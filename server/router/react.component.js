@@ -7,9 +7,9 @@ module.exports = function(app) {
 
   const routes = {
     path: '/',
-    component: require('./../../client/component/Apps').default, 
+    component: require('./../../client/Apps').default, 
      indexRoute: {
-      component: require('./../../client/component/Apps')
+      component: require('./../../client/Apps')
     },
     childRoutes: [  
     ]
