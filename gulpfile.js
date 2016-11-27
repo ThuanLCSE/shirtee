@@ -25,7 +25,7 @@ gulp.task('live-server', function() {
 
 gulp.task('bundle', function() {
   return browserify({
-      entries: 'client/main.jsx',
+      entries: 'client/Apps.jsx',
       extensions: ['.jsx'],
       debug: true,
     })
