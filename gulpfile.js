@@ -25,7 +25,7 @@ gulp.task('live-server', function() {
 
 gulp.task('bundle', function() {
   return browserify({
-      entries: 'client/main.jsx',
+      entries: 'client/Apps.jsx',
       extensions: ['.jsx'],
       debug: true,
     })
@@ -37,7 +37,7 @@ gulp.task('bundle', function() {
 });
  
 gulp.task('temp', function() {
-  gulp.src(['client/index.html', 'client/css/**/*.*', 'client/js/**/*.*'])
+  gulp.src(['client/index.ejs', 'client/css/**/*.*', 'client/js/**/*.*'])
     .pipe(gulp.dest('./static'));
 
   // gulp.src(['app/images/**'])
