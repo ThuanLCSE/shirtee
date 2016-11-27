@@ -4,11 +4,11 @@ require('babel-register')({
 });
 
 // var mongoose = require('./config/mongoose'),
-// 	express = require('./config/express');
+ 	express = require('./config/express');
 
 // var mongo_db = mongoose();
 
-// var server = express(mongo_db);
+ var server = express();
 
 server.listen('3013');
 console.log('-----Server running at http://localhost:3013/ ------'); 
