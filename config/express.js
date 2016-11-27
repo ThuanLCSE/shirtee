@@ -28,9 +28,8 @@ module.exports = function(database) {
 	);
 
 
-	require('../server/routing/react.component.js')(app);
-	require('../server/routing/user.js')(app); 
-	require('../server/routing/doctor.js')(app); 
+	require('../server/router/react.component.js')(app);
+	require('../server/router/user.js')(app);  
  
 	return server;
 }
