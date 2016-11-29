@@ -39,7 +39,10 @@ var userSchema = new Schema({
     	type: Date,
         default: Date.now
     },
-    active: Boolean,
+    active: {
+        type: Boolean,
+        default: true
+    },
     gender: String,
     birthday: Date
 });

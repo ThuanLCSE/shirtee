@@ -3,10 +3,10 @@ require('babel-register')({
         "presets": ["es2015", "react"]
 });
 
-// var mongoose = require('./config/mongoose'),
+var mongoose = require('./config/mongoose'),
  	express = require('./config/express');
 
-// var mongo_db = mongoose();
+var mongo_db = mongoose();
 
  var server = express();
 

@@ -36,7 +36,25 @@ var orderSchema = new Schema({
        type: Number,
         required: 'preserve price required',
     },
-    shirtList: [customShirtSchema]
+    shirtList: [customShirtSchema],
+    shippingInfo:{
+        receiver: {
+            type: String,
+            required: 'receiver required'
+        },
+        phone: {
+            type: String,
+            required: 'phone required'
+        },
+        address:{
+            type: String,
+            required: 'address required'
+        }
+    },
+    shipType: {
+        type: String,
+        required: 'shiip type required'
+    },
 });
 
 mongoose.model('Order', orderSchema);
