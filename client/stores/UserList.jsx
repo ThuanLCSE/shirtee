@@ -4,6 +4,10 @@ export default function UserTodo(state, action) {
           return {
               text: action.user.email
           };
+    case 'SIGN_UP_SUCCESSFULLY':
+          return {
+              text: action.user.name
+          };
     default:
       return {
           text: 'SignIn/SignUp'

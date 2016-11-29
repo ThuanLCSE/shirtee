@@ -4,6 +4,7 @@ import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import Popover from 'material-ui/Popover';
 import {List, ListItem} from 'material-ui/List';
+import SignIn from './SignIn';
 
 import ContentGesture from 'material-ui/svg-icons/content/gesture';
 import PlacesPool from 'material-ui/svg-icons/places/pool';
@@ -35,6 +36,7 @@ class Navigator extends React.Component {
         };
         this.handleMouseOver = this.handleMouseOver.bind(this);
         this.handleRequestClose = this.handleRequestClose.bind(this);
+        this.signInFunc = this.signInFunc.bind(this);
     }
 
     handleMouseOver(event) {
@@ -51,13 +53,17 @@ class Navigator extends React.Component {
           open: false,
         });
     };
+    
+    signInFunc() {
+        
+    };
 
     render() {
         return (
             <Paper style={stylePaper} zDepth={1}>
-                <div className="col-md-2" style={logo}>
+                <div className="col-sm-2" style={logo}>
                 </div>
-                <div className="col-md-7">
+                <div className="col-sm-6">
                     <List style={flexContainer}>
                       <ListItem primaryText="Best Sell " leftIcon={<ContentGesture />} />
                       <ListItem primaryText="Newest" leftIcon={<ImageAudiotrack />} />
@@ -65,11 +71,11 @@ class Navigator extends React.Component {
                     
                     </List>
                 </div>
-                <div className="col-md-3">
+                <div className="col-sm-3">
                     <List style={flexContainer}>
                       <ListItem primaryText="Cart" leftIcon={<ActionShoppingCart />} />
                       <ListItem primaryText="Sign in"
-                          onMouseEnter={this.handleMouseOver}/>
+                          onClick={this.handleMouseOver}/>
                       <Popover
                           open={this.state.open}
                           anchorEl={this.state.anchorEl}
@@ -86,6 +92,11 @@ class Navigator extends React.Component {
                           </Menu>
                       </Popover>
                     </List>
+                </div>
+                <div className="col-sm-1">
+                    <SignIn signInFunc={this.props.signInFunc}
+                            userData={this.props.userData}
+                            signUpFunc={this.props.signUpFunc}/>
                 </div>
             </Paper>
         );
