@@ -19,7 +19,8 @@ const flexContainer = {
     };
 const stylePaper = {
     height: 90,
-    paddingBottom: 10
+    paddingBottom: 10,
+    marginBottom: 10
 }
 const logo = {
     backgroundImage: "url(https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150)",
@@ -28,17 +29,16 @@ const logo = {
     height: '100%'
 }
 
-class Navigator extends React.Component {
+class Profile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          open: false,
+          open: false
         };
         this.handleMouseOver = this.handleMouseOver.bind(this);
         this.handleRequestClose = this.handleRequestClose.bind(this);
-        this.signInFunc = this.signInFunc.bind(this);
     }
-
+    
     handleMouseOver(event) {
         // This prevents ghost click.
         event.preventDefault();
@@ -54,49 +54,63 @@ class Navigator extends React.Component {
         });
     };
     
-    signInFunc() {
-        
-    };
+    render() {
+        return (
+            <List>
+              <ListItem primaryText="Profile"
+                  onClick={this.handleMouseOver}/>
+              <Popover
+                  open={this.state.open}
+                  anchorEl={this.state.anchorEl}
+                  anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+                  targetOrigin={{horizontal: 'left', vertical: 'top'}}
+                  onRequestClose={this.handleRequestClose}>
+                  <Menu>
+                    <MenuItem primaryText="Information" />
+                    <MenuItem primaryText="Manage account" />
+                    <MenuItem primaryText="History orders" />
+                    <MenuItem primaryText="Create new design" />
+                    <MenuItem primaryText="View my design" />
+                    <MenuItem primaryText="Log out" />
+                  </Menu>
+              </Popover>
+            </List>
+        );
+    }
+}
+
+class Navigator extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+          signInStatus: false
+        };
+    }
 
     render() {
         return (
             <Paper style={stylePaper} zDepth={1}>
                 <div className="col-sm-2" style={logo}>
                 </div>
-                <div className="col-sm-6">
+                <div className="col-sm-7">
                     <List style={flexContainer}>
-                      <ListItem primaryText="Best Sell " leftIcon={<ContentGesture />} />
-                      <ListItem primaryText="Newest" leftIcon={<ImageAudiotrack />} />
-                      <ListItem primaryText="Promotion" leftIcon={<PlacesAcUnit />} />
+                      <ListItem primaryText={(<b>Best Sell</b>)} leftIcon={<ContentGesture />} />
+                      <ListItem primaryText={(<b>Newest</b>)} leftIcon={<ImageAudiotrack />} />
+                      <ListItem primaryText={(<b>Promotion</b>)} leftIcon={<PlacesAcUnit />} />
                     
                     </List>
                 </div>
                 <div className="col-sm-3">
-                    <List style={flexContainer}>
-                      <ListItem primaryText="Cart" leftIcon={<ActionShoppingCart />} />
-                      <ListItem primaryText="Sign in"
-                          onClick={this.handleMouseOver}/>
-                      <Popover
-                          open={this.state.open}
-                          anchorEl={this.state.anchorEl}
-                          anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-                          targetOrigin={{horizontal: 'left', vertical: 'top'}}
-                          onRequestClose={this.handleRequestClose}>
-                          <Menu>
-                            <MenuItem primaryText="Information" />
-                            <MenuItem primaryText="Manage account" />
-                            <MenuItem primaryText="History orders" />
-                            <MenuItem primaryText="Create new design" />
-                            <MenuItem primaryText="View my design" />
-                            <MenuItem primaryText="Log out" />
-                          </Menu>
-                      </Popover>
-                    </List>
-                </div>
-                <div className="col-sm-1">
-                    <SignIn signInFunc={this.props.signInFunc}
-                            userData={this.props.userData}
-                            signUpFunc={this.props.signUpFunc}/>
+                    <div className="col-sm-6">
+                        <List style={flexContainer}>
+                          <ListItem primaryText={(<b>Cart</b>)} leftIcon={<ActionShoppingCart />} />
+                        </List>
+                    </div>
+                    <div className="col-sm-6">
+                        {!this.state.signInStatus ? <SignIn signInFunc={this.props.signInFunc}
+                                                            userData={this.props.userData}
+                                                            signUpFunc={this.props.signUpFunc}/> : <Profile/>}
+                    </div>
                 </div>
             </Paper>
         );

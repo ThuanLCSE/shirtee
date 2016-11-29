@@ -20,21 +20,22 @@ const divStyle = {
 class Home extends React.Component{
   render(){
     return(
-      <div className="container">
-        <Navigator signInFunc={this.props.UserAct.SignIn}
-                    userData={this.props.UserTodo}
-                    signUpFunc={this.props.UserAct.SignUp}/>
-        <GridListFrame />
-        <h3 style={divStyle}>Best Sell </h3>
-        <a href="#">View All</a>
-        <GridListFour />
-        <h3 style={divStyle}>Newest </h3>
-        <a href='#'>View All</a>
-        <GridListFour />
-        <h3 style={divStyle}>Promotion </h3>
-        <a href='#'>View All</a>
-        <GridListFour />
-
+      <div>
+          <Navigator signInFunc={this.props.UserAct.SignIn}
+                     userData={this.props.UserTodo}
+                     signUpFunc={this.props.UserAct.SignUp}/>
+          <div className="container">
+            <GridListFrame />
+            <h3 style={divStyle}>Best Sell </h3>
+            <a href="#">View All</a>
+            <GridListFour />
+            <h3 style={divStyle}>Newest </h3>
+            <a href='#'>View All</a>
+            <GridListFour />
+            <h3 style={divStyle}>Promotion </h3>
+            <a href='#'>View All</a>
+            <GridListFour />
+          </div>
       </div>
     );
   }
