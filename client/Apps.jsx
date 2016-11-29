@@ -15,6 +15,12 @@ import BottomNavigationSimple from './components/BottomNavigationSimple';
 //import HelloWorld from './components/HelloWorld';
 import SignIn from './components/SignIn';
 
+//
+import { Router, Route, Link, browserHistory, IndexRoute  } from 'react-router';
+// import Component
+import Home from './components/Home';
+
+
 let store = createStore(RootReducers);
 injectTapEventPlugin();
 
@@ -24,9 +30,7 @@ class Apps extends React.Component {
     }
     render() {
         return (
-            <SignIn SignInFunc={this.props.UserAct.SignIn}
-                user={this.props.UserTodo}
-            />
+            <Home />
         );
     }
 }
@@ -48,7 +52,15 @@ if(typeof window !== 'undefined') {
 ReactDOM.render(
     <Provider store={store}>
         <MuiThemeProvider>
-            <ConnectedApp />
+        <Router history = {browserHistory}>
+            <Route path = "/" component = {ConnectedApp}>
+               <IndexRoute component = {Home} />
+               <Route path = "home" component = {ConnectedApp} />
+               <Route path = "about" component = {ConnectedApp} />
+               <Route path = "contact" component = {ConnectedApp} />
+            </Route>
+          </Router>
+
         </MuiThemeProvider>
     </Provider>,
   document.getElementById('main')

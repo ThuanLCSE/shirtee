@@ -36,7 +36,7 @@ class Navigator extends React.Component {
         this.handleMouseOver = this.handleMouseOver.bind(this);
         this.handleRequestClose = this.handleRequestClose.bind(this);
     }
-    
+
     handleMouseOver(event) {
         // This prevents ghost click.
         event.preventDefault();
@@ -51,7 +51,7 @@ class Navigator extends React.Component {
           open: false,
         });
     };
-    
+
     render() {
         return (
             <Paper style={stylePaper} zDepth={1}>
@@ -59,10 +59,10 @@ class Navigator extends React.Component {
                 </div>
                 <div className="col-md-7">
                     <List style={flexContainer}>
-                      <ListItem primaryText="Doodle" leftIcon={<ContentGesture />} />
-                      <ListItem primaryText="Entertainment" leftIcon={<ImageAudiotrack />} />
-                      <ListItem primaryText="Nature" leftIcon={<PlacesAcUnit />} />
-                      <ListItem primaryText="Sport" leftIcon={<PlacesPool />} />
+                      <ListItem primaryText="Best Sell " leftIcon={<ContentGesture />} />
+                      <ListItem primaryText="Newest" leftIcon={<ImageAudiotrack />} />
+                      <ListItem primaryText="Promotion" leftIcon={<PlacesAcUnit />} />
+                    
                     </List>
                 </div>
                 <div className="col-md-3">
