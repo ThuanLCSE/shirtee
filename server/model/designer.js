@@ -9,7 +9,7 @@ var designerSchema = new Schema({
       }, 
     bankAccount: {
     	name: String,
-        number: Number,
+        number: String,
         expiredDay: Number,
         expiredMonth: Number        
     },
@@ -23,7 +23,11 @@ var designerSchema = new Schema({
             required: 'id require'
         },
         detail:String
-    } 
+    },
+    userEmail :{
+        type: String, 
+        required: 'email required'
+    }
 });
 
 mongoose.model('Designer', designerSchema);
