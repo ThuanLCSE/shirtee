@@ -85,7 +85,7 @@ class HistoryOrder extends React.Component{
                   </TableHeader>
                   <TableBody showRowHover={true} displayRowCheckbox={false}>
                     {orders.map( (row, index) => (
-                      <TableRow key={index} selected={row.selected}>
+                      <TableRow key={index}>
                         <TableRowColumn>{row.orderId}</TableRowColumn>
                         <TableRowColumn>{row.date.toLocaleDateString()}</TableRowColumn>
                         <TableRowColumn>{row.price}</TableRowColumn>

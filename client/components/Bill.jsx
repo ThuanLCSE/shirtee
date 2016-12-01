@@ -47,7 +47,13 @@ shirts.map( (row, index) => (total += row.quantity * row.unitPrice));
 class Bill extends React.Component {
     constructor(props) {
         super(props);
+        this.removeSelected = this.removeSelected.bind(this);
     }
+    
+    removeSelected() {
+        
+    }
+    
     render() {
         return (
             <Table multiSelectable="true">
@@ -63,7 +69,7 @@ class Bill extends React.Component {
                 </TableHeader>
                 <TableBody showRowHover={true}>
                     {shirts.map( (row, index) => (
-                      <TableRow key={index} selected={row.selected}>
+                      <TableRow key={index}>
                         <TableRowColumn>{row.detail}</TableRowColumn>
                         <TableRowColumn>{row.size}</TableRowColumn>
                         <TableRowColumn>{row.color}</TableRowColumn>
@@ -76,7 +82,7 @@ class Bill extends React.Component {
                 <TableFooter>
                     <TableRow>
                       <TableRowColumn>
-                        <IconButton tooltip="Delete Selected">
+                        <IconButton tooltip="Delete Selected" onClick={this.removeSelected}>
                           <ActionDelete />
                         </IconButton>
                      </TableRowColumn>

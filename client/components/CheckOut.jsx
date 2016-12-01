@@ -65,7 +65,8 @@ class CheckOut extends React.Component {
       <div>
        <Navigator signInFunc={this.props.UserAct.SignIn}
                      userData={this.props.UserTodo}
-                     signUpFunc={this.props.UserAct.SignUp}/>
+                     signUpFunc={this.props.UserAct.SignUp}
+                     becomeNewDesigner={this.props.UserAct.BecomeNewDesigner}/>
        <div className="container">
         <Stepper activeStep={stepIndex}>
           <Step>

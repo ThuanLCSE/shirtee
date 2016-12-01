@@ -5,6 +5,7 @@ import MenuItem from 'material-ui/MenuItem';
 import Popover from 'material-ui/Popover';
 import {List, ListItem} from 'material-ui/List';
 import SignIn from './SignIn';
+import BecomeDesigner from './BecomeDesigner';
 
 import ContentGesture from 'material-ui/svg-icons/content/gesture';
 import PlacesPool from 'material-ui/svg-icons/places/pool';
@@ -33,12 +34,19 @@ class Profile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          open: false
+          open: false,
+          openDialog: false
         };
         this.handleMouseOver = this.handleMouseOver.bind(this);
         this.handleRequestClose = this.handleRequestClose.bind(this);
+        this.handleBecomeDesigner = this.handleBecomeDesigner.bind(this);
     }
 
+    handleBecomeDesigner() {
+        this.handleRequestClose();
+        this.setState({openDialog: !this.state.openDialog});
+    }
+    
     handleMouseOver(event) {
         // This prevents ghost click.
         event.preventDefault();
@@ -69,11 +77,17 @@ class Profile extends React.Component {
                     <MenuItem primaryText="Information" />
                     <MenuItem primaryText="Manage account" />
                     <MenuItem primaryText="History orders" />
+                    <MenuItem onClick={this.handleBecomeDesigner} primaryText="Become designer" />
+                    
                     <MenuItem primaryText="Create new design" />
                     <MenuItem primaryText="View my design" />
                     <MenuItem primaryText="Log out" />
                   </Menu>
               </Popover>
+              <BecomeDesigner openDialog = {this.state.openDialog}
+                              closeDialog = {this.handleBecomeDesigner}
+                              becomeNewDesigner={this.props.becomeNewDesigner}
+                              designerData={this.props.designerData}/>
             </List>
         );
     }
@@ -83,7 +97,7 @@ class Navigator extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          signInStatus: false
+          signInStatus: true
         };
     }
 
@@ -109,7 +123,8 @@ class Navigator extends React.Component {
                     <div className="col-sm-6">
                         {!this.state.signInStatus ? <SignIn signInFunc={this.props.signInFunc}
                                                             userData={this.props.userData}
-                                                            signUpFunc={this.props.signUpFunc}/> : <Profile/>}
+                                                            signUpFunc={this.props.signUpFunc}/> :
+                                                    <Profile becomeNewDesigner={this.props.becomeNewDesigner}/>}
                     </div>
                 </div>
             </Paper>

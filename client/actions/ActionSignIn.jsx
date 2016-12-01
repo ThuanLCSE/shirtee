@@ -1,8 +1,8 @@
 import * as apiUser from './../constant/ApiUri';
 import restApi from "./../service/restAPI.js";
 
-export function SignIn(userData) {
-    var data = {
+export function SignIn(userData) { 
+    var data= {
         email: userData.email,
         password: userData.pwd
     };
@@ -12,7 +12,7 @@ export function SignIn(userData) {
 	       dispatch({ type: 'SIGN_IN_SUCCESSFULLY',
                      user : response.user}
                    );
-	    }).catch((err) => {
+	    }).catch((err) => {   
 	    	console.log(err);
 	        dispatch({ type: 'SIGN_IN_SUCCESSFULLY',
                     text: err.responseText
@@ -21,7 +21,7 @@ export function SignIn(userData) {
 	};
 }
 
-export function SignUp(userData) {
+export function SignUp(userData) { 
     var data= {
         email: userData.email,
         fullname: userData.name,
@@ -33,9 +33,32 @@ export function SignUp(userData) {
 	       dispatch({ type: 'SIGN_UP_SUCCESSFULLY',
                      user : response.user}
                    );
-	    }).catch((err) => {
+	    }).catch((err) => {   
 	    	console.log(err);
 	        dispatch({ type: 'SIGN_UP_SUCCESSFULLY',
+                    text: err.responseText
+                    });
+		});
+	};
+}
+
+export function BecomeNewDesigner(designerData) { 
+    var data= {
+        displayName : designerData.displayName, 
+        bankAccount: {
+            name: designerData.name,
+            number: designerData.number
+        }
+    };
+    return function (dispatch) {
+	  	return restApi.post(apiUser.DesignerRegister, data).then((response) => {
+	    	console.log(response);
+	       dispatch({ type: 'BECOME_DESIGNER_SUCCESSFULLY',
+                     user : response.user}
+                   );
+	    }).catch((err) => {   
+	    	console.log(err);
+	        dispatch({ type: 'BECOME_DESIGNER_SUCCESSFULLY',
                     text: err.responseText
                     });
 		});

@@ -14,8 +14,6 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import SignIn from './components/SignIn';
 import Navigator from './components/Navigator';
-import SideBar from './components/SideBar';
-import CheckOut from './components/CheckOut';
 import Bill from './components/Bill';
 import UploadDemo from './components/demo/UploadDemo';
 
@@ -30,7 +28,6 @@ import ViewSellProgram from './components/admin/ViewSellProgram';
 import CreateSellProgram from './components/admin/CreateSellProgram';
 
 
-
 let store = createStore(
   RootReducers,
   applyMiddleware(thunk)
@@ -43,6 +40,7 @@ class Apps extends React.Component {
     }
     render() {
         return (
+            
           <div>
             <Home />
             <UpLoadShirt />
