@@ -1,9 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import * as UserAct from '../actions/ActionSignIn.jsx';
+
 import {Step, Stepper, StepLabel} from 'material-ui/Stepper';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 
 import Bill from './Bill';
+import Navigator from './Navigator';
 /**
  * Horizontal steppers are ideal when the contents of one step depend on an earlier step.
  * Avoid using long step names in horizontal steppers.
@@ -55,7 +62,11 @@ class CheckOut extends React.Component {
     const contentStyle = {margin: '0 16px'};
 
     return (
-      <div style={{width: '100%', margin: 'auto'}}>
+      <div>
+       <Navigator signInFunc={this.props.UserAct.SignIn}
+                     userData={this.props.UserTodo}
+                     signUpFunc={this.props.UserAct.SignUp}/>
+       <div className="container">
         <Stepper activeStep={stepIndex}>
           <Step>
             <StepLabel>Order Information</StepLabel>
@@ -76,6 +87,8 @@ class CheckOut extends React.Component {
             <div>
               {this.getStepContent(stepIndex)}
               <div style={{marginTop: 12}}>
+               <div className="col-sm-9"></div>
+               <div className="col-sm-3">
                 <FlatButton
                   label="Back"
                   disabled={stepIndex === 0}
@@ -87,13 +100,26 @@ class CheckOut extends React.Component {
                   primary={true}
                   onTouchTap={this.handleNext}
                 />
+               </div>
               </div>
             </div>
           )}
         </div>
+       </div>
       </div>
     );
   }
 }
 
-export default CheckOut;
+const mapStateToProps = state => ({
+  UserTodo: state.UserTodo
+});
+
+const mapDispatchToProps = dispatch => ({
+    UserAct: bindActionCreators(UserAct, dispatch),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CheckOut);
