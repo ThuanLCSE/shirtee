@@ -9,7 +9,7 @@ var catSchema = new Schema({
 });
 
 var Category = mongoose.model('Category', catSchema);
-
+//
 // var catlife = new Category({
 // 	name: 'Life style' 
 // });

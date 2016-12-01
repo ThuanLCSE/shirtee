@@ -14,7 +14,7 @@ export function SignIn(userData) {
                    );
 	    }).catch((err) => {   
 	    	console.log(err);
-	        dispatch({ type: 'SIGN_IN_SUCCESSFULLY',
+	        dispatch({ type: 'SIGN_IN_ERROR',
                     text: err.responseText
                     });
 		});
@@ -35,7 +35,7 @@ export function SignUp(userData) {
                    );
 	    }).catch((err) => {   
 	    	console.log(err);
-	        dispatch({ type: 'SIGN_UP_SUCCESSFULLY',
+	        dispatch({ type: 'SIGN_UP_ERROR',
                     text: err.responseText
                     });
 		});
@@ -54,11 +54,11 @@ export function BecomeNewDesigner(designerData) {
 	  	return restApi.post(apiUser.DesignerRegister, data).then((response) => {
 	    	console.log(response);
 	       dispatch({ type: 'BECOME_DESIGNER_SUCCESSFULLY',
-                     user : response.user}
+                     designer : response.designer}
                    );
 	    }).catch((err) => {   
 	    	console.log(err);
-	        dispatch({ type: 'BECOME_DESIGNER_SUCCESSFULLY',
+	        dispatch({ type: 'BECOME_DESIGNER_ERROR',
                     text: err.responseText
                     });
 		});

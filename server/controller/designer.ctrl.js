@@ -36,10 +36,10 @@ exports.register = function(req,res){
 exports.checkDesignerNotExist = function(req,res,next){  
 
     Designer.findOne({ 
-  		userEmail:  req.session.user.email;
+  		userEmail:  req.session.user.email
   	 }, function (err, designer) {
 		  if (err || designer !== null) {
-		  	res.status(400).send(err?err:{message: 'not found'});
+		  	res.status(400).send(err?err:{message: 'designer already registed'});
 		  }  else { 
 		  	next();
 		}

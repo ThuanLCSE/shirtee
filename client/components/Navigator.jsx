@@ -77,10 +77,12 @@ class Profile extends React.Component {
                     <MenuItem primaryText="Information" />
                     <MenuItem primaryText="Manage account" />
                     <MenuItem primaryText="History orders" />
-                    <MenuItem onClick={this.handleBecomeDesigner} primaryText="Become designer" />
-                    
-                    <MenuItem primaryText="Create new design" />
-                    <MenuItem primaryText="View my design" />
+                    {this.props.userData.isDesigner ?
+                        <MenuItem primaryText="Create new design" /> :
+                        <MenuItem onClick={this.handleBecomeDesigner} primaryText="Become designer" />
+                    }
+                    {this.props.userData.isDesigner ?
+                        <MenuItem primaryText="View my design" /> : null}
                     <MenuItem primaryText="Log out" />
                   </Menu>
               </Popover>
@@ -100,8 +102,9 @@ class Navigator extends React.Component {
           signInStatus: true
         };
     }
-
+//{this.props.categoryData.list.map()...}
     render() {
+        console.log(this.props.userData);
         return (
             <Paper style={stylePaper} zDepth={1}>
                 <div className="col-sm-2" style={logo}>
@@ -111,7 +114,6 @@ class Navigator extends React.Component {
                       <ListItem primaryText={(<b>Best Sell</b>)} leftIcon={<ContentGesture />} />
                       <ListItem primaryText={(<b>Newest</b>)} leftIcon={<ImageAudiotrack />} />
                       <ListItem primaryText={(<b>Promotion</b>)} leftIcon={<PlacesAcUnit />} />
-
                     </List>
                 </div>
                 <div className="col-sm-3">
@@ -121,10 +123,11 @@ class Navigator extends React.Component {
                         </List>
                     </div>
                     <div className="col-sm-6">
-                        {!this.state.signInStatus ? <SignIn signInFunc={this.props.signInFunc}
+                        {!this.props.userData.signInSuccess ? <SignIn signInFunc={this.props.signInFunc}
                                                             userData={this.props.userData}
                                                             signUpFunc={this.props.signUpFunc}/> :
-                                                    <Profile becomeNewDesigner={this.props.becomeNewDesigner}/>}
+                                                    <Profile becomeNewDesigner={this.props.becomeNewDesigner}
+                                                             userData={this.props.userData}/>}
                     </div>
                 </div>
             </Paper>

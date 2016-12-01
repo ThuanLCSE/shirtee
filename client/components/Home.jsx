@@ -27,7 +27,8 @@ class Home extends React.Component{
       <div>
         <Navigator  signInFunc={this.props.UserAct.SignIn}
                     userData={this.props.UserTodo}
-                    signUpFunc={ this.props.UserAct.SignUp} />
+                    signUpFunc={ this.props.UserAct.SignUp}
+                    becomeNewDesigner={this.props.UserAct.BecomeNewDesigner}/>
         <a href="admins">Go to Admin </a>
         <div className="container">
           <GridListFrame />

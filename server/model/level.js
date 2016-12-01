@@ -14,7 +14,7 @@ var levelSchema = new Schema({
 });
 
 var Level = mongoose.model('Level', levelSchema);
-
+//
 // var levelOne = new Level({
 // 	numberShirt : 15, 
 //     expireTime: 45,
@@ -51,7 +51,7 @@ var Level = mongoose.model('Level', levelSchema);
 // 		console.log(level);
 // 	}
 // });
-
+//
 // levelOne = new Level({
 // 	numberShirt : 60, 
 //     expireTime: 90,
