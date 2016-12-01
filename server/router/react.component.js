@@ -7,41 +7,18 @@ module.exports = function(app) {
 
   const routes = {
     path: '/',
-    
-      {
-        path: '/',
-        component: require('./../../client/components/Home')
-      },
-        {
-          path: '/admins',
-          component: require('./../../client/components/Admin')
-        },
-
-        {
-          path: '/admin-upload',
-          component: require('./../../client/components/admin/UpLoadShirt')
-        },
-
-        {
-          path: '/admin-view-pattern',
-          component: require('./../../client/components/admin/ViewAdminPattern')
-        },
-        {
-          path: '/admin-view-sell-program',
-          component: require('./../../client/components/admin/ViewSellProgram')
-        },
-        {
-          path: '/admin-create-sell-program',
-          component: require('./../../client/components/admin/CreateSellProgram')
-        },
-
+    component: require('./../../client/Apps').default, 
+     indexRoute: {
+      component: require('./../../client/Apps')
+    },
+    childRoutes: [  
       {
         path: '/updemo',
         component: require('./../../client/components/demo/UploadDemo')
       }
     ]
   };
-
+ 
   app.use((req, res, next) => {
     const location = createLocation(req.path);
 
@@ -54,8 +31,8 @@ module.exports = function(app) {
       if (error) {
         res.status(500).send(error.message)
       } else if (redirectLocation) {
-        res.redirect(302, redirectLocation.pathname + redirectLocation.search) 
-      } else if (renderProps) {
+        res.redirect(302, redirectLocation.pathname + redirectLocation.search)
+      } else if (renderProps) { 
         res.render('./../client/index.ejs');
 
       } else {
