@@ -59,6 +59,7 @@
     "react-tap-event-plugin": "2.0.0",
     "react-time": "^4.2.0",
     "reactcss": "^0.4.2",
+    "rc-upload": "2.2.0",
     "redux-thunk": "^2.1.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",

@@ -3,22 +3,33 @@ var Schema = mongoose.Schema;
 var   ObjectId = Schema.ObjectId;
 
 var customShirtSchema = new Schema({
-	url : {
-        type: String, 
-        required: 'url required'
-      }, 
-    size: {
-    	type: String,
-    	required: 'size required'
-    },
-    shirtType: {
-        type: String,
-        required: 'type required'
+	shirt:{
+        url : {
+            type: String, 
+            required: 'shirt url required'
+        }, 
     },
     pattern: {
-        type: ObjectId,
-        required: 'pattern id required'
+        url : {
+            type: String, 
+            required: 'pattern url required'
+        }, 
+        id : {
+            type: ObjectId, 
+            required: 'shirt id required'
+        },
+        position: {
+            x: Number,
+            y: Number
+        },
+        size: Number,
+        rotate: Number
     },
+    size: String,
+    detail: {
+        type: String,
+        required: 'detail required'
+    }, 
     price: {
         type: Number,
         required: 'price  required'

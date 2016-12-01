@@ -12,6 +12,10 @@ module.exports = function(app) {
       component: require('./../../client/Apps')
     },
     childRoutes: [  
+      {
+        path: '/updemo',
+        component: require('./../../client/components/demo/UploadDemo')
+      }
     ]
   };
  

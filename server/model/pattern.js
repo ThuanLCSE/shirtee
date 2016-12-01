@@ -8,7 +8,7 @@ var categorySchema = new Schema({
 var patternSchema = new Schema({
 	status : {
         type: String, 
-        default: 'out of stock'
+        default: 'pending'
       }, 
     url: {
     	type: String,
@@ -16,24 +16,33 @@ var patternSchema = new Schema({
     },
     designer: {
         type: String,
-        required: 'detail required'
+        required: 'designer required'
     },
     designerId: ObjectId,
     price: {
         type: Number,
-        required: 'detail required'
+        required: 'price required'
     },
     catergory: [categorySchema],
     expireDay: {
     	type:Date,
-    	 required: 'detail required'
+    	 required: 'expire required'
     },
     createdDay: {
     	type: Date,
     	default: Date.now
     },
-    recommendShirt: ObjectId,
-    recommentPattern: {
+    recommendShirt:{
+        url:  {
+            type: String,
+            required: 'recom shirt url required'
+        },
+        id:  {
+            type: ObjectId,
+            required: 'recom shirt id required'
+        }
+    },
+    recommendPattern: {
     	position: {
     		x: Number,
     		y: Number
@@ -53,11 +62,7 @@ var patternSchema = new Schema({
     	type: Number,
     	default: 0
     },
-    name: String,
-    recommendUrl: {
-    	type: String,
-    	required: 'url required'
-    },
+    name: String, 
     available: {
         type: Boolean,
         default: true

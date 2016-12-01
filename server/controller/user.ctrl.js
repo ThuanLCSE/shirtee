@@ -69,3 +69,51 @@ exports.checkEmailNotExist = function(req,res,next){
     }
   });
 };
+exports.updateInfo = function(req,res){
+	var user = req.user;
+	user.fullname = req.body.fullname?req.body.fullname:user.fullname;
+	user.password = req.body.password?req.body.password:user.password;
+	user.gender = req.body.gender?req.body.gender:user.gender;
+	user.birthday = req.body.birthday?req.body.birthday:user.birthday;
+  	user.save(function (err,updatedUser) {
+	  if (err) {
+	  	res.status(400).send(err);
+	  }  else { 
+	  	res.status(200).send({
+	  		message: 'update user success',
+	  		user: updatedUser,
+	  	}); 
+	  }
+  });
+};
+exports.delete = function(req,res){
+	
+	var user = req.user;
+	user.active = false;
+  	user.save(function (err,removedUser) {
+	  if (err) {
+	  	res.status(400).send(err);
+	    } else { 
+		  	res.status(200).send({
+		  		message: 'remove user success',
+		  		user: removedUser,
+		  	}); 
+	  	}
+ 	});
+};
+exports.getById = function(req,res,next){ 
+  	User.findById(req.param('userId')).exec(function (err, user) {
+	  if (err) {
+	  	res.status(400).send(err);
+	  }  else 
+	  if (user === null){
+	  	res.status(400).send({
+	  		message: 'not found user Id'
+	  	});
+	  }
+	  	else { 
+	   		req.user = user;
+	   		next();
+	  }
+  });
+};

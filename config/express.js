@@ -4,18 +4,22 @@ var configDetail = require('./config'),
 	morgan = require('morgan'),
 	bodyParser = require('body-parser'),
 	methodOverride = require('method-override'),
-	session = require('express-session');
-var path = require('path');
+	session = require('express-session'),	 
+	path = require('path');
+var favicon = require('serve-favicon');
 
 module.exports = function(database) { 
 	var app = expressWebAppFramwrk();
-	var server = http.createServer(app);
+	var server = http.createServer(app); 
 	
-	app.use(morgan('dev'));
+	app.use(morgan('dev'));  
+	app.use(favicon(__dirname + './../static/Beer.ico'));
+ 
 	app.use(bodyParser.urlencoded({
 		extended: true
 	}));
 	app.use(bodyParser.json());
+
 	app.use(methodOverride());
 	app.use(session({
 		saveUninitialized: true,
@@ -23,13 +27,14 @@ module.exports = function(database) {
 		secret: configDetail.secretKey
 	}));
 
-	app.use('/static', expressWebAppFramwrk.static(path.join(__dirname, '/../static'), 
-		{ maxAge: 86400000 })
-	);
+	app.use('/static', expressWebAppFramwrk.static(path.join(__dirname, './../static')));
+	app.use('/upload', expressWebAppFramwrk.static(path.join(__dirname, './../upload')));
 
 
 	require('../server/router/react.component.js')(app);
 	require('../server/router/user.js')(app);  
- 
+ 	require('../server/router/designer.js')(app);  
+	require('../server/router/common.js')(app); 
+
 	return server;
 }

@@ -12,6 +12,7 @@ module.exports = function(){
 	require('../server/model/pattern'); 
 	require('../server/model/saleProgramme'); 
 	require('../server/model/shirt'); 
+	require('../server/model/category'); 
 
 	return noSqlDb;
 }

@@ -33,12 +33,12 @@ exports.register = function(req,res){
   	 	}
   	 }); 
 };
-exports.checkBeDesigner = function(req,res,next){  
+exports.checkDesignerNotExist = function(req,res,next){  
 
     Designer.findOne({ 
   		userEmail: req.body.userEmail
   	 }, function (err, designer) {
-		  if (err || designer === null) {
+		  if (err || designer !== null) {
 		  	res.status(400).send(err?err:{message: 'not found'});
 		  }  else { 
 		  	next();
@@ -46,3 +46,22 @@ exports.checkBeDesigner = function(req,res,next){
 	});
  
 };
+
+exports.getById = function(req,res,next){  
+ 
+  	Designer.findById(req.param('designerId')).exec(function (err, designer) {
+	  if (err) {
+	  	res.status(400).send(err);
+	  }  else 
+	  if (designer === null){
+	  	res.status(400).send({
+	  		message: 'not found designer Id'
+	  	});
+	  }
+	  	else { 
+		   		req.designer = designer;
+		   		next();
+		  }
+	  });
+};
+

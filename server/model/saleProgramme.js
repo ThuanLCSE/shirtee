@@ -1,15 +1,15 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var   ObjectId = Schema.ObjectId;
-var shirtSaleSchema = new Schema({
-    shirtId: {
+var patternSaleSchema = new Schema({
+    patternId: {
         type: ObjectId,
-        required: 'shirt id require'
+        required: 'pattern id require'
     },
-    shirtUrl:{
+    patternUrl:{
         type: String,
         trim: true, 
-        required: 'url shirt required'
+        required: 'pattern url required'
     }
 });
 
@@ -22,8 +22,8 @@ var saleProgrammeSchema = new Schema({
     	type: String,
     	required: 'detail required'
     },
-    shirtSale: [
-   	 shirtSaleSchema
+    patternSale: [
+   	 patternSaleSchema
     ],
     startDay: {
     	type: Date,
