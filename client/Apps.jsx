@@ -17,6 +17,7 @@ import Navigator from './components/Navigator';
 import SideBar from './components/SideBar';
 import CheckOut from './components/CheckOut';
 import Bill from './components/Bill';
+import UploadDemo from './components/demo/UploadDemo';
 
 //
 import { Router, Route, Link, browserHistory, IndexRoute  } from 'react-router';
@@ -86,6 +87,8 @@ if(typeof window !== 'undefined') {
                 <Route path = "/" component = {Home}/>
                 <Route path = "admins"  component = {Admin} />
                 <Route path = "admin-upload" component = {UpLoadShirt} />
+                <Route path = "updemo" component = {UploadDemo} />
+
                 <Route path = "admin-view-pattern" component = {ViewAdminPattern} />
                 <Route path = "admin-view-sell-program" component = {ViewSellProgram} />
                 <Route path = "admin-create-sell-program" component = {CreateSellProgram} />

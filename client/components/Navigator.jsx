@@ -38,7 +38,7 @@ class Profile extends React.Component {
         this.handleMouseOver = this.handleMouseOver.bind(this);
         this.handleRequestClose = this.handleRequestClose.bind(this);
     }
-    
+
     handleMouseOver(event) {
         // This prevents ghost click.
         event.preventDefault();
@@ -53,7 +53,7 @@ class Profile extends React.Component {
           open: false,
         });
     };
-    
+
     render() {
         return (
             <List>
@@ -97,7 +97,7 @@ class Navigator extends React.Component {
                       <ListItem primaryText={(<b>Best Sell</b>)} leftIcon={<ContentGesture />} />
                       <ListItem primaryText={(<b>Newest</b>)} leftIcon={<ImageAudiotrack />} />
                       <ListItem primaryText={(<b>Promotion</b>)} leftIcon={<PlacesAcUnit />} />
-                    
+
                     </List>
                 </div>
                 <div className="col-sm-3">

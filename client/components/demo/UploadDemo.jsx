@@ -1,11 +1,11 @@
-import React from 'react'; 
+import React from 'react';
 import Upload from 'rc-upload';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux'; 
+import { createStore } from 'redux';
 
-class UploaDemo extends React.Component{
+class UploadDemo extends React.Component{
   constructor(props) {
         super(props);
         this.state= {
@@ -22,28 +22,28 @@ class UploaDemo extends React.Component{
   beforeUpload(file) {
         console.log('beforeUpload');
         console.log(file);
-  };  
+  };
   onStartUpload(file){
     console.log('on start');
     console.log(file);
   }
   onErrorUpload(err,response){
     console.log('on error');
-    console.log(response); 
-    console.log(err); 
+    console.log(response);
+    console.log(err);
   }
   onSuccessUpload(result, file){
     console.log('on success');
     this.setState({previewUrl: result.path});
 
-    console.log(result); 
+    console.log(result);
     console.log(file);
   }
   fileUploadRedux(){
     return(
         <div>
           {this.state.previewUrl?<img src={this.state.previewUrl}/>:null}
-          
+
           <Upload name="picture" onReady={this.onReadyUpload}
           action="/upload"
           onStart={this.onStartUpload}
@@ -70,7 +70,7 @@ class UploaDemo extends React.Component{
 
   render(){
     return(
-      <div> 
+      <div>
           {this.fileUploadRedux()}
       </div>
     );
@@ -88,4 +88,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(UploaDemo);
+)(UploadDemo);

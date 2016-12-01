@@ -1,23 +1,66 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Dialog from 'material-ui/Dialog';
+import CarouselLogo from './../CarouselLogo';
+import FlatButton from 'material-ui/FlatButton';
+import ImagePaper from './../ImagePaper';
+
+const customContentStyle = {
+  width: '100%',
+  maxWidth: 'none',
+};
+
 
 class ProductImg extends React.Component{
 
+
   constructor(props){
     super(props);
+    this.state = {
+      open: false,
+    };
+    this.handleOpen = this.handleOpen.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+  }
+
+
+
+
+  handleOpen() {
+    this.setState({open: true});
+  }
+  handleClose() {
+    this.setState({open: false});
   }
 
 
 
   render(){
+
       return (
-        <div className="hovereffect">
-            <img className="img-responsive" src="https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/15230586_1632363410392273_7932220563088524415_n.jpg?oh=ee83d1988ddaf55c8f5688508647c142&oe=58FA0F44" />
-            <div className="overlay">
-               <h2>Hover effect 9</h2>
-               <a className="info" href="#">link here</a>
+        <div onClick={this.handleOpen}>
+
+          <Dialog
+
+            modal={false}
+            open={this.state.open}
+            onRequestClose={this.handleClose}
+            contentStyle={customContentStyle}
+          >
+          <CarouselLogo />
+        </Dialog>
+
+
+            <div className="hovereffect" >
+              <img className="img-responsive" src="https://images.freecreatives.com/wp-content/uploads/2016/02/Black-Wood-Plank-Background-Wallpaper.jpg" />
+                  <div className="overlay">
+                      <h2>Hover effect 8</h2>
+                  </div>
             </div>
+
         </div>
+
+
       );
   }
 };

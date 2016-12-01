@@ -7,18 +7,34 @@ module.exports = function(app) {
 
   const routes = {
     path: '/',
-    component: require('./../../client/Apps').default, 
+    component: require('./../../client/Apps').default,
      indexRoute: {
       component: require('./../../client/Apps')
     },
-    childRoutes: [  
+    childRoutes: [
       {
         path: '/updemo',
         component: require('./../../client/components/demo/UploadDemo')
       }
+      ,{
+        path: '/admins',
+        component: require('./../../client/components/demo/UploadDemo')
+      },{
+        path: '/admin-upload',
+        component: require('./../../client/components/demo/UploadDemo')
+      },{
+        path: '/admin-view-pattern',
+        component: require('./../../client/components/demo/UploadDemo')
+      },{
+        path: '/admin-view-sell-program',
+        component: require('./../../client/components/demo/UploadDemo')
+      },{
+        path: '/admin-create-sell-program',
+        component: require('./../../client/components/demo/UploadDemo')
+      }
     ]
   };
- 
+
   app.use((req, res, next) => {
     const location = createLocation(req.path);
 
@@ -32,7 +48,7 @@ module.exports = function(app) {
         res.status(500).send(error.message)
       } else if (redirectLocation) {
         res.redirect(302, redirectLocation.pathname + redirectLocation.search)
-      } else if (renderProps) { 
+      } else if (renderProps) {
         res.render('./../client/index.ejs');
 
       } else {

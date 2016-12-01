@@ -8,6 +8,10 @@ export default function UserTodo(state, action) {
           return {
               text: action.user.name
           };
+    case 'ADMIN_UPLOAD_SUCCESSFULLY':
+      return {
+          text: action.user.name
+      };
     default:
       return {
           text: 'SignIn/SignUp'
