@@ -1,13 +1,15 @@
 var Pattern = require('mongoose').model('Pattern'); 
 
 exports.create = function(req,res){
+	var expireDay = new Date(); 
+    expireDay.setDate(expireDay.getDate()+ req.level.expireTime);
 	var newPattern = new Pattern({ 
     	url: req.body.url,
 	    designer: req.designer.displayName,
     	designerId:  req.designer._id,
 	    price: req.body.price,
     	catergory: req.body.catergory,
-	    expireDay: req.body.expireDay, 
+	    expireDay: expireDay, 
     	recommendShirt: req.body.shirt?mongoose.Types.ObjectId(req.body.shirt._id):null,
 	    recommendPattern: {
 	    	position: req.body.position?req.body.position:null,

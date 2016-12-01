@@ -13,6 +13,7 @@ exports.signUp = function(req,res){
 	  }  else {
 	  	var newSession = req.session;
 			var authenticateduser = {
+				email: user.email,
 				id : user._id
 			};
 			newSession.user = authenticateduser;
@@ -39,6 +40,7 @@ exports.signIn = function(req,res){
 	  } else {
 	  	var newSession = req.session;
 			var authenticateduser = {
+				email: user.email,
 				id : user._id
 			};
 			newSession.user = authenticateduser;

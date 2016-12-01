@@ -14,6 +14,6 @@ var uploading = multer({ storage: storage }).single('picture');
 
 module.exports = function(app){
 	var imageCtrler = require('../controller/image.ctrl');
-	app.get('/upload', imageCtrler.imageForm);
-	app.post('/upload', uploading, imageCtrler.uploadImage);
+	app.get('/api/upload', imageCtrler.imageForm);
+	app.post('/api/upload', uploading, imageCtrler.uploadImage);
 }

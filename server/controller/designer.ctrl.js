@@ -16,7 +16,7 @@ exports.register = function(req,res){
 		    var newDesigner = new Designer({
 				displayName : req.body.displayName, 
 			    bankAccount: req.body.bankAccount, 
-			    userEmail: req.body.userEmail,
+			    userEmail: req.session.user.email,
 			    level: levelOne 
 			});
 		    newDesigner.save(function (err, design) {
@@ -36,7 +36,7 @@ exports.register = function(req,res){
 exports.checkDesignerNotExist = function(req,res,next){  
 
     Designer.findOne({ 
-  		userEmail: req.body.userEmail
+  		userEmail:  req.session.user.email;
   	 }, function (err, designer) {
 		  if (err || designer !== null) {
 		  	res.status(400).send(err?err:{message: 'not found'});
@@ -65,3 +65,19 @@ exports.getById = function(req,res,next){
 	  });
 };
 
+exports.getLevelById = function(req,res,next){
+	Level.findById(req.designer.level.levelId).exec(function (err, level) {
+	  if (err) {
+	  	res.status(400).send(err);
+	  }  else 
+	  if (level === null){
+	  	res.status(400).send({
+	  		message: 'not found level Id'
+	  	});
+	  }
+	  	else { 
+		   		req.level = level;
+		   		next();
+		  }
+	  });
+}
