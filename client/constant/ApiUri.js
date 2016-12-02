@@ -1,4 +1,4 @@
-export const UserSignIn = '/api/user/signIn'
+export const UserSignIn = '/api/user/signIn' //ông nội cho sign in mà k quăng cho check designer
 export const UserSignUp = '/api/user/signUp'
 export const DesignerRegister = '/api/designer/register' 
 // send data = {
@@ -40,7 +40,7 @@ export const uploadShirt = '/api/shirt/create'
 export const viewUserInfo = 'api/user/info'
 // http method : get
 
-export const checkUserSignIn = 'api/user/checkSignin'
+export const checkUserSignIn = 'api/user/checkSignin' //ông nội check sign in mà k quăng cho name
 //http method: get
 // success: {
 // 			user: object,

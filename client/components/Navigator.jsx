@@ -7,10 +7,9 @@ import {List, ListItem} from 'material-ui/List';
 import SignIn from './SignIn';
 import BecomeDesigner from './BecomeDesigner';
 
-import ContentGesture from 'material-ui/svg-icons/content/gesture';
-import PlacesPool from 'material-ui/svg-icons/places/pool';
-import PlacesAcUnit from 'material-ui/svg-icons/places/ac-unit';
-import ImageAudiotrack from 'material-ui/svg-icons/image/audiotrack';
+import ActionFavorite from 'material-ui/svg-icons/action/favorite';
+import AvFiberNew from 'material-ui/svg-icons/av/fiber-new';
+import ActionCardGiftcard from 'material-ui/svg-icons/action/card-giftcard';
 import ActionShoppingCart from 'material-ui/svg-icons/action/shopping-cart';
 
 const flexContainer = {
@@ -19,7 +18,7 @@ const flexContainer = {
       padding: 0,
     };
 const stylePaper = {
-    height: 90,
+    overflow: 'auto',
     paddingBottom: 10,
     marginBottom: 10
 }
@@ -27,7 +26,7 @@ const logo = {
     backgroundImage: "url(https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150)",
     backgroundSize: "contain",
     backgroundRepeat: 'no-repeat',
-    height: '100%'
+    overflow:'auto'
 }
 
 class Profile extends React.Component {
@@ -55,7 +54,7 @@ class Profile extends React.Component {
           anchorEl: event.currentTarget,
         });
     };
-
+    
     handleRequestClose() {
         this.setState({
           open: false,
@@ -65,7 +64,7 @@ class Profile extends React.Component {
     render() {
         return (
             <List>
-              <ListItem primaryText="Profile"
+                <ListItem primaryText={<b>Hello, {this.props.userData.user.fullname.split(' ')[0]}</b>}
                   onClick={this.handleMouseOver}/>
               <Popover
                   open={this.state.open}
@@ -74,16 +73,16 @@ class Profile extends React.Component {
                   targetOrigin={{horizontal: 'left', vertical: 'top'}}
                   onRequestClose={this.handleRequestClose}>
                   <Menu>
-                    <MenuItem primaryText="Information" />
+                    <MenuItem primaryText="Information" onClick={() => this.props.changeView('info')}/>
                     <MenuItem primaryText="Manage account" />
                     <MenuItem primaryText="History orders" />
                     {this.props.userData.isDesigner ?
                         <MenuItem primaryText="Create new design" /> :
-                        <MenuItem onClick={this.handleBecomeDesigner} primaryText="Become designer" />
+                        <MenuItem onClick={this.handleBecomeDesigner} primaryText={"Become designer"} />
                     }
                     {this.props.userData.isDesigner ?
                         <MenuItem primaryText="View my design" /> : null}
-                    <MenuItem primaryText="Log out" />
+                    <MenuItem primaryText="Log out" onClick={this.props.signOutFunc}/>
                   </Menu>
               </Popover>
               <BecomeDesigner openDialog = {this.state.openDialog}
@@ -102,6 +101,11 @@ class Navigator extends React.Component {
           signInStatus: true
         };
     }
+    
+    componentWillMount() {
+        this.props.checkSignIn();
+        this.props.getCategory();
+    }
 //{this.props.categoryData.list.map()...}
     render() {
         console.log(this.props.userData);
@@ -111,9 +115,12 @@ class Navigator extends React.Component {
                 </div>
                 <div className="col-sm-7">
                     <List style={flexContainer}>
-                      <ListItem primaryText={(<b>Best Sell</b>)} leftIcon={<ContentGesture />} />
-                      <ListItem primaryText={(<b>Newest</b>)} leftIcon={<ImageAudiotrack />} />
-                      <ListItem primaryText={(<b>Promotion</b>)} leftIcon={<PlacesAcUnit />} />
+                      <ListItem primaryText={(<b>Best Sell</b>)} leftIcon={<ActionFavorite />} />
+                      <ListItem primaryText={(<b>Newest</b>)} leftIcon={<AvFiberNew />} />
+                      <ListItem primaryText={(<b>Promotion</b>)} leftIcon={<ActionCardGiftcard />} />
+                      {this.props.categoryList.listCategory.map( (row, index) => (
+                      <ListItem key={index} primaryText={<b>{row.name}</b>}/>
+                      ))}
                     </List>
                 </div>
                 <div className="col-sm-3">
@@ -126,10 +133,13 @@ class Navigator extends React.Component {
                         {!this.props.userData.signInSuccess ? <SignIn signInFunc={this.props.signInFunc}
                                                             userData={this.props.userData}
                                                             signUpFunc={this.props.signUpFunc}/> :
-                                                    <Profile becomeNewDesigner={this.props.becomeNewDesigner}
-                                                             userData={this.props.userData}/>}
+                                                            <Profile becomeNewDesigner={this.props.becomeNewDesigner}
+                                                             userData={this.props.userData}
+                                                             signOutFunc={this.props.signOutFunc}
+                                                             changeView={this.props.changeView}/>}
                     </div>
                 </div>
+                <br/>
             </Paper>
         );
     }

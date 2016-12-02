@@ -14,11 +14,10 @@ const styles = {
   gridList: {
     display: 'flex',
     flexWrap: 'nowrap',
-    overflowX: 'auto',
-
+    overflow: 'auto',
   },
   titleStyle: {
-    color: 'rgb(0, 188, 212)',
+    color: 'rgb(255, 255, 255)',
   },
 };
 
@@ -52,10 +51,9 @@ class  GridListFrame extends React.Component{
   render(){
     return (
       <div style={styles.root}>
-        <GridList style={styles.gridList} cols={3} cellHeight={'auto'} padding={10}>
+        <GridList style={styles.gridList} cols={3} padding={10} cellHeight='auto'>
           {tilesData.map((tile) => (
             <GridTile
-              cellHeight={'auto'}
               title={tile.title}
               actionIcon={<IconButton><StarBorder color="yellow" /></IconButton>}
               titleStyle={styles.titleStyle}

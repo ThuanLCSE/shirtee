@@ -15,8 +15,8 @@ module.exports = function(app) {
       {
         path: '/updemo',
         component: require('./../../client/components/demo/UploadDemo')
-      }
-      ,{
+      },
+      {
         path: '/admins',
         component: require('./../../client/components/demo/UploadDemo')
       },{

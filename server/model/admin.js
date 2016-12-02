@@ -18,18 +18,18 @@ var adminSchema = new Schema({
         default: true
     }
 });
-
-
-var Admin = mongoose.model('Admin', adminSchema);
-
-var admin = new Admin({
- email: 'abc@123',
- password: '123'
-});
-admin.save(function (err, admin) {
-  if (err) {
-     console.log(err);
- } else  {
-     console.log(admin);
- }
-});
+//
+//
+//var Admin = mongoose.model('Admin', adminSchema);
+//
+//var admin = new Admin({
+// email: 'abc@123',
+// password: '123'
+//});
+//admin.save(function (err, admin) {
+//  if (err) {
+//     console.log(err);
+// } else  {
+//     console.log(admin);
+// }
+//});

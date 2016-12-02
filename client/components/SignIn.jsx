@@ -5,7 +5,7 @@ import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
 import {List, ListItem} from 'material-ui/List';
 
-import userTodo from '../stores/UserList';
+//import userTodo from '../stores/UserList';
 
 const customContentStyle = {
     width: '25%',
@@ -56,7 +56,7 @@ class SignIn extends React.Component {
         );
         return (
             <List>
-                <ListItem primaryText="Sign in" onClick={() => this.setState({open: true})}/>
+                <ListItem primaryText={<b>Sign in</b>} onClick={() => this.setState({open: true})}/>
                 <Dialog
                   title={(<p><b>Sign In</b></p>)}
                   modal={false}

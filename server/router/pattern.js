@@ -15,8 +15,8 @@ module.exports = function(app){
 	app.route('/api/pattern/addSale/:patternId')
 	.get(patternCtrller.getByID,patternCtrller.increaseSale,
 		adminCtrller.checkAdminRole, patternCtrller.updatePattern); 
-	app.route('/api/pattern/info/:patternId')
-	.get(patternCtrller.getByID, patternCtrller.returnPattern); 
+//	app.route('/api/pattern/info/:patternId')
+//	.get(patternCtrller.getByID, patternCtrller.returnPattern); 
 	app.route('/api/pattern/listAll')
 	.get(patternCtrller.getAll); 
 

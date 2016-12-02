@@ -14,11 +14,11 @@ const styles = {
   gridList: {
     display: 'flex',
     flexWrap: 'nowrap',
-    overflowX: 'auto',
+    overflow: 'auto',
 
   },
   titleStyle: {
-    color: 'rgb(0, 188, 212)',
+    color: 'rgb(255, 255, 255)',
   },
 
 };
@@ -62,7 +62,7 @@ class GridListFour extends React.Component{
    render () {
       return (
         <div style={styles.root}>
-          <GridList style={styles.gridList} cols={4}>
+          <GridList style={styles.gridList} cols={4} cellHeight='auto'>
             {tilesData.map((tile) => (
               <GridTile
                 zDepth={5}

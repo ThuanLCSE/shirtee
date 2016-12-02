@@ -26,8 +26,10 @@ class BecomeDesigner extends React.Component {
     }
     
     getValue() {
+        if (!this.state.agree) return;
         var designerData = this.state.designer;
         this.props.becomeNewDesigner(designerData);
+        this.props.closeDialog();
 //        this.props.closeDialog;
     }
     
@@ -61,14 +63,14 @@ class BecomeDesigner extends React.Component {
                                 hintText="Your bank account number"
                                 fullWidth={true}
                                 onChange={(e) => this.handleChange('number', e)}/>
-                    <div><p>
+                    <div style={{height: 200, overflow:'scroll'}}><p>
                         <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore commodi, reiciendis et non doloremque perferendis quidem repellendus vel neque molestiae quod aliquid aliquam vero odit iure culpa. Magnam, qui, sed.</span>
                         <span>Numquam delectus, velit repellat eligendi asperiores sed in consequatur exercitationem laborum cum quam blanditiis, minus ipsam praesentium obcaecati nulla maiores animi optio nostrum minima aperiam enim quis ratione vel. Consequatur.</span>
                         <span>Officiis eius debitis dolore? Omnis nobis, iure earum cupiditate repudiandae veritatis repellat sunt obcaecati exercitationem! Voluptate, laborum, incidunt. Mollitia eaque expedita consectetur in tenetur, obcaecati esse officia, ut quisquam modi.</span>
                         <span>Repudiandae quo eaque error repellat cumque maiores consequatur, fugiat ad optio accusantium dignissimos sapiente magnam facilis consequuntur! Vitae in totam molestias, minus nisi, aperiam id rem architecto. Provident, quisquam, nesciunt.</span>
                         <span>Omnis libero nihil soluta enim laboriosam, repellendus itaque harum, quibusdam eum sequi, recusandae autem eos aliquam sunt fuga iste cum minus quaerat natus et ab iure perspiciatis ipsam! Adipisci, nesciunt.</span>
                     </p></div>
-                    <Checkbox label="I Agree" onCheck={this.agreeLicense}/>
+                    <Checkbox label="I agree with the license" onCheck={this.agreeLicense}/>
             </Dialog>
         );
     }

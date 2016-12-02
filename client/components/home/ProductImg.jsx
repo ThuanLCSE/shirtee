@@ -52,10 +52,7 @@ class ProductImg extends React.Component{
 
 
             <div className="hovereffect" >
-              <img className="img-responsive" src="https://images.freecreatives.com/wp-content/uploads/2016/02/Black-Wood-Plank-Background-Wallpaper.jpg" />
-                  <div className="overlay">
-                      <h2>Hover effect 8</h2>
-                  </div>
+              <img className="img-responsive" src="https://image.freepik.com/free-vector/grey-background-design_23-2147489413.jpg" />
             </div>
 
         </div>

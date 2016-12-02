@@ -31,11 +31,43 @@ export function SignUp(userData) {
 	  	return restApi.post(apiUser.UserSignUp, data).then((response) => {
 	    	console.log(response);
 	       dispatch({ type: 'SIGN_UP_SUCCESSFULLY',
-                     user : response.user}
+                     user : response.user,
+                    designer: response.designer}
                    );
 	    }).catch((err) => {
 	    	console.log(err);
 	        dispatch({ type: 'SIGN_UP_ERROR',
+                    text: err.responseText
+                    });
+		});
+	};
+}
+
+export function CheckSignIn() {
+    return function (dispatch) {
+	  	return restApi.get(apiUser.checkUserSignIn).then((response) => {
+	    	console.log(response);
+	       dispatch({ type: 'IS_SIGNED_IN_YET',
+                     user : response.user,
+                    designer: response.designer}
+                   );
+	    }).catch((err) => {
+	    	console.log(err);
+	        dispatch({ type: 'NOT_SIGNED_IN_YET',
+                    text: err.responseText
+                    });
+		});
+	};
+}
+
+export function UserSignOut() {
+    return function (dispatch) {
+	  	return restApi.get(apiUser.userSignOut).then((response) => {
+	    	console.log(response);
+	       dispatch({ type: 'SIGN_OUT_SUCCESS', null});
+	    }).catch((err) => {
+	    	console.log(err);
+	        dispatch({ type: 'SIGN_OUT_FAILED',
                     text: err.responseText
                     });
 		});

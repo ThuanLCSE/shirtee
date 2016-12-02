@@ -27,7 +27,6 @@ import ViewAdminPattern from './components/admin/ViewAdminPattern';
 import ViewSellProgram from './components/admin/ViewSellProgram';
 import CreateSellProgram from './components/admin/CreateSellProgram';
 
-
 let store = createStore(
   RootReducers,
   applyMiddleware(thunk)
@@ -43,6 +42,7 @@ class Apps extends React.Component {
 
           <div>
             <Home />
+            <Information/>
             <UpLoadShirt />
             <Admin />
             <ViewAdminPattern />
@@ -86,7 +86,6 @@ if(typeof window !== 'undefined') {
                 <Route path = "admins"  component = {Admin} />
                 <Route path = "admin-upload" component = {UpLoadShirt} />
                 <Route path = "updemo" component = {UploadDemo} />
-
                 <Route path = "admin-view-pattern" component = {ViewAdminPattern} />
                 <Route path = "admin-view-sell-program" component = {ViewSellProgram} />
                 <Route path = "admin-create-sell-program" component = {CreateSellProgram} />
