@@ -16,4 +16,7 @@ module.exports = function(app){
 	app.route('/api/user/signOut')
 	.get(userCtrller.signOut);
 	
+	app.route('/api/user/info')
+	.get(userCtrller.getUserByEmail);
+	
 }

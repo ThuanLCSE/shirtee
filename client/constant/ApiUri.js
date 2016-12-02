@@ -37,6 +37,8 @@ export const uploadShirt = '/api/shirt/create'
 //     	price: 'number',
 //     	colorCode: 'color code'
 // 	}
+export const viewUserInfo = 'api/user/info'
+// http method : get
 
 export const checkUserSignIn = 'api/user/checkSignin'
 //http method: get

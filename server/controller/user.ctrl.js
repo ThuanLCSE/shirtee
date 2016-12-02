@@ -46,12 +46,11 @@ exports.signIn = function(req,res){
 		};
 		req.session.user = authenticateduser;
 	  	Designer.findOne({ 
-  			userEmail:  req.session.email
+  			userEmail:  req.session.user.email
 	  	 }, function (err, designer) {
 			if (err) {
 			  	res.status(400).send(err);
-			}  else if (designer == null) { 
-			  	
+			}  else if (designer == null) {  
 			  	res.status(200).send({
 			  		user:user,
 			  		message: "sign in as user success",
@@ -159,6 +158,24 @@ exports.delete = function(req,res){
 	  	}
  	});
 };
+exports.getUserByEmail = function(req,res){ 
+	User.findOne({ 
+  		email: req.session.user.email
+  	 }, function (err, user) {
+	  if (err) {
+	  	res.status(400).send(err);
+	  } else if (user === null) {
+ 		res.status(400).send('user not exist');
+	  } else { 
+			res.status(200).send({
+		  		message: 'user info',
+		  		user: user,
+		  	}); 		
+	  }
+  });
+}
+
+
 exports.getById = function(req,res,next){ 
   	User.findById(req.param('userId')).exec(function (err, user) {
 	  if (err) {
