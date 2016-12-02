@@ -36,7 +36,7 @@ exports.signIn = function(req,res){
 	  if (err) {
 	  	res.status(400).send(err);
 	  } else if (user === null) {
- 		res.status(400).send('not auth');
+ 		res.status(400).send('wrong email or password');
 	  } else {
 	  	var newSession = req.session;
 			var authenticateduser = {
@@ -50,6 +50,34 @@ exports.signIn = function(req,res){
 	  	});
 	  }
   });
+};
+exports.checkAuthenticated = function(req,res){
+	var userInSession = req.session.user;
+
+   
+	  if (!userInSession) { 
+ 		res.status(400).send('user not signin');
+	  } else { 
+	  	 Designer.findOne({ 
+  			userEmail:  userInSession.email
+	  	 }, function (err, designer) {
+			if (err) {
+			  	res.status(400).send(err);
+			}  else if (designer == null) { 
+			  	res.status(200).send({
+			  		user:userInSession,
+			  		message: "sign in as user",
+			  	});   
+			} else {
+				res.status(200).send({
+					user: userInSession,
+			  		designer:designer,
+			  		message: "sign in as designer",
+			  	});   
+			}
+		});
+	  	
+	  }
 };
 
 exports.checkEmailNotExist = function(req,res,next){

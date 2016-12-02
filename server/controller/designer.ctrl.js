@@ -39,13 +39,14 @@ exports.checkDesignerNotExist = function(req,res,next){
   		userEmail:  req.session.user.email
   	 }, function (err, designer) {
 		  if (err || designer !== null) {
-		  	res.status(400).send(err?err:{message: 'designer already registed'});
+		  	res.status(400).send(err?err:{message: 'designer already exist'});
 		  }  else { 
 		  	next();
 		}
 	});
  
 };
+
 
 exports.getById = function(req,res,next){  
  
@@ -81,3 +82,4 @@ exports.getLevelById = function(req,res,next){
 		  }
 	  });
 }
+

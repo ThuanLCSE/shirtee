@@ -24,6 +24,8 @@ export const uploadPattern = '/api/designer/pattern/create/:designerId'
 //     	name: 'require',
 // 	    recommendUrl: 'shirtUrl',
 // 	}
+export const getListCategory = '/api/category/listAll'
+//http method : get
 export const getListShirt = '/api/shirt/listAll'
 // http method : get
 export const uploadShirt = '/api/shirt/create' 

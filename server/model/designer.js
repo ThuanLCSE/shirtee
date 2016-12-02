@@ -10,7 +10,7 @@ var designerSchema = new Schema({
     bankAccount: {
     	name: String,
         number: String,
-        expiredDay: Number,
+        expiredYear: Number,
         expiredMonth: Number        
     },
     joinedDay: {
