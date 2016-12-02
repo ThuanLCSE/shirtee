@@ -47,12 +47,10 @@ export const checkUserSignIn = 'api/user/checkSignin'
 // 	  		designer: 'neu nhu la designer', 
 // 	  		message: "...",
 // 	  	}
-export const userSignOut = 'api/user/signOut'
+export const userSignOut = '/api/user/signOut'
 //http method: get
 export const adminSignOut = '/api/admin/signOut'
 //http method: get
-
-
 export const adminSignIn = '/api/admin/signIn'
 // send data = {
 // 	   email : 'require', 
@@ -62,3 +60,16 @@ export const adminSignIn = '/api/admin/signIn'
 // 			admin: object, 
 // 	  		message: "...",
 // 	  	}
+export const adminApprovePattern = '/api/pattern/approve/:patternId'
+// http method get
+// success :{
+// 	message: 'update status success',
+// 	pattern: object
+// }
+export const adminDeletePattern = '/api/pattern/remove/:patternId'
+// http method get
+// success :{
+// 	message: 'remove pattern success' 
+// }
+export const getListPattern = '/api/pattern/listAll'
+// http method get 

@@ -36,34 +36,26 @@ exports.delete = function(req,res){
 	
 	var pattern = req.pattern;
 	pattern.available = false;
-  	pattern.save(function (err,removedPattern) {
-	  if (err) {
+  	pattern.save(function (err) {
+	  if (err ) {
 	  	res.status(400).send(err);
 	    } else { 
 		  	res.status(200).send({
-		  		message: 'remove pattern success',
-		  		pattern: removedPattern,
+		  		message: 'remove pattern success' 
 		  	}); 
 	  	}
  	});
 };
-exports.increaseSale = function(req,res){
-	var pattern = req.pattern;
-	pattern.saleTime += 1;
-  	pattern.save(function (err,updatedPattern) {
-	  if (err) {
-	  	res.status(400).send(err);
-	  }  else { 
-	  	res.status(200).send({
-	  		message: 'update sale success',
-	  		pattern: updatedPattern,
-	  	}); 
-	  }
-  });
+
+
+exports.increaseSale = function(req,res,next){
+	req.pattern.saleTime += 1;
+	next();
 };
-exports.updateStatus = function(req,res){
-	var pattern = req.pattern;
-	pattern.status = req.body.status;
+
+exports.updatePattern = function(req,res){
+	
+	var pattern = req.pattern; 
   	pattern.save(function (err,updatedPattern) {
 	  if (err) {
 	  	res.status(400).send(err);
@@ -75,6 +67,24 @@ exports.updateStatus = function(req,res){
 	  }
   });
 };
+exports.updatePattern = function(req,res){
+	
+	var pattern = req.pattern; 
+  	pattern.save(function (err,updatedPattern) {
+	  if (err) {
+	  	res.status(400).send(err);
+	  }  else { 
+	  	res.status(200).send({
+	  		message: 'update status success',
+	  		pattern: updatedPattern,
+	  	}); 
+	  }
+  });
+};
+exports.setAcceptStatus = function(req,res,next){
+	req.pattern.status = 'Approve';
+	next();
+}
 
 exports.getByID = function(req,res,next){
 	 

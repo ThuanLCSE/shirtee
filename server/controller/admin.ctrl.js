@@ -25,7 +25,16 @@ exports.signIn = function(req,res){
 	  }
   });
 }; 
-
+exports.checkAdminRole = function(req,res,next){
+	if (!req.session.admin){
+		res.status(200).send({
+	  		message: 'not authorized' 
+	  	});
+	} else {
+		next();
+	}
+	
+};
 exports.signOut = function(req,res){
 	req.session.admin = null; 
 	  if (req.session.admin) { 
