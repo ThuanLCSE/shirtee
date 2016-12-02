@@ -49,3 +49,16 @@ export const checkUserSignIn = 'api/user/checkSignin'
 // 	  	}
 export const userSignOut = 'api/user/signOut'
 //http method: get
+export const adminSignOut = '/api/admin/signOut'
+//http method: get
+
+
+export const adminSignIn = '/api/admin/signIn'
+// send data = {
+// 	   email : 'require', 
+//     password: 'require'
+// }
+// success :{
+// 			admin: object, 
+// 	  		message: "...",
+// 	  	}

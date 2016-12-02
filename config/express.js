@@ -36,6 +36,7 @@ module.exports = function(database) {
 	require('../server/router/shirt.js')(app);  
 	require('../server/router/pattern.js')(app);  
 	require('../server/router/user.js')(app);  
+		require('../server/router/admin.js')(app);  
  	require('../server/router/designer.js')(app);  
 	require('../server/router/common.js')(app); 
 

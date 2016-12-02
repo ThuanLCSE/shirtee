@@ -10,6 +10,7 @@ module.exports = function(){
 	require('../server/model/level'); 
 	require('../server/model/order'); 
 	require('../server/model/pattern'); 
+		require('../server/model/admin');
 	require('../server/model/saleProgramme'); 
 	require('../server/model/shirt'); 
 	require('../server/model/category'); 
