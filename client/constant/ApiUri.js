@@ -37,3 +37,13 @@ export const uploadShirt = '/api/shirt/create'
 //     	price: 'number',
 //     	colorCode: 'color code'
 // 	}
+
+export const checkUserSignIn = 'api/user/checkSignin'
+//http method: get
+// success: {
+// 			user: object,
+// 	  		designer: 'neu nhu la designer', 
+// 	  		message: "...",
+// 	  	}
+export const userSignOut = 'api/user/signOut'
+//http method: get

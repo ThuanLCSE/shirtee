@@ -14,4 +14,7 @@ module.exports = function(app){
 	app.route('api/user/checkSignin')
 	.get(userCtrller.checkAuthenticated);
 	
+	app.route('api/user/signOut')
+	.get(userCtrller.signOut);
+	
 }

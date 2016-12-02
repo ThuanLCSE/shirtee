@@ -80,6 +80,19 @@ exports.checkAuthenticated = function(req,res){
 	  }
 };
 
+exports.signOut = function(req,res){
+	req.session.user = null;
+
+   
+	  if (req.session.user) { 
+ 		res.status(400).send('sign out failed');
+	  } else {  
+		res.status(200).send({
+			message: "sign out success",
+	  	});    
+	  }
+};
+
 exports.checkEmailNotExist = function(req,res,next){
 	var currentEmail = req.body.email;
 
