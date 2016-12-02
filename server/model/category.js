@@ -1,17 +1,17 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+var Schema = mongoose.Schema;  
 
-var catSchema = new Schema({
+var catSchema = new Schema({ 
     name: {
     	type: String,
-    	require: "name required"
-    }
+    	require: "name required"        
+    } 
 });
 
 var Category = mongoose.model('Category', catSchema);
 
 // var catlife = new Category({
-// 	name: 'Life style'
+// 	name: 'Life style' 
 // });
 // catlife.save(function (err, cat) {
 //   if (err) {
@@ -21,7 +21,7 @@ var Category = mongoose.model('Category', catSchema);
 // 	}
 // });
 // catlife = new Category({
-// 	name: 'Music'
+// 	name: 'Music' 
 // });
 // catlife.save(function (err, cat) {
 //   if (err) {
@@ -31,7 +31,7 @@ var Category = mongoose.model('Category', catSchema);
 // 	}
 // });
 // catlife = new Category({
-// 	name: 'Artist'
+// 	name: 'Artist' 
 // });
 // catlife.save(function (err, cat) {
 //   if (err) {
@@ -39,4 +39,4 @@ var Category = mongoose.model('Category', catSchema);
 // 	} else  {
 // 		console.log(cat);
 // 	}
-// });
+// }); 

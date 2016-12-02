@@ -1,24 +1,24 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+var Schema = mongoose.Schema;  
 
 var levelSchema = new Schema({
 	numberShirt : {
-        type: Number,
+        type: Number, 
         required: 'number shirt required'
-      },
+      }, 
     expireTime: {
     	type: Number,
-    	require: "expire time required"
+    	require: "expire time required"        
     },
-    detail: String
+    detail: String 
 });
 
 var Level = mongoose.model('Level', levelSchema);
 
 // var levelOne = new Level({
-// 	numberShirt : 15,
+// 	numberShirt : 15, 
 //     expireTime: 45,
-//     detail: 'Good design'
+//     detail: 'Good design' 
 // });
 // levelOne.save(function (err, level) {
 //   if (err) {
@@ -28,9 +28,9 @@ var Level = mongoose.model('Level', levelSchema);
 // 	}
 // });
 // levelOne = new Level({
-// 	numberShirt : 0,
+// 	numberShirt : 0, 
 //     expireTime: 20,
-//     detail: 'New comer'
+//     detail: 'New comer' 
 // });
 // levelOne.save(function (err, level) {
 //   if (err) {
@@ -40,9 +40,9 @@ var Level = mongoose.model('Level', levelSchema);
 // 	}
 // });
 // levelOne = new Level({
-// 	numberShirt : 30,
+// 	numberShirt : 30, 
 //     expireTime: 60,
-//     detail: 'Advance design'
+//     detail: 'Advance design' 
 // });
 // levelOne.save(function (err, level) {
 //   if (err) {
@@ -53,9 +53,9 @@ var Level = mongoose.model('Level', levelSchema);
 // });
 
 // levelOne = new Level({
-// 	numberShirt : 60,
+// 	numberShirt : 60, 
 //     expireTime: 90,
-//     detail: 'Professional design'
+//     detail: 'Professional design' 
 // });
 // levelOne.save(function (err, level) {
 //   if (err) {
@@ -64,3 +64,5 @@ var Level = mongoose.model('Level', levelSchema);
 // 		console.log(level);
 // 	}
 // });
+
+

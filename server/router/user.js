@@ -11,10 +11,9 @@ module.exports = function(app){
 	.post(userCtrller.getById,userCtrller.updateInfo);
 	app.route('/api/pattern/listAll')
 	.post(userCtrller.getById,userCtrller.updateInfo);
-	app.route('api/user/checkSignin')
-	.get(userCtrller.checkAuthenticated);
-	
-	app.route('api/user/signOut')
+	app.route('/api/user/checkSignin')
+	.get(userCtrller.checkAuthenticated); 
+	app.route('/api/user/signOut')
 	.get(userCtrller.signOut);
 	
 }
