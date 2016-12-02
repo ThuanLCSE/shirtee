@@ -11,13 +11,13 @@ exports.signUp = function(req,res){
   	newUser.save(function (err, user) {
 	  if (err) {
 	  	res.status(400).send(err);
-	  }  else {
-	  	var newSession = req.session;
+	  }  else { 
 			var authenticateduser = {
+				fullname: user.fullname,
 				email: user.email,
 				id : user._id
 			};
-			newSession.user = authenticateduser;
+			req.session.user = authenticateduser;
 	  	res.status(200).send({
 	  		user : user,
 	  		message : 'sign up success',
@@ -39,16 +39,32 @@ exports.signIn = function(req,res){
 	  } else if (user === null) {
  		res.status(400).send('wrong email or password');
 	  } else {
-	  	var newSession = req.session;
-			var authenticateduser = {
-				email: user.email,
-				id : user._id
-			};
-			newSession.user = authenticateduser;
-	  	res.status(200).send({
-	  		user:user,
-	  		message: "sign in success",
-	  	});
+	  	var authenticateduser = {
+	  		fullname: user.fullname,
+			email: user.email,
+			id : user._id
+		};
+		req.session.user = authenticateduser;
+	  	Designer.findOne({ 
+  			userEmail:  req.session.email
+	  	 }, function (err, designer) {
+			if (err) {
+			  	res.status(400).send(err);
+			}  else if (designer == null) { 
+			  	
+			  	res.status(200).send({
+			  		user:user,
+			  		message: "sign in as user success",
+			  	});
+			} else {
+				res.status(200).send({
+					user: user,
+			  		designer:designer,
+			  		message: "sign in as designer",
+			  	});   
+			}
+		}); 
+			
 	  }
   });
 };
@@ -82,9 +98,7 @@ exports.checkAuthenticated = function(req,res){
 };
 
 exports.signOut = function(req,res){
-	req.session.user = null;
-
-   
+	req.session.user = null; 
 	  if (req.session.user) { 
  		res.status(400).send('sign out failed');
 	  } else {  
