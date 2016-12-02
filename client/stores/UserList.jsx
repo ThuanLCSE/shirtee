@@ -32,6 +32,10 @@ export default function UserTodo(state = defaultState, action) {
           return {
               text: 'Failed'
           };
+    case 'UPLOAD_SHIRT_SUCCESSFULLY':
+        return {
+              text: action.info
+        };
     default:
       return defaultState;
   }

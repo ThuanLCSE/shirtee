@@ -5,6 +5,10 @@ import { bindActionCreators } from 'redux';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
+import {uploadFileUrl} from './../../constant/ApiUri';
+
+
+
 class UploadImg extends React.Component{
   constructor(props) {
         super(props);
@@ -45,7 +49,7 @@ class UploadImg extends React.Component{
           {this.state.previewUrl?<img src={this.state.previewUrl}/>:null}
 
           <Upload name="picture" onReady={this.onReadyUpload}
-          action="/upload"
+          action = {uploadFileUrl}
           onStart={this.onStartUpload}
           onError={this.onErrorUpload}
           onSuccess={this.onSuccessUpload}

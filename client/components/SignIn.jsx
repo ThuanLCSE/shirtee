@@ -28,25 +28,25 @@ class SignIn extends React.Component {
         this.getValueSignUp = this.getValueSignUp.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
-    
+
     getValueSignIn() {
         var userData = this.state.user;
         this.props.signInFunc(userData);
 //        this.setState({open: false, openSignUp: false});
     }
-    
+
     getValueSignUp() {
         var userData = this.state.user;
         this.props.signUpFunc(userData);
 //        this.setState({open: false, openSignUp: false});
     }
-    
+
     handleChange(att, e) {
         var newUser = this.state.user;
         newUser[att] = e.target.value;
         this.setState({user: newUser});
     }
-    
+
     render() {
         const changeSignUp = (
             <FlatButton label="Sign Up" primary={true} onClick={() => this.setState({open: false, openSignUp: true})} />
@@ -93,7 +93,7 @@ class SignIn extends React.Component {
                                     hintText="Your email"
                                     fullWidth={true}
                                     onChange={(e) => this.handleChange('email', e)}/><br/>
-                        <TextField  type="password" 
+                        <TextField  type="password"
                                     floatingLabelText="Your password"
                                     hintText="Your password"
                                     fullWidth={true}
