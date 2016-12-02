@@ -1,4 +1,5 @@
 var User = require('mongoose').model('User'); 
+var Designer = require('mongoose').model('Designer'); 
 
 exports.signUp = function(req,res){
 	var newUser = new User({
