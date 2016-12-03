@@ -69,7 +69,7 @@ class Home extends React.Component{
         <Navigator changeView = {this.changeStateView} 
                    signInFunc={this.props.UserAct.SignIn}
                     userData={this.props.UserTodo}
-                    signUpFunc={ this.props.UserAct.SignUp}
+                    signUpFunc={ this.props.UserAct.SignUp }
                     becomeNewDesigner={this.props.UserAct.BecomeNewDesigner}
                     checkSignIn={this.props.UserAct.CheckSignIn}
                     signOutFunc={this.props.UserAct.UserSignOut}

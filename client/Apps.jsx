@@ -22,10 +22,10 @@ import { Router, Route, Link, browserHistory, IndexRoute  } from 'react-router';
 // import Component
 import Home from './components/Home';
 import Admin from './components/Admin';
-import UpLoadShirt from './components/admin/UpLoadShirt';
-import ViewAdminPattern from './components/admin/ViewAdminPattern';
-import ViewSellProgram from './components/admin/ViewSellProgram';
-import CreateSellProgram from './components/admin/CreateSellProgram';
+// import UpLoadShirt from './components/admins/UpLoadShirt';
+// import ViewAdminPattern from './components/admins/ViewAdminPattern';
+// import ViewSellProgram from './components/admins/ViewSellProgram';
+// import CreateSellProgram from './components/admins/CreateSellProgram';
 
 let store = createStore(
   RootReducers,
@@ -75,6 +75,11 @@ class Apps extends React.Component {
 //   <Route path="/admin-upload" component = {UpLoadShirt} />
 // </Route>
 
+// <Route path = "admin-upload" component = {UpLoadShirt} />
+// <Route path = "updemo" component = {UploadDemo} />
+// <Route path = "admin-view-pattern" component = {ViewAdminPattern} />
+// <Route path = "admin-view-sell-program" component = {ViewSellProgram} />
+// <Route path = "admin-create-sell-program" component = {CreateSellProgram} />
 
 if(typeof window !== 'undefined') {
   console.log("Router");
@@ -84,11 +89,6 @@ if(typeof window !== 'undefined') {
         <Router history = {browserHistory}>
                 <Route path = "/" component = {Home}/>
                 <Route path = "admins"  component = {Admin} />
-                <Route path = "admin-upload" component = {UpLoadShirt} />
-                <Route path = "updemo" component = {UploadDemo} />
-                <Route path = "admin-view-pattern" component = {ViewAdminPattern} />
-                <Route path = "admin-view-sell-program" component = {ViewSellProgram} />
-                <Route path = "admin-create-sell-program" component = {CreateSellProgram} />
           </Router>
         </MuiThemeProvider>
     </Provider>,

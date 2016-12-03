@@ -5,22 +5,83 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
 
+
+import * as PatternAct from './../actions/PatternAction.jsx';
+import * as AdminAct from './../actions/ActionAdminSignIn.jsx';
+import AdminSignIn from './admins/AdminSignIn';
+import ListPattern from './admins/ListPattern';
 
 
 
 class Admin extends React.Component{
+  constructor(props) {
+      super(props);
+      this.state = {
+          view: 'signIn'
+      };
+      this.changeViewDropdown = this.changeViewDropdown.bind(this);
+      this.listPattern = this.listPattern.bind(this);
+  }
+  listPattern(){
+    console.log('list patt');
+    return(
+      <ListPattern
+              getListPattern = {this.props.PatternAct.GetList}
+              AdminStore={this.props.AdminTodo}/>
+    );
+  }
+  changeViewDropdown(event, index, value){
+      console.log('view thay doi '+ value);
+      this.setState({
+          view : value
+      });
+  }
+  adminHome(){
+    return(
+      <DropDownMenu value={this.state.value} onChange={this.changeViewDropdown}>
+          <MenuItem value='upload shirt' primaryText="Upload" />
+          <MenuItem value='list pattern' primaryText="View Pattern" />
+          <MenuItem value='sell program' primaryText="View sell program" />
+          <MenuItem value= 'create sell program' primaryText="Create new sale program" />
+        </DropDownMenu>
+    )
+  }
+  signInAdmin(){
+    return(
+      <AdminSignIn
+            signInFunc={this.props.AdminAct.SignIn}
+            adminData={this.props.AdminTodo}
+      />
+
+    )
+  }
+
     render(){
       return (
           <div>
-            <a href="/">Home</a>
-            <a href="admin-upload">Upload</a>
-            <a href="admin-view-pattern">View Pattern</a>
-            <a href="admin-view-sell-program">View sell program</a>
-            <a href="admin-create-sell-program">Create new sale program</a>
+          {this.props.AdminTodo.signInSuccess?this.adminHome():this.signInAdmin()}
+          {this.state.view === 'list pattern'? this.listPattern():null}
+          {this.state.view === 'upload shirt'? this.listPattern():null}
+          {this.state.view === 'sell program'? this.listPattern():null}
+          {this.state.view === 'create sell program'? this.listPattern():null}
           </div>
       );
     }
 };
 
-export default Admin;
+
+const mapStateToProps = state => ({
+  AdminTodo: state.AdminTodo
+});
+const mapDispatchToProps = dispatch => ({
+  AdminAct: bindActionCreators(AdminAct, dispatch),
+  PatternAct: bindActionCreators(PatternAct, dispatch),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Admin);

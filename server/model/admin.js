@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema; 
-var adminSchema = new Schema({ 
+var Schema = mongoose.Schema;
+var adminSchema = new Schema({
     password :{
     	type: String,
     	required: 'Password required'
@@ -8,7 +8,7 @@ var adminSchema = new Schema({
     email: {
     	type: String,
     	required: 'email required'
-    }, 
+    },
     createdDay: {
     	type: Date,
         default: Date.now
@@ -20,16 +20,16 @@ var adminSchema = new Schema({
 });
 //
 //
-//var Admin = mongoose.model('Admin', adminSchema);
-//
-//var admin = new Admin({
+var Admin = mongoose.model('Admin', adminSchema);
+
+// var admin = new Admin({
 // email: 'abc@123',
 // password: '123'
-//});
-//admin.save(function (err, admin) {
+// });
+// admin.save(function (err, admin) {
 //  if (err) {
 //     console.log(err);
 // } else  {
 //     console.log(admin);
 // }
-//});
+// });
