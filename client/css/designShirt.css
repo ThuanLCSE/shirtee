@@ -1,0 +1,17 @@
+.designShirtForm{
+	float: right;
+	border: 1px solid;
+}
+.shirtframe {
+	float: right;
+	margin-right: 50px;
+	display: block;
+	width: 400;
+    height: 500;
+}
+
+
+.shirtframe #canvascontent{
+  border: solid 1px blue;  
+  display:block;
+}
