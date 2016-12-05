@@ -73,4 +73,16 @@ export const adminDeletePattern = '/api/pattern/remove/:patternId'
 // 	message: 'remove pattern success'
 // }
 export const getListPattern = '/api/pattern/listAll'
-// http method get
+
+export const userUpdateInfo = '/api/user/update/:userId'
+// send data = {
+// 	   fullname
+	// password
+	// gender
+	// birthday   
+// }
+// success :{
+// 			message: 'update user success',
+	  		// user: Object,
+// 	  	}
+
