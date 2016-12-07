@@ -17,6 +17,7 @@ import { createStore } from 'redux';
 import * as UserAct from './../actions/ActionSignIn.jsx';
 import * as CategoryAct from './../actions/CategoryAction.jsx';
 import * as PatternAct from './../actions/PatternAction.jsx';
+import * as DesignerAct from './../actions/DesignerAction.jsx';
 
 const divStyle = {
   color: 'blue'
@@ -49,7 +50,10 @@ class Home extends React.Component{
     newShirt() {
         return (
            <NewShirt categoryList={this.props.CategoryList}
-                     getCategory={this.props.CategoryAct.GetList}/>
+                     getCategory={this.props.CategoryAct.GetList}
+                     userData={this.props.UserTodo}
+                     designerList={this.props.DesignerList}
+                     uploadPattern={this.props.DesignerAct.UploadPattern}/>
         );
     }
     
@@ -106,13 +110,15 @@ class Home extends React.Component{
 const mapStateToProps = state => ({
   UserTodo: state.UserTodo,
   CategoryList: state.CategoryList,
-  PatternList: state.PatternList
+  PatternList: state.PatternList,
+  DesignerList: state.DesignerList
 });
 
 const mapDispatchToProps = dispatch => ({
   UserAct: bindActionCreators(UserAct, dispatch),
   CategoryAct: bindActionCreators(CategoryAct, dispatch),
-  PatternAct: bindActionCreators(PatternAct, dispatch)
+  PatternAct: bindActionCreators(PatternAct, dispatch),
+  DesignerAct: bindActionCreators(DesignerAct, dispatch),
 });
 
 export default connect(

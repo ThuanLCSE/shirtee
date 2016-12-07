@@ -4,79 +4,97 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Checkbox from 'material-ui/Checkbox';
 import Slider from 'material-ui/Slider';
+import Upload from 'rc-upload';
+import {uploadFileUrl} from './../../constant/ApiUri';
 
 class PatternInfor extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            category: {},
-            expirationDate: 5,
-            detail: {
-                name: '',
-                price: 0
-            }
-        };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleExpiration = this.handleExpiration.bind(this);
-        this.handleCategory = this.handleCategory.bind(this);
+        this.onSuccessUpload = this.onSuccessUpload.bind(this);
+        this.fileUploadRedux = this.fileUploadRedux.bind(this);
     }
-    
-    handleCategory(e, name) {
-        var categoryCheck = this.state.category;
-        categoryCheck[name] = categoryCheck[name] ? false : true;
-        this.setState({category: categoryCheck})
-    }
-    
-    handleChange(att, e) {
-        var newDetail = this.state.detail;
-        newDetail[att] = e.target.value;
-        this.setState({detail: newDetail});
-    }
-    
-    handleExpiration(e, value) {
-        this.setState({expirationDate: value > 10 ? 10 : value});
-    };
     
     componentWillMount() {
         this.props.getCategory();
     }
     
+      uploadFile() {
+        var fd = new FormData();
+        fd.append( "fileInput", $("#fileInput")[0].files[0]);
+      }
+      beforeUpload(file) {
+            console.log('beforeUpload');
+            console.log(file);
+      };
+      onStartUpload(file){
+        console.log('on start');
+        console.log(file);
+      }
+      onErrorUpload(err,response){
+        console.log('on error');
+        console.log(response);
+        console.log(err);
+      }
+      onSuccessUpload(result, file){
+        console.log('on success');
+//        this.setState({previewUrl: result.path});
+        this.props.changeUrl(result.path);
+        console.log(result);
+        console.log(file);
+      }
+      fileUploadRedux(){
+          console.log(uploadFileUrl);
+        return(
+            <div>
+              {this.props.url ? <img className="img-responsive" style={{marginBottom:20}} src={this.props.url}/> : null}
+
+              <Upload name="picture" onReady={this.onReadyUpload}
+              action = {uploadFileUrl}
+              onStart={this.onStartUpload}
+              onError={this.onErrorUpload}
+              onSuccess={this.onSuccessUpload}
+              onProgress={this.onProgressUpload}
+              beforeUpload={this.beforeUpload}>
+                <RaisedButton style={{width: '100%'}} label="Upload image" primary={true}/>
+              </Upload>
+            </div>
+        )
+      }
+    
     render() {
-        console.log(this.state.category);
+        console.log(this.props.stateList.category);
         return (
             <Paper style={{padding: 20}}>
-               <div style={{position: 'relative', width:'70%', margin: 'auto'}}>
-                <RaisedButton style={{width: '100%'}} type="file" label="Upload image" primary={true}/>
-                <input type="file" style={{position: 'absolute', top: 0, left: 0, opacity: 0, width:'100%', height:'100%'}}/>
-               </div>
+                {this.fileUploadRedux()}
                 <TextField  floatingLabelText="Name"
                             hintText="Name"
                             fullWidth={true}
-                            onChange={(e) => this.handleChange('name', e)}/><br/>
+                            onChange={(e) => this.props.handleChange('name', e)}/><br/>
                 <TextField  type="number"
                             floatingLabelText="Price"
                             hintText="Price"
                             fullWidth={true}
-                            onChange={(e) => this.handleChange('price', e)}/>
+                            onChange={(e) => this.props.handleChange('price', e)}/>
                 <TextField  type="number"
                             floatingLabelText="Expiration date"
                             min={0}
                             max={10}
-                            value={this.state.expirationDate}
+                            value={this.props.stateList.expirationDate}
                             fullWidth={true}
-                            onChange={(e, value) => this.handleExpiration(e, value)}/><br/>
+                            onChange={(e, value) => this.props.handleExpiration(e, value)}/><br/>
                 <Slider
                   min={0}
                   max={10}
                   step={1}
-                  value={this.state.expirationDate}
-                  onChange={(e, value) => this.handleExpiration(e, value)}
+                  value={this.props.stateList.expirationDate}
+                  onChange={(e, value) => this.props.handleExpiration(e, value)}
                 />
                 {this.props.categoryList.listCategory.map( (row, index) => (
                   <Checkbox key={index}
                             label={<b>{row.name}</b>}
-                            onCheck={(e, name) => this.handleCategory(e, row.name)}/>
+                            onCheck={(e, id) => this.props.handleCategory(e, row._id)}/>
                   ))}
+                <RaisedButton label="Create new pattern" onClick={this.props.submit} primary={true}/>
             </Paper>
         );
     }

@@ -9,7 +9,7 @@ export const DesignerRegister = '/api/designer/register'
 //     }
 // }
 export const uploadFileUrl = '/api/upload' 
-export const uploadPattern = '/api/designer/pattern/create/:designerId'
+export const uploadPattern = '/api/designer/pattern/create/'//:designerId'
 // send data = { 
 //     	url: 'require', 
 // 	    price: 'require',

@@ -43,8 +43,7 @@ class UploadDemo extends React.Component{
   fileUploadRedux(){
     return(
         <div>
-          {this.state.previewUrl?<img src={this.state.previewUrl}/>:null}
-
+          {this.state.previewUrl ? <img src={this.state.previewUrl}/> : null}
           <Upload name="picture" onReady={this.onReadyUpload}
           action = {uploadFileUrl}
           onStart={this.onStartUpload}

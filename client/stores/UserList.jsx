@@ -11,6 +11,7 @@ export default function UserTodo(state = defaultState, action) {
           newState.isDesigner = action.designer ? true : false;
           newState.signInSuccess = true;
           newState.user = action.user;
+          newState.designer = action.designer;
           return newState;
     case 'SIGN_IN_ERROR':
           return {
@@ -39,6 +40,7 @@ export default function UserTodo(state = defaultState, action) {
           newState.isDesigner = action.designer ? true : false;
           newState.signInSuccess = true;
           newState.user = action.user;
+          newState.designer = action.designer;
           return newState;
     case 'NOT_SIGNED_IN_YET':
           return {
