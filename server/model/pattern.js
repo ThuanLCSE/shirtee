@@ -33,14 +33,8 @@ var patternSchema = new Schema({
     	default: Date.now
     },
     recommendShirt:{
-        url:  {
-            type: String,
-            required: 'recom shirt url required'
-        },
-        id:  {
-            type: ObjectId,
-            required: 'recom shirt id required'
-        }
+        url:  String,
+        id: ObjectId
     },
     recommendPattern: {
     	position: {
