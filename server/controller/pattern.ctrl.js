@@ -3,22 +3,27 @@ var Pattern = require('mongoose').model('Pattern');
 exports.create = function(req,res){
 	var expireDay = new Date(); 
     expireDay.setDate(expireDay.getDate()+ req.level.expireTime);
-	var newPattern = new Pattern({ 
+	var reqPattern = { 
     	url: req.body.url,
 	    designer: req.designer.displayName,
     	designerId:  req.designer._id,
 	    price: req.body.price,
     	catergory: req.body.catergory,
 	    expireDay: expireDay, 
-    	recommendShirt: req.body.shirt?mongoose.Types.ObjectId(req.body.shirt._id):null,
-	    recommendPattern: {
-	    	position: req.body.position?req.body.position:null,
-	    	size: req.body.size?req.body.size:null,
-	    	rotate: req.body.rotate?req.body.rotate:null
-	    }, 
-    	name: req.body.name,
-	    recommendUrl: req.body.shirt?mongoose.Types.ObjectId(req.body.shirt.url):null,
-	});
+	    recommendShirt: {},
+    	recommendPattern: {}, 
+    	name: req.body.name
+	};
+	reqPattern.recommendPattern = {
+		position: req.body.position?req.body.position:null,
+    	size: req.body.size?req.body.size:null,
+    	rotate: req.body.rotate?req.body.rotate:null
+    };
+	reqPattern.recommendShirt = {
+		url: req.body.recommendShirtUrl?req.body.recommendShirtUrl:null,
+        id: req.body.recommendShirtId?req.body.recommendShirtId:null
+    };
+    var newPattern = new Pattern(reqPattern);
 	
   	newPattern.save(function (err, pattern) {
 	  if (err) {
@@ -46,26 +51,21 @@ exports.delete = function(req,res){
 	  	}
  	});
 };
-
+ 
 
 exports.increaseSale = function(req,res,next){
 	req.pattern.saleTime += 1;
 	next();
 };
 
-exports.updatePattern = function(req,res){
+exports.returnPattern = function(req,res){
 	
 	var pattern = req.pattern; 
-  	pattern.save(function (err,updatedPattern) {
-	  if (err) {
-	  	res.status(400).send(err);
-	  }  else { 
+ 
 	  	res.status(200).send({
 	  		message: 'update status success',
-	  		pattern: updatedPattern,
-	  	}); 
-	  }
-  });
+	  		pattern: pattern,
+	  	});  
 };
 exports.updatePattern = function(req,res){
 	
