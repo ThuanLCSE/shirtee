@@ -46,20 +46,24 @@ class  GridListFrame extends React.Component{
   constructor(props){
     super(props);
   };
-
+    
+  componentWillMount() {
+        this.props.getPattern();
+  }
 
   render(){
     return (
       <div style={styles.root}>
         <GridList style={styles.gridList} cols={3} padding={10} cellHeight='auto'>
-          {tilesData.map((tile) => (
+          {this.props.patternList.listPattern.map( (row, index) => (
             <GridTile
-              title={tile.title}
+              key={index}
+              title={row.name}
               actionIcon={<IconButton><StarBorder color="yellow" /></IconButton>}
               titleStyle={styles.titleStyle}
               titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
             >
-            <ProductImg />
+            <ProductImg url={row.url}/>
             </GridTile>
           ))}
         </GridList>

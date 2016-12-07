@@ -74,7 +74,7 @@ export const adminDeletePattern = '/api/pattern/remove/:patternId'
 // }
 export const getListPattern = '/api/pattern/listAll'
 
-export const userUpdateInfo = '/api/user/update/:userId'
+export const userUpdateInfo = '/api/user/update/'//userId
 // send data = {
 // 	   fullname
 	// password

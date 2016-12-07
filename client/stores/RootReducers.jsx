@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 import UserTodo from './UserList.jsx';
 import CategoryList from './CategoryList.jsx';
-import AdminTodo from './AdminList.jsx';
+import PatternList from './PatternList.jsx';
 
 const RootReducers = combineReducers({
   UserTodo,
   CategoryList,
-  AdminTodo
+  PatternList
 })
 
 export default RootReducers

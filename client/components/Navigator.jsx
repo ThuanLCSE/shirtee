@@ -10,6 +10,7 @@ import BecomeDesigner from './BecomeDesigner';
 import ActionFavorite from 'material-ui/svg-icons/action/favorite';
 import AvFiberNew from 'material-ui/svg-icons/av/fiber-new';
 import ActionCardGiftcard from 'material-ui/svg-icons/action/card-giftcard';
+import ActionList from 'material-ui/svg-icons/action/list';
 import ActionShoppingCart from 'material-ui/svg-icons/action/shopping-cart';
 
 const flexContainer = {
@@ -36,9 +37,15 @@ class Profile extends React.Component {
           open: false,
           openDialog: false
         };
-        this.handleMouseOver = this.handleMouseOver.bind(this);
+        this.handleClickProfile = this.handleClickProfile.bind(this);
         this.handleRequestClose = this.handleRequestClose.bind(this);
         this.handleBecomeDesigner = this.handleBecomeDesigner.bind(this);
+        this.handleChoosePopover = this.handleChoosePopover.bind(this);
+    }
+    
+    handleChoosePopover(e, view) {
+        this.props.changeView(view);
+        this.setState({open: false});
     }
 
     handleBecomeDesigner() {
@@ -46,7 +53,7 @@ class Profile extends React.Component {
         this.setState({openDialog: !this.state.openDialog});
     }
     
-    handleMouseOver(event) {
+    handleClickProfile(event) {
         // This prevents ghost click.
         event.preventDefault();
         this.setState({
@@ -57,7 +64,7 @@ class Profile extends React.Component {
     
     handleRequestClose() {
         this.setState({
-          open: false,
+          open: false
         });
     };
 
@@ -65,7 +72,7 @@ class Profile extends React.Component {
         return (
             <List>
                 <ListItem primaryText={<b>Hello, {this.props.userData.user.fullname.split(' ')[0]}</b>}
-                  onClick={this.handleMouseOver}/>
+                  onClick={this.handleClickProfile}/>
               <Popover
                   open={this.state.open}
                   anchorEl={this.state.anchorEl}
@@ -73,11 +80,11 @@ class Profile extends React.Component {
                   targetOrigin={{horizontal: 'left', vertical: 'top'}}
                   onRequestClose={this.handleRequestClose}>
                   <Menu>
-                    <MenuItem primaryText="Information" onClick={() => this.props.changeView('info')}/>
-                    <MenuItem primaryText="Manage account" />
+                    <MenuItem primaryText="Information" onClick={(e, view) => this.handleChoosePopover(e, 'info')}/>
+                    <MenuItem primaryText="Manage account" onClick={(e, view) => this.handleChoosePopover(e, 'accUpdate')}/>
                     <MenuItem primaryText="History orders" />
                     {this.props.userData.isDesigner ?
-                        <MenuItem primaryText="Create new design" /> :
+                        <MenuItem primaryText="Create new design" onClick={(e, view) => this.handleChoosePopover(e, 'newShirt')}/> :
                         <MenuItem onClick={this.handleBecomeDesigner} primaryText={"Become designer"} />
                     }
                     {this.props.userData.isDesigner ?
@@ -98,13 +105,30 @@ class Navigator extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          signInStatus: true
+          openCategory: false
         };
+        this.handleClickCategory = this.handleClickCategory.bind(this);
+        this.handleRequestClose = this.handleRequestClose.bind(this);
     }
     
+    handleRequestClose() {
+        this.setState({
+          openCategory: false
+        });
+    };
+    
+    handleClickCategory(event) {
+        // This prevents ghost click.
+        event.preventDefault();
+        this.setState({
+          openCategory: true,
+          anchorEl: event.currentTarget,
+        });
+    };
+    
     componentWillMount() {
-        this.props.checkSignIn();
         this.props.getCategory();
+        this.props.checkSignIn();
     }
 //{this.props.categoryData.list.map()...}
     render() {
@@ -118,9 +142,19 @@ class Navigator extends React.Component {
                       <ListItem primaryText={(<b>Best Sell</b>)} leftIcon={<ActionFavorite />} />
                       <ListItem primaryText={(<b>Newest</b>)} leftIcon={<AvFiberNew />} />
                       <ListItem primaryText={(<b>Promotion</b>)} leftIcon={<ActionCardGiftcard />} />
-                      {this.props.categoryList.listCategory.map( (row, index) => (
-                      <ListItem key={index} primaryText={<b>{row.name}</b>}/>
-                      ))}
+                      <ListItem primaryText={(<b>Category</b>)} onClick={this.handleClickCategory} leftIcon={<ActionList />} />
+                      <Popover
+                          open={this.state.openCategory}
+                          anchorEl={this.state.anchorEl}
+                          anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+                          targetOrigin={{horizontal: 'left', vertical: 'top'}}
+                          onRequestClose={this.handleRequestClose}>
+                          <Menu>
+                              {this.props.categoryList.listCategory.map( (row, index) => (
+                                <MenuItem key={index} primaryText={<b>{row.name}</b>}/>
+                              ))}
+                          </Menu>
+                      </Popover>
                     </List>
                 </div>
                 <div className="col-sm-3">

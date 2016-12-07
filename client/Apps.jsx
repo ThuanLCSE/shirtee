@@ -21,7 +21,7 @@ import UploadDemo from './components/demo/UploadDemo';
 import { Router, Route, Link, browserHistory, IndexRoute  } from 'react-router';
 // import Component
 import Home from './components/Home';
-import Admin from './components/Admin';
+//import Admin from './components/Admin';
 // import UpLoadShirt from './components/admins/UpLoadShirt';
 // import ViewAdminPattern from './components/admins/ViewAdminPattern';
 // import ViewSellProgram from './components/admins/ViewSellProgram';
@@ -43,11 +43,6 @@ class Apps extends React.Component {
           <div>
             <Home />
             <Information/>
-            <UpLoadShirt />
-            <Admin />
-            <ViewAdminPattern />
-            <ViewSellProgram />
-            <CreateSellProgram />
             {this.props.children}
           </div>
         );
@@ -88,7 +83,6 @@ if(typeof window !== 'undefined') {
         <MuiThemeProvider>
         <Router history = {browserHistory}>
                 <Route path = "/" component = {Home}/>
-                <Route path = "admins"  component = {Admin} />
           </Router>
         </MuiThemeProvider>
     </Provider>,

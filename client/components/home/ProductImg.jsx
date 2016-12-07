@@ -38,10 +38,8 @@ class ProductImg extends React.Component{
   render(){
 
       return (
-        <div onClick={this.handleOpen}>
-
+        <div className="imageoutside" onClick={this.handleOpen}>
           <Dialog
-
             modal={false}
             open={this.state.open}
             onRequestClose={this.handleClose}
@@ -49,10 +47,9 @@ class ProductImg extends React.Component{
           >
           <CarouselLogo />
         </Dialog>
-
-
-            <div className="hovereffect" >
-              <img className="img-responsive" src="https://image.freepik.com/free-vector/grey-background-design_23-2147489413.jpg" />
+            <div>
+              <img className="img-pattern img-responsive" src="https://image.freepik.com/free-vector/color-waves-with-brush-style_23-2147496667.jpg" />
+              <img className="img-shirt img-responsive" src="https://image.freepik.com/free-vector/amazing-full-color-background-with-wavy-shapes_1126-105.jpg" />
             </div>
 
         </div>

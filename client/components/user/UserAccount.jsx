@@ -1,11 +1,5 @@
 import React from 'react';
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import * as UserAct from '../../actions/ActionSignIn.jsx';
-
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
@@ -20,27 +14,41 @@ class UserAccount extends React.Component{
         super(props);
         this.state = {
             userData: {
-                fullName: 'Nguyen Viet Hung',
-                password: '123456',
+                id: this.props.userData.user._id,
+                fullname: this.props.userData.user.fullname,
+                password: this.props.userData.user.password,
                 oldPwd: '',
                 newPwd: '',
                 cfmPwd: '',
-                email: 'abc@xyz',
-                gender: 'male',
-                birthday: new Date()
+                gender: this.props.userData.user.gender,
+                birthday: new Date(this.props.userData.user.birthday)
             },
-            changePwd: true
+            changePwd: false
         };
         this.handleChange = this.handleChange.bind(this);
+        this.handleChangeBirthday = this.handleChangeBirthday.bind(this);
         this.handleChangePwd = this.handleChangePwd.bind(this);
         this.handleUpdate = this.handleUpdate.bind(this);
     }
     
     handleUpdate() {
-        alert((this.state.userData.oldPwd == this.state.userData.password &&
-               this.state.userData.newPwd == this.state.userData.cfmPwd) ?
-              "Update successfully!"
-             : "Wrong password or confirm password!!!");
+        if (this.state.userData.oldPwd !== this.state.userData.password) {
+            alert ("Wrong password!");
+            return;
+        }
+        if (this.state.changePwd)
+            if (this.state.userData.newPwd !== this.state.userData.cfmPwd) {
+                alert("Wrong confirm password!");
+                return;
+            }
+            else {
+                var newUser = this.state.userData;
+                newUser.password = newUser.newPwd;
+                this.setState({userData: newUser});
+            };
+        var userData = this.state.userData;
+        console.log(userData);
+        this.props.updateInfo(userData);
     }
     
     handleChangePwd() {
@@ -53,126 +61,119 @@ class UserAccount extends React.Component{
         this.setState({userData: newUser});
     }
     
+    handleChangeBirthday(e, date) {
+        var newUser = this.state.userData;
+        newUser.birthday = date;
+        this.setState({userData: newUser});
+    }
+    
+    getValueSignIn() {
+        var userData = this.state.user;
+        this.props.signInFunc(userData);
+    } 
+    
   render(){
     return(
-      <div>
-          <Navigator signInFunc={this.props.UserAct.SignIn}
-                     userData={this.props.UserTodo}
-                     signUpFunc={this.props.UserAct.SignUp}/>
-          <div className="container">
-            <div className="col-sm-3">
-                <SideBar/>
-            </div>
-            <div className="col-sm-1"></div>
-            <div className="col-sm-8">
-             <h2>Update your information</h2>
-              <table>
-                <tr>
-                    <td>
-                        <label style={{padding: 20}}>Full name:</label>
-                    </td>
-                    <td>
-                        <TextField
-                                defaultValue={this.state.userData.fullName}
-                                onChange={(e) => this.handleChange('fullName', e)}/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label style={{padding: 20}}>Gender:</label>
-                    </td>
-                    <td>
-                        <RadioButtonGroup onChange={(e) => this.handleChange('gender', e)}
-                                         defaultSelected={this.state.userData.gender == "male" ? "male" : "female"}>
-                          <RadioButton value="male" label="Male"/>
-                          <RadioButton value="female" label="Female"/>
-                        </RadioButtonGroup>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label style={{padding: 20}}>Date of birth:</label>
-                    </td>
-                    <td>
-                        <DatePicker defaultDate={this.state.userData.birthday}
-                                    mode="landscape"
-                                    onChange={(e) => this.handleChange('birthday', e)}/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label style={{padding: 20}}>Email:</label>
-                    </td>
-                    <td>
-                        <TextField
-                                defaultValue={this.state.userData.email}
-                                onChange={(e) => this.handleChange('email', e)}/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                    </td>
-                    <td>
-                        <Checkbox label="Change password" onCheck={this.handleChangePwd}/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label style={{padding: 20}}>Old password:</label>
-                    </td>
-                    <td>
-                         <TextField  type="password"
-                                hintText="Old password"
-                                disabled={this.state.changePwd}
-                                onChange={(e) => this.handleChange('oldPwd', e)}/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label style={{padding: 20}}>New password:</label>
-                    </td>
-                    <td>
-                         <TextField  type="password"
-                                hintText="New password"
-                                disabled={this.state.changePwd}
-                                onChange={(e) => this.handleChange('newPwd', e)}/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label style={{padding: 20}}>Confirm:</label>
-                    </td>
-                    <td>
-                         <TextField  type="password"
-                                hintText="Confirm password"
-                                disabled={this.state.changePwd}
-                                onChange={(e) => this.handleChange('cfmPwd', e)}/>
-                    </td>
-                </tr>
-              </table>
-                {this.state.userData.fullName}
-                {this.state.userData.email}
-                {this.state.userData.gender}
-                {this.state.userData.oldPwd}
-                {this.state.userData.newPwd}
-                {this.state.userData.cfmPwd}
-             <RaisedButton label="Update" primary={true} onClick={this.handleUpdate}/>
-            </div>
-          </div>
+      <div className="container">
+        <div className="col-sm-3">
+            <SideBar/>
+        </div>
+        <div className="col-sm-1"></div>
+        <div className="col-sm-8">
+         <h2>Update your information</h2>
+         {this.props.userData.user ?
+          <z>
+          <table>
+            <tr>
+                <td>
+                    <label style={{padding: 20}}>Full name:</label>
+                </td>
+                <td>
+                    <TextField
+                            name="Update Name"
+                            defaultValue={this.props.userData.user.fullname}
+                            onChange={(e) => this.handleChange('fullname', e)}/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label style={{padding: 20}}>Gender:</label>
+                </td>
+                <td>
+                    <RadioButtonGroup name="gender" onChange={(e) => this.handleChange('gender', e)}
+                                     defaultSelected={this.props.userData.user.gender ? this.props.userData.user.gender : null}>
+                      <RadioButton value="male" label="Male"/>
+                      <RadioButton value="female" label="Female"/>
+                    </RadioButtonGroup>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label style={{padding: 20}}>Date of birth:</label>
+                </td>
+                <td>
+                    {this.props.userData.user.birthday ?
+                    <DatePicker defaultDate={new Date(this.props.userData.user.birthday)}
+                                mode="landscape"
+                                onChange={(e, date) => this.handleChangeBirthday(e, date)}/> : 
+                    <DatePicker floatingLabelText="Date of birth"
+                                mode="landscape"
+                                onChange={(e, date) => this.handleChangeBirthday(e, date)}/>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label style={{padding: 20}}>Current password:</label>
+                </td>
+                <td>
+                     <TextField 
+                            name="Check pwd"
+                            type="password"
+                            hintText="Current password"
+                            onChange={(e) => this.handleChange('oldPwd', e)}/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td>
+                    <Checkbox label="Change password" onCheck={this.handleChangePwd}/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label style={{padding: 20}}>New password:</label>
+                </td>
+                <td>
+                     <TextField
+                            name="New pwd"
+                            type="password"
+                            hintText="New password"
+                            disabled={!this.state.changePwd}
+                            onChange={(e) => this.handleChange('newPwd', e)}/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label style={{padding: 20}}>Confirm:</label>
+                </td>
+                <td>
+                     <TextField
+                            name="Comfirm pwd"
+                            type="password"
+                            hintText="Confirm password"
+                            disabled={!this.state.changePwd}
+                            onChange={(e) => this.handleChange('cfmPwd', e)}/>
+                </td>
+            </tr>
+          </table>
+         <RaisedButton label="Update" primary={true} onClick={this.handleUpdate}/>
+        </z> : null}
+        </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  UserTodo: state.UserTodo
-});
-
-const mapDispatchToProps = dispatch => ({
-    UserAct: bindActionCreators(UserAct, dispatch),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(UserAccount);
+export default UserAccount;

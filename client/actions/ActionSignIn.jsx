@@ -10,7 +10,8 @@ export function SignIn(userData) {
 	  	return restApi.post(apiUser.UserSignIn, data).then((response) => {
 	    	console.log(response);
 	       dispatch({ type: 'SIGN_IN_SUCCESSFULLY',
-                     user : response.user}
+                     user : response.user,
+                    designer: response.designer}
                    );
 	    }).catch((err) => {
 	    	console.log(err);
@@ -91,6 +92,30 @@ export function BecomeNewDesigner(designerData) {
 	    }).catch((err) => {
 	    	console.log(err);
 	        dispatch({ type: 'BECOME_DESIGNER_ERROR',
+                    text: err.responseText
+                    });
+		});
+	};
+}
+
+export function UpdateInfo(userData) {
+    var data= {
+        fullname: userData.fullname,
+        password: userData.password,
+        gender: userData.gender,
+        birthday: userData.birthday
+    };
+    var UpdateAPI = apiUser.userUpdateInfo + userData.id;
+    console.log(UpdateAPI);
+    return function (dispatch) {
+	  	return restApi.post(UpdateAPI, data).then((response) => {
+	    	console.log(response);
+	       dispatch({ type: 'UPDATE_SUCCESSFULLY', 
+                    user: response.user}
+                   );
+	    }).catch((err) => {
+	    	console.log(err);
+	        dispatch({ type: 'UPDATE_ERROR',
                     text: err.responseText
                     });
 		});

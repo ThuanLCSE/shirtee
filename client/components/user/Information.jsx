@@ -12,16 +12,6 @@ import Navigator from '../Navigator';
 class Information extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {
-            userData: {
-                user: {
-                fullName: 'Nguyen Viet Hung',
-                email: 'abc@xyz',
-                gender: 'male',
-                birthday: new Date()
-                }
-            },
-        };
     }
     
   render(){
@@ -56,7 +46,7 @@ class Information extends React.Component{
                     <label style={{padding: 20}}>Date of birth:</label>
                 </td>
                 <td>
-                    <p>{this.props.userData.user.birthday?this.props.userData.user.birthday.toLocaleDateString():null}</p>
+                    <p>{this.props.userData.user.birthday? (new Date(this.props.userData.user.birthday)).toLocaleDateString() : null}</p>
                 </td>
             </tr>
             <tr>

@@ -6,6 +6,8 @@ import Navigator from './Navigator';
 //import CarouselLogo from './CarouselLogo';
 import CarouselModal from './CarouselModal';
 import Information from './user/Information';
+import UserAccount from './user/UserAccount';
+import NewShirt from './pattern/NewShirt';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -14,6 +16,7 @@ import { createStore } from 'redux';
 
 import * as UserAct from './../actions/ActionSignIn.jsx';
 import * as CategoryAct from './../actions/CategoryAction.jsx';
+import * as PatternAct from './../actions/PatternAction.jsx';
 
 const divStyle = {
   color: 'blue'
@@ -30,9 +33,23 @@ class Home extends React.Component{
         this.changeStateView = this.changeStateView.bind(this);
     }
     
-    infoView(){
+    infoView() {
         return (
            <Information userData = {this.props.UserTodo}/>
+        );
+    }
+    
+    accUpdateView() {
+        return (
+           <UserAccount userData = {this.props.UserTodo}
+                        updateInfo = {this.props.UserAct.UpdateInfo}/>
+        );
+    }
+    
+    newShirt() {
+        return (
+           <NewShirt categoryList={this.props.CategoryList}
+                     getCategory={this.props.CategoryAct.GetList}/>
         );
     }
     
@@ -48,7 +65,8 @@ class Home extends React.Component{
             <z>
               <a href="admins">Go to Admin </a>
                 <div className="container">
-                  <GridListFrame />
+                  <GridListFrame patternList={this.props.PatternList}
+                                 getPattern={this.props.PatternAct.GetList}/>    
                   <h3 style={divStyle}>Best Sell </h3>
                   <a href="#">View All</a>
                   <GridListFour />
@@ -77,6 +95,8 @@ class Home extends React.Component{
                     getCategory={this.props.CategoryAct.GetList}/>
           {this.state.view === 'home'?this.homeView():null}
            {this.state.view === 'info'?this.infoView():null}
+           {this.state.view === 'accUpdate'?this.accUpdateView():null}
+           {this.state.view === 'newShirt'?this.newShirt():null}
           
       </div>
     );
@@ -85,12 +105,14 @@ class Home extends React.Component{
 
 const mapStateToProps = state => ({
   UserTodo: state.UserTodo,
-  CategoryList: state.CategoryList
+  CategoryList: state.CategoryList,
+  PatternList: state.PatternList
 });
 
 const mapDispatchToProps = dispatch => ({
   UserAct: bindActionCreators(UserAct, dispatch),
-  CategoryAct: bindActionCreators(CategoryAct, dispatch)
+  CategoryAct: bindActionCreators(CategoryAct, dispatch),
+  PatternAct: bindActionCreators(PatternAct, dispatch)
 });
 
 export default connect(

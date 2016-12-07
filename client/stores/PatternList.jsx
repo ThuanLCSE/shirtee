@@ -1,15 +1,15 @@
 var defaultState = {
-    listCategory: []
+    listPattern: []
 }
 
-export default function CategoryList(state = defaultState, action) {
+export default function PatternList(state = defaultState, action) {
   var newState = Object.assign({}, state);
   switch (action.type) {
-    case 'GET_LIST_CATEGORY_SUCCESS':
+    case 'GET_LIST_PATTERN_SUCCESS':
           console.log("get list");
-          newState.listCategory = action.listCategory;
+          newState.listPattern = action.listPattern;
           return newState;
-    case 'GET_LIST_CATEGORY_FAILED':
+    case 'GET_LIST_PATTERN_FAILED':
           return {
               text: 'Failed'
           };
