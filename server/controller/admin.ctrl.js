@@ -4,7 +4,7 @@ exports.signIn = function(req,res){
 	var data = {};
 	data.email = req.body.email;
 	data.password = req.body.password;
-  	User.findOne({ 
+  	Admin.findOne({ 
   		email: data.email,
   		password: data.password
   	 }, function (err, admin) {

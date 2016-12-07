@@ -82,7 +82,7 @@ exports.updatePattern = function(req,res){
   });
 };
 exports.setAcceptStatus = function(req,res,next){
-	req.pattern.status = 'Approve';
+	req.pattern.status = 'approve';
 	next();
 }
 
@@ -122,6 +122,20 @@ exports.getAllOfDesigner = function(req,res){
 exports.getAll = function(req,res){
 	 
   	Pattern.find().sort({vote:-1}).exec(function (err, patterns) {
+	  if (err) {
+	  	res.status(400).send(err);
+	  }  else { 
+	  	res.status(200).send({
+	  		listPattern : patterns,
+	  		message : 'get all success',
+	  	});
+	  }
+  });
+};
+
+exports.getAllAvailable = function(req,res){
+	 
+  	Pattern.find({status: 'approve'}).sort({vote:-1}).exec(function (err, patterns) {
 	  if (err) {
 	  	res.status(400).send(err);
 	  }  else { 

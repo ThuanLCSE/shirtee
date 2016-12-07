@@ -9,7 +9,7 @@ export const DesignerRegister = '/api/designer/register'
 //     }
 // }
 export const uploadFileUrl = '/api/upload' 
-export const uploadPattern = '/api/designer/pattern/create/'//:designerId'
+export const uploadPattern = '/api/designer/pattern/create/:designerId'
 // send data = { 
 //     	url: 'require', 
 // 	    price: 'require',
@@ -68,8 +68,10 @@ export const adminDeletePattern = '/api/pattern/remove/:patternId'
 // success :{
 // 	message: 'remove pattern success' 
 // }
-export const getListPattern = '/api/pattern/listAll'
+export const getListPattern = '/api/user/pattern/listAll'
 // http method get 
+export const adminGetListPattern = '/api/admin/pattern/listAll'
+// http method get
 export const userUpdateInfo = '/api/user/update/'//userId
 // send data = {
 // 	   fullname

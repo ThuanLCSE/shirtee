@@ -3,8 +3,10 @@ var adminCtrller = require('../controller/admin.ctrl');
 
 module.exports = function(app){
  
-	app.route('/api/pattern/listAll')
-	.get(patternCtrller.getAll);
+	app.route('/api/admin/pattern/listAll')
+	.get(adminCtrller.checkAdminRole,patternCtrller.getAll);
+	app.route('/api/user/pattern/listAll')
+	.get(patternCtrller.getAllAvailable);
 	app.route('/api/pattern/remove/:patternId')
 	.get(patternCtrller.getByID,
 		adminCtrller.checkAdminRole, patternCtrller.delete);

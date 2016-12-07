@@ -19,18 +19,6 @@ module.exports = function(app) {
       ,{
         path: '/admins',
         component: require('./../../client/components/demo/UploadDemo')
-      },{
-        path: '/admin-upload',
-        component: require('./../../client/components/demo/UploadDemo')
-      },{
-        path: '/admin-view-pattern',
-        component: require('./../../client/components/demo/UploadDemo')
-      },{
-        path: '/admin-view-sell-program',
-        component: require('./../../client/components/demo/UploadDemo')
-      },{
-        path: '/admin-create-sell-program',
-        component: require('./../../client/components/demo/UploadDemo')
       }
     ]
   };
