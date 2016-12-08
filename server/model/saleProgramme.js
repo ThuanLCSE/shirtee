@@ -22,9 +22,7 @@ var saleProgrammeSchema = new Schema({
     	type: String,
     	required: 'detail required'
     },
-    patternSale: [
-   	 patternSaleSchema
-    ],
+    patternSale: [],
     startDay: {
     	type: Date,
         default: Date.now

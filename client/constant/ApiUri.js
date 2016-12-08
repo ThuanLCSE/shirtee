@@ -70,6 +70,26 @@ export const adminDeletePattern = '/api/pattern/remove/:patternId'
 // }
 export const getListPattern = '/api/user/pattern/listAll'
 // http method get 
+export const getListPatternBestSell = '/api/user/pattern/listAll/bestSell'
+// http method get
+// return {
+	  	// 	listPattern : [],
+	  	// 	message : 'get all best sell success',
+	  	// }
+export const getListPatternNewest = '/api/user/pattern/listAll/newest'
+// http method get
+// return {
+	  	// 	listPattern : [],
+	  	// 	message : 'get all newest success',
+	  	// }
+export const getListPatternSale = '/api/user/pattern/listAll/getAllSale'
+// http method get
+// return {
+// 	listPattern : [],
+// 	saleProgramme: sale,
+// 	message : 'get all sale success',	
+// }
+
 export const adminGetListPattern = '/api/admin/pattern/listAll'
 // http method get
 export const userUpdateInfo = '/api/user/update/'//userId

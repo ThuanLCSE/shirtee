@@ -1,4 +1,6 @@
 var Pattern = require('mongoose').model('Pattern'); 
+var SaleProgramme = require('mongoose').model('SaleProgramme'); 
+var ObjectId = require('mongoose').Types.ObjectId; 
 
 exports.create = function(req,res){
 	var expireDay = new Date(); 
@@ -82,6 +84,7 @@ exports.updatePattern = function(req,res){
   });
 };
 exports.setAcceptStatus = function(req,res,next){
+	req.pattern.createdDay = new Date();
 	req.pattern.status = 'approve';
 	next();
 }
@@ -133,9 +136,8 @@ exports.getAll = function(req,res){
   });
 };
 
-exports.getAllAvailable = function(req,res){
-	 
-  	Pattern.find({status: 'approve'}).sort({vote:-1}).exec(function (err, patterns) {
+exports.getAllAvailable = function(req,res){ 
+  	Pattern.find({status: 'approve'}).exec(function (err, patterns) {
 	  if (err) {
 	  	res.status(400).send(err);
 	  }  else { 
@@ -146,5 +148,64 @@ exports.getAllAvailable = function(req,res){
 	  }
   });
 };
+
+exports.getAllNewest= function(req,res){ 
+  	Pattern.find({status: 'approve'}).sort({createdDay:-1}).exec(function (err, patterns) {
+	  if (err) {
+	  	res.status(400).send(err);
+	  }  else { 
+	  	res.status(200).send({
+	  		listPattern : patterns,
+	  		message : 'get all newest success',
+	  	});
+	  }
+  });
+};
+
+
+exports.getAllBestSell = function(req,res){ 
+  	Pattern.find({status: 'approve'}).sort({saleTime:-1}).exec(function (err, patterns) {
+	  if (err) {
+	  	res.status(400).send(err);
+	  }  else { 
+	  	res.status(200).send({
+	  		listPattern : patterns,
+	  		message : 'get all best sell success',
+	  	});
+	  }
+  });
+};
+
+exports.getAllSale = function(req,res){
+	SaleProgramme.find().sort({endDay:-1}).limit(1).exec(function (err, sale) {
+	  if (err) {
+	  	res.status(400).send(err);
+	  }  else if (sale === null) {
+	  	res.status(200).send({
+	  		listPattern : [],
+	  		message : 'have no sale'
+	  	});
+	  }
+	  else {
+	    var saleIdList = sale.patternSale;    
+	  	for (patternId in sale.patternSale){
+	  		saleIdList.push(ObjectId(patternId));
+	  	}	    
+	  	Pattern.find({
+		    '_id': { $in: saleIdList}
+		}, function(err, patterns){
+			 if (err) {
+			  	res.status(400).send(err);
+			  }  else {
+			  	res.status(200).send({
+			  		listPattern : patterns,
+			  		saleProgramme: sale,
+			  		message : 'get all sale success',
+			  	});
+			  }
+		});
+	  }
+  });
+}
 
  

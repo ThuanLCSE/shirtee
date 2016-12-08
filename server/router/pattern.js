@@ -19,8 +19,11 @@ module.exports = function(app){
 		adminCtrller.checkAdminRole, patternCtrller.updatePattern); 
 	app.route('/api/pattern/info/:patternId')
 	.get(patternCtrller.getByID, patternCtrller.returnPattern); 
-	app.route('/api/pattern/listAll')
-	.get(patternCtrller.getAll); 
-
+	app.route('/api/user/pattern/listAll/newest')
+	.get(patternCtrller.getAllNewest); 
+	app.route('/api/user/pattern/listAll/bestSell')
+	.get(patternCtrller.getAllBestSell); 
+	app.route('/api/user/pattern/listAll/getAllSale')
+	.get(patternCtrller.getAllSale); 
 	
 }
