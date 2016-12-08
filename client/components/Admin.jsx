@@ -10,8 +10,11 @@ import MenuItem from 'material-ui/MenuItem';
 
 
 import * as PatternAct from './../actions/PatternAction.jsx';
+import * as UploadAct from './../actions/ActionUploadShirt.jsx';
+
 import * as AdminAct from './../actions/ActionAdminSignIn.jsx';
 import AdminSignIn from './admins/AdminSignIn';
+import UpLoadShirt from './admins/UpLoadShirt';
 import ListPattern from './admins/ListPattern';
 
 
@@ -24,15 +27,31 @@ class Admin extends React.Component{
       };
       this.changeViewDropdown = this.changeViewDropdown.bind(this);
       this.listPattern = this.listPattern.bind(this);
+      this.adminHome = this.adminHome.bind(this);
+      this.signInAdmin = this.signInAdmin.bind(this);
+      this.uploadPattern = this.uploadPattern.bind(this);
+
   }
   listPattern(){
     console.log('list patt');
     return(
       <ListPattern
               getListPattern = {this.props.PatternAct.GetList}
-              AdminStore={this.props.AdminTodo}/>
+              AdminStore={this.props.AdminTodo}
+      />
     );
   }
+
+  uploadPattern(){
+      console.log("Goto: upload pattern");
+      return (
+        <UpLoadShirt
+          getUploadShirt = {this.props.UploadAct.UpLoadShirt}
+          adminData={this.props.AdminTodo}
+        />
+      )
+  }
+
   changeViewDropdown(event, index, value){
       console.log('view thay doi '+ value);
       this.setState({
@@ -55,7 +74,6 @@ class Admin extends React.Component{
             signInFunc={this.props.AdminAct.SignIn}
             adminData={this.props.AdminTodo}
       />
-
     )
   }
 
@@ -63,9 +81,9 @@ class Admin extends React.Component{
       return (
           <div>
           {this.props.AdminTodo.signInSuccess?this.adminHome():this.signInAdmin()}
-          {this.state.view === 'list pattern'? this.listPattern():null}
-          {this.state.view === 'upload shirt'? this.listPattern():null}
-          {this.state.view === 'sell program'? this.listPattern():null}
+          {this.state.view === 'upload shirt'?this.uploadPattern():null}
+          {this.state.view === 'list pattern'?this.listPattern():null}
+          {this.state.view === 'sell program'?this.listPattern():null}
           {this.state.view === 'create sell program'? this.listPattern():null}
           </div>
       );
@@ -79,6 +97,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   AdminAct: bindActionCreators(AdminAct, dispatch),
   PatternAct: bindActionCreators(PatternAct, dispatch),
+  UploadAct: bindActionCreators(UploadAct, dispatch)
 });
 
 export default connect(

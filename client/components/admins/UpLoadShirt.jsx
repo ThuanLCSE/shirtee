@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import UploadImg from './UploadImg';
 
 
+
 import * as UploadAct from './../../actions/ActionUploadShirt.jsx';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
 
 
 
@@ -33,7 +35,8 @@ class UpLoadShirt extends React.Component{
   }
   getValueUploadShirt() {
       var shirtInfo = this.state.info;
-      this.props.UploadAct.UpLoadShirt(shirtInfo);
+      //console.log(shirtInfo);
+      this.props.getUploadShirt(shirtInfo);
 //        this.setState({open: false, openSignUp: false});
 
   }
@@ -78,10 +81,9 @@ class UpLoadShirt extends React.Component{
 
       return (
         <div>
-            <UploadImg getUrl = {this.onUrlChange}/>
-            <UploadImg getUrl = {this.onLayoutUrlChange}/>
+        <UploadImg getUrl = {this.onUrlChange}/>
+        <UploadImg getUrl = {this.onLayoutUrlChange}/>
 
-             <form>
               Detail: <br/>
               <textarea rows="10" cols="30"
               onChange={(e) => this.handleChange('detail', e)}
@@ -111,21 +113,13 @@ class UpLoadShirt extends React.Component{
               <button onClick={this.getValueUploadShirt}>
               Create
               </button>
-              </form>
+              <div>{this.props.adminData.message}</div>
+
           </div>
       );
     }
 };
 
-const mapStateToProps = state => ({
-  UserTodo : state.UserTodo
-});
 
-const mapDispatchToProps = dispatch => ({
-  UploadAct : bindActionCreators(UploadAct, dispatch),
-});
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(UpLoadShirt);
+export default UpLoadShirt;

@@ -27,16 +27,20 @@ export default function AdminTodo(state = defaultState, action) {
               text: 'Failed'
           };
     case 'ADMIN_UPLOAD_SUCCESSFULLY':
-        return {
-              text: action.info
 
-        };
+
+              newState.signInSuccess = true;
+              newState.patternList = action.info;
+              newState.message = action.message;
+              return newState;
+
     case 'ADMIN_UPLOAD_ERROR':
        return {
           text: 'Upload Failed'
+
        };
     case 'GET_PATTERN_LIST_SUCCESS':
-      //newState.signInSuccess = true; //  why ? ??  hien ra sign up 
+      //newState.signInSuccess = true; //  why ? ??  hien ra sign up
       newState.patternList = action.patternList;
       newState.message = action.message;
       return newState;

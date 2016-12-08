@@ -16,6 +16,8 @@ export function UpLoadShirt(uploadInfo) {
       	return restApi.post(apiUser.uploadShirt, info).then((response) => {
         	console.log(response);
            dispatch({ type: 'ADMIN_UPLOAD_SUCCESSFULLY',
+                      text: 'Upload successful ahihi',
+                      message: 'succuess upload',
                        info : response.info}
                      );
         }).catch((err) => {
@@ -25,6 +27,7 @@ export function UpLoadShirt(uploadInfo) {
                       });
       });
     }
+
 
 
 
