@@ -19,6 +19,9 @@ module.exports = function(app) {
       ,{
         path: '/admins',
         component: require('./../../client/components/demo/UploadDemo')
+      },{
+        path: '/drawShirt',
+        component: require('./../../client/components/demo/UploadDemo')
       }
     ]
   };

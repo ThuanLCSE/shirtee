@@ -16,6 +16,7 @@ import SignIn from './components/SignIn';
 import Navigator from './components/Navigator';
 import Bill from './components/Bill';
 import UploadDemo from './components/demo/UploadDemo';
+import DragDropDemo from './components/demo/DragDropDemo';
 
 //
 import { Router, Route, Link, browserHistory, IndexRoute  } from 'react-router';
@@ -32,27 +33,7 @@ let store = createStore(
   applyMiddleware(thunk)
 );
 injectTapEventPlugin();
-
-
-          <div>
-            <Home />
-          </div>
-        );
-    }
-}
-
-//const mapStateToProps = state => ({
-//  UserTodo: state.UserTodo
-//});
-//
-//const mapDispatchToProps = dispatch => ({
-//    UserAct: bindActionCreators(UserAct, dispatch),
-//});
-//
-//var ConnectedApp = connect(
-//  mapStateToProps,
-//  mapDispatchToProps
-//)(Apps);
+ 
 //   <Route path = "home" component = {ConnectedApp} />
 //               <Route path = "about" component = {ConnectedApp} />
 //               <Route path = "contact" component = {ConnectedApp} />
@@ -75,6 +56,7 @@ if(typeof window !== 'undefined') {
         <MuiThemeProvider>
         <Router history = {browserHistory}>
                 <Route path = "/" component = {Home}/>
+                <Route path = "drawShirt" component = {DragDropDemo}/>
                 <Route path = "admins"  component = {Admin} />
           </Router>
         </MuiThemeProvider>

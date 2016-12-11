@@ -1,0 +1,13 @@
+#border{
+  border: solid 1px black;
+}
+
+#canvascontent{
+  border: solid 1px blue;  
+  width:400px;
+  height:500px;
+}
+
+h2 {
+  font-size: 20px;
+}

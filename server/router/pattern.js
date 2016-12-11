@@ -23,8 +23,7 @@ module.exports = function(app){
 	app.route('/api/user/pattern/listAll/newest')
 	.get(patternCtrller.getAllNewest); 
 	app.route('/api/user/pattern/listAll/bestSell')
-	.get(patternCtrller.getAllBestSell); 
-	getListPatternOnSale
+	.get(patternCtrller.getAllBestSell);  
 	app.route('/api/user/pattern/listAll/getAllSale')
 	.get(saleCtrller.getListPatternOnSale,patternCtrller.getAllSale); 
 	
