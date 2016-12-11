@@ -24,10 +24,11 @@ class ViewAdminPattern extends React.Component{
            </tr>
          </thead>
          <tbody>
-          {this.props.AdminStore.patternList.map(pattern =>
+          {this.props.PatternList.listPatternAdmin.map(pattern =>
                <PatternItem
                key = {pattern._id}
                pattern = {pattern}
+               approvePattern={this.props.approvePattern}
                />
             )
           }

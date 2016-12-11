@@ -1,8 +1,6 @@
 var defaultState = {
     signInSuccess : false,
-    message: '',
-    patternList: []
-    //isDesigner: false
+    message: ''
 }
 
 
@@ -39,12 +37,7 @@ export default function AdminTodo(state = defaultState, action) {
           text: 'Upload Failed'
 
        };
-    case 'GET_PATTERN_LIST_SUCCESS':
-      //newState.signInSuccess = true; //  why ? ??  hien ra sign up
-      newState.patternList = action.patternList;
-      newState.message = action.message;
-      return newState;
     default:
-      return defaultState;
+      return state;
   }
 }

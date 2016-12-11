@@ -15,6 +15,7 @@ const styles = {
     display: 'flex',
     flexWrap: 'nowrap',
     overflow: 'auto',
+    width: '100%'
   },
   titleStyle: {
     color: 'rgb(255, 255, 255)',

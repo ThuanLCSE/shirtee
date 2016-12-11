@@ -36,9 +36,10 @@ class Admin extends React.Component{
     console.log('list patt');
     return(
       <ListPattern
-              getListPattern = {this.props.PatternAct.GetList}
+              getListPattern = {this.props.PatternAct.GetListByAdmin}
               AdminStore={this.props.AdminTodo}
-      />
+              PatternList={this.props.PatternList}
+              approvePattern={this.props.PatternAct.ApprovePattern}/>
     );
   }
 
@@ -92,7 +93,8 @@ class Admin extends React.Component{
 
 
 const mapStateToProps = state => ({
-  AdminTodo: state.AdminTodo
+  AdminTodo: state.AdminTodo,
+  PatternList: state.PatternList
 });
 const mapDispatchToProps = dispatch => ({
   AdminAct: bindActionCreators(AdminAct, dispatch),

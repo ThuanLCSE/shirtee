@@ -34,27 +34,12 @@ let store = createStore(
 injectTapEventPlugin();
 
 
-// class Apps extends React.Component {
-//     constructor(props) {
-//         super(props);
-//     }
-//     render() {
-//         return (
-//
-//           <div>
-//             <Home />
-//             <Information/>
-//             <UpLoadShirt />
-//             <Admin />
-//             <ViewAdminPattern />
-//             <ViewSellProgram />
-//             <CreateSellProgram />
-//             {this.props.children}
-//           </div>
-//         );
-//     }
-// }
-//
+          <div>
+            <Home />
+          </div>
+        );
+    }
+}
 
 //const mapStateToProps = state => ({
 //  UserTodo: state.UserTodo
