@@ -1,12 +1,12 @@
 var canvas;
 var tshirts = new Array(); //prototype: [{style:'x',color:'white',front:'a',back:'b',price:{tshirt:'12.95',frontPrint:'4.99',backPrint:'4.99',total:'22.47'}}]
-var a;
-var b;
+  
 var line1;
 var line2;
 var line3;
 var line4;
- 	$(document).ready(function() {
+ 
+var initFunction = function(left, top) {
 		//setup front side canvas 
  		canvas = new fabric.Canvas('tcanvas', {
 		  hoverCursor: 'pointer',
@@ -44,6 +44,8 @@ var line4;
 		  };
 		})(canvas.findTarget);
 
+
+
  		canvas.on('object:over', function(e) {		 
 		});
 		
@@ -57,15 +59,8 @@ var line4;
 
 		// left frame
 	  	$(".img-polaroid").click(function(e){
-	  		var el = e.target;
-	  		/*temp code*/
-	  		var offset = 50;
-	        var left = fabric.util.getRandomInt(0 + offset, 200 - offset);
-	        var top = fabric.util.getRandomInt(0 + offset, 400 - offset);
-	        var angle = fabric.util.getRandomInt(-20, 40);
-	        var width = fabric.util.getRandomInt(30, 50);
-	        var opacity = (function(min, max){ return Math.random() * (max - min) + min; })(0.5, 1);
-	        
+	  		var el = e.target; 
+
 	  		fabric.Image.fromURL(el.src, function(image) {
 		          image.set({
 		            left: left,
@@ -78,7 +73,8 @@ var line4;
 		          //image.scale(getRandomNum(0.1, 0.25)).setCoords();
 		          canvas.add(image);
 		        });
-	  	});	  		  
+	  	});	      
+	  	$(".img-polaroid").click();
 	  document.getElementById('remove-selected').onclick = function() {		  
 		    var activeObject = canvas.getActiveObject(),
 		        activeGroup = canvas.getActiveGroup();
@@ -124,7 +120,7 @@ var line4;
 	   line2 = new fabric.Line([199,0,200,399], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
 	   line3 = new fabric.Line([0,0,0,400], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
 	   line4 = new fabric.Line([0,400,200,399], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
-	 });//doc ready
+}//end
 	  
 	 
 	 function onObjectSelected(e) {	 
@@ -161,4 +157,15 @@ var line4;
 			  activeObject.filters[2] =  new fabric.Image.filters.RemoveWhite({hreshold: 100, distance: 10});//0-255, 0-255
 			  activeObject.applyFilters(canvas.renderAll.bind(canvas));
 		  }	        
-	 }
+	 } 
+	 var event = new MouseEvent('click', {
+    'view': window,
+    'bubbles': true,
+    'cancelable': true
+  });
+	  var hiddenDiv = document.getElementById('hiddenDiv'); 
+	  hiddenDiv.dispatchEvent(event);
+	  hiddenDiv.click = function(left, top){
+	  	initFunction(left, top);
+	  	// alert('ok');
+ 	}

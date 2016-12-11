@@ -2,17 +2,28 @@
 import React from 'react'; 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Provider } from 'react-redux';  
+import { Provider } from 'react-redux';   
 
 class DragDropDemo extends React.Component{
   constructor(props) {
       super(props);
       this.state= { 
+        patternImg : "static/invisibleman.jpg",
         colorCodeList : ['#ffffff', '#616161', '#f0f0f0', '#5b5b5b', '#222222', '#fc8d74','#432d26','#eead91',
                         '#806355', '#382d21', '#faef93','#aeba5e','#8aa140']
 	    };
       this.customItem = this.customItem.bind(this);
+      this.patternChosen = this.patternChosen.bind(this);
+      
     } 
+  componentDidMount(){
+     
+     setTimeout(function(){
+        var hiddenDiv = document.getElementById('hiddenDiv'); 
+        hiddenDiv.click(100,200);
+     }, 1500);
+     
+  }
   header(){
     return (
         <div className="page-header">
@@ -47,7 +58,7 @@ class DragDropDemo extends React.Component{
       cursor : 'pointer'
     }
     return( 
-          <img style={cusorPointer} className="img-polaroid" src="static/invisibleman.jpg"/> 
+          <img style={cusorPointer} className="img-polaroid" src={this.state.patternImg}/> 
       )
   }
   
@@ -152,9 +163,13 @@ class DragDropDemo extends React.Component{
       )
   }
   render(){
+  let hiddeen = {
+
+  } 
     return(
       <div>
-          {this.dragDrop()}
+          {this.dragDrop()} 
+      
       </div>
     );
   }
