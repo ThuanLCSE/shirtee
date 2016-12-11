@@ -177,35 +177,25 @@ exports.getAllBestSell = function(req,res){
 };
 
 exports.getAllSale = function(req,res){
-	SaleProgramme.find().sort({endDay:-1}).limit(1).exec(function (err, sale) {
-	  if (err) {
-	  	res.status(400).send(err);
-	  }  else if (sale === null) {
-	  	res.status(200).send({
-	  		listPattern : [],
-	  		message : 'have no sale'
-	  	});
-	  }
-	  else {
-	    var saleIdList = sale.patternSale;    
-	  	for (patternId in sale.patternSale){
-	  		saleIdList.push(ObjectId(patternId));
-	  	}	    
-	  	Pattern.find({
-		    '_id': { $in: saleIdList}
-		}, function(err, patterns){
-			 if (err) {
-			  	res.status(400).send(err);
-			  }  else {
-			  	res.status(200).send({
-			  		listPattern : patterns,
-			  		saleProgramme: sale,
-			  		message : 'get all sale success',
-			  	});
-			  }
-		});
-	  }
-  });
+ 
+    var saleIdList = [];    
+  	for (patternId in req.saleProgramme.patternSale){
+  		saleIdList.push(ObjectId(patternId));
+  	}	    
+  	Pattern.find({
+	    '_id': { $in: saleIdList}
+	}, function(err, patterns){
+		 if (err) {
+		  	res.status(400).send(err);
+		  }  else {
+		  	res.status(200).send({
+		  		listPattern : patterns,
+		  		saleProgramme: req.saleProgramme,
+		  		message : 'get all sale success',
+		  	});
+		  }
+	});
+	   
 }
 
  

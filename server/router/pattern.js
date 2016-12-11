@@ -1,6 +1,7 @@
 var patternCtrller = require('../controller/pattern.ctrl'); 
 var adminCtrller = require('../controller/admin.ctrl'); 
-
+var saleCtrller = require('../controller/saleProgram.ctrl'); 
+ 
 module.exports = function(app){
  
 	app.route('/api/admin/pattern/listAll')
@@ -23,7 +24,8 @@ module.exports = function(app){
 	.get(patternCtrller.getAllNewest); 
 	app.route('/api/user/pattern/listAll/bestSell')
 	.get(patternCtrller.getAllBestSell); 
+	getListPatternOnSale
 	app.route('/api/user/pattern/listAll/getAllSale')
-	.get(patternCtrller.getAllSale); 
+	.get(saleCtrller.getListPatternOnSale,patternCtrller.getAllSale); 
 	
 }

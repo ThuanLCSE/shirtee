@@ -25,6 +25,11 @@ export const getListCategory = '/api/category/listAll'
 //http method : get
 export const getListShirt = '/api/shirt/listAll'
 // http method : get
+export const removeShirt = '/api/shirt/remove'
+// http method : post
+// send data = {
+// 	shirtId: 'id'
+// }
 export const uploadShirt = '/api/shirt/create' 
 // send data = { 
 //     	gender : 'require', 
@@ -103,4 +108,20 @@ export const userUpdateInfo = '/api/user/update/'//userId
 // 			message: 'update user success',
 	  		// user: Object,
 // 	  	}
+export const adminCreateSale = '/api/sale/create/'
+//http method: post
+// { 
+//     	percentage : number (<100), 
+//    		detail: string,
+//     	patternSale: array of pattern Id,
+// 	    endDay: date,
+//     	startDay: date
+// 	}
+export const adminViewAllSale = '/api/sale/getAll/'
+//http method: get
+export const adminRemoveSale = '/api/sale/remove/'
+//http method: post
+// {
+// 	saleId : id
+// }
 

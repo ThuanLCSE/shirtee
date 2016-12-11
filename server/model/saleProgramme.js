@@ -1,17 +1,17 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var   ObjectId = Schema.ObjectId;
-var patternSaleSchema = new Schema({
-    patternId: {
-        type: ObjectId,
-        required: 'pattern id require'
-    },
-    patternUrl:{
-        type: String,
-        trim: true, 
-        required: 'pattern url required'
-    }
-});
+// var patternSaleSchema = new Schema({
+//     patternId: {
+//         type: ObjectId,
+//         required: 'pattern id require'
+//     },
+//     patternUrl:{
+//         type: String,
+//         trim: true, 
+//         required: 'pattern url required'
+//     }
+// });
 
 var saleProgrammeSchema = new Schema({
 	percentage : {
