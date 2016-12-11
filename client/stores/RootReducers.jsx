@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import UserTodo from './UserList.jsx';
-
+import AdminTodo from './AdminList.jsx';
 
 import CategoryList from './CategoryList.jsx';
 import PatternList from './PatternList.jsx';
@@ -10,7 +10,8 @@ const RootReducers = combineReducers({
   UserTodo,
   CategoryList,
   PatternList,
-  DesignerList
+  DesignerList,
+  AdminTodo
 })
 
 export default RootReducers
