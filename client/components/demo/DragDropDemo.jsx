@@ -94,6 +94,9 @@ class DragDropDemo extends React.Component{
   shirtTypeList(){
     return (
       <div className="form-group form-inline"> 
+       <input type="text" id="patternTop" value=""/>
+       <input type="text" id="patternLeft" value=""/>
+       
        <div className="row">
             <div className="col-sm-5">
                <img id="shirt1" className="img-responsive shirtTypes" src="./static/TeeShirt1.png"/>

@@ -87,8 +87,7 @@ class PatternInfor extends React.Component {
                   max={10}
                   step={1}
                   value={this.props.stateList.expirationDate}
-                  onChange={(e, value) => this.props.handleExpiration(e, value)}
-                />
+                  onChange={(e, value) => this.props.handleExpiration(e, value)}  />
                 {this.props.categoryList.listCategory.map( (row, index) => (
                   <Checkbox key={index}
                             label={<b>{row.name}</b>}

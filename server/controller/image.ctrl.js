@@ -6,8 +6,7 @@ exports.imageForm = function(req, res) {
 };
 
 exports.uploadImage = function(req, res){
-		var picturePath = req.file.path;  
-        console.log(req.file);
+		var picturePath = req.file.path;   
         var pictureInfo = {
         	path: req.file.path,
         	name: req.file.filename

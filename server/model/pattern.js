@@ -23,7 +23,7 @@ var patternSchema = new Schema({
         type: Number,
         required: 'price required'
     },
-    catergory: [categorySchema],
+    category: [categorySchema],
     expireDay: {
     	type:Date,
     	 required: 'expire required'

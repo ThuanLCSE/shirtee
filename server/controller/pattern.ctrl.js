@@ -10,7 +10,7 @@ exports.create = function(req,res){
 	    designer: req.designer.displayName,
     	designerId:  req.designer._id,
 	    price: req.body.price,
-    	catergory: req.body.catergory,
+    	category: req.body.category,
 	    expireDay: expireDay, 
 	    recommendShirt: {},
     	recommendPattern: {}, 

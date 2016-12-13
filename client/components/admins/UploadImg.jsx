@@ -23,13 +23,10 @@ class UploadImg extends React.Component{
     fd.append( "fileInput", $("#fileInput")[0].files[0]);
 
   }
-  beforeUpload(file) {
-        console.log('beforeUpload');
-        console.log(file);
+  beforeUpload(file) { 
   };
   onStartUpload(file){
-    console.log('on start');
-    console.log(file);
+  
   }
   onErrorUpload(err,response){
     console.log('on error');
@@ -37,11 +34,8 @@ class UploadImg extends React.Component{
     console.log(err);
   }
   onSuccessUpload(result, file){
-    this.props.getUrl(result.path);
-    console.log('on success');
-    this.setState({previewUrl: result.path});
-    console.log(result);
-    console.log(file);
+    this.props.getUrl(result.path); 
+    this.setState({previewUrl: result.path}); 
   }
   //{this.state.previewUrl?<img src={this.state.previewUrl}/>:null}
   fileUploadRedux(){
@@ -56,23 +50,11 @@ class UploadImg extends React.Component{
           onSuccess={this.onSuccessUpload}
           onProgress={this.onProgressUpload}
           beforeUpload={this.beforeUpload}>
-            <button>okoko</button>
+            <button>{this.props.buttonName}</button>
           </Upload>
         </div>
     )
-  }
-  classicForm(){
-    return(
-      <form encType   =  "multipart/form-data"
-               action    =  "/upload"
-               method    =  "post"
-          >
-          <input type="file" name="picture" />
-          <input type="submit" value="Upload Image" name="submit"/>
-          </form>
-      );
-  }
-
+  } 
   render(){
     return(
       <div>

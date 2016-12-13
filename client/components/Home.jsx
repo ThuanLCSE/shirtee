@@ -7,7 +7,7 @@ import Navigator from './Navigator';
 import CarouselModal from './CarouselModal';
 import Information from './user/Information';
 import UserAccount from './user/UserAccount';
-import NewShirt from './pattern/NewShirt';
+import NewPattern from './pattern/NewPattern';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -17,7 +17,6 @@ import { createStore } from 'redux';
 import * as UserAct from './../actions/ActionSignIn.jsx';
 import * as CategoryAct from './../actions/CategoryAction.jsx';
 import * as PatternAct from './../actions/PatternAction.jsx';
-import * as DesignerAct from './../actions/DesignerAction.jsx';
 
 const divStyle = {
   color: 'blue'
@@ -47,13 +46,10 @@ class Home extends React.Component{
         );
     }
     
-    newShirt() {
+    CreatePattern() {
         return (
-           <NewShirt categoryList={this.props.CategoryList}
-                     getCategory={this.props.CategoryAct.GetList}
-                     userData={this.props.UserTodo}
-                     designerList={this.props.DesignerList}
-                     uploadPattern={this.props.DesignerAct.UploadPattern}/>
+           <NewPattern categoryList={this.props.CategoryList}
+                     getCategory={this.props.CategoryAct.GetList}/>
         );
     }
     
@@ -100,7 +96,7 @@ class Home extends React.Component{
           {this.state.view === 'home'?this.homeView():null}
            {this.state.view === 'info'?this.infoView():null}
            {this.state.view === 'accUpdate'?this.accUpdateView():null}
-           {this.state.view === 'newShirt'?this.newShirt():null}
+           {this.state.view === 'NewPattern'?this.CreatePattern():null}
           
       </div>
     );
@@ -110,15 +106,13 @@ class Home extends React.Component{
 const mapStateToProps = state => ({
   UserTodo: state.UserTodo,
   CategoryList: state.CategoryList,
-  PatternList: state.PatternList,
-  DesignerList: state.DesignerList
+  PatternList: state.PatternList
 });
 
 const mapDispatchToProps = dispatch => ({
   UserAct: bindActionCreators(UserAct, dispatch),
   CategoryAct: bindActionCreators(CategoryAct, dispatch),
-  PatternAct: bindActionCreators(PatternAct, dispatch),
-  DesignerAct: bindActionCreators(DesignerAct, dispatch),
+  PatternAct: bindActionCreators(PatternAct, dispatch)
 });
 
 export default connect(

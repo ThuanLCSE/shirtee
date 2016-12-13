@@ -23,7 +23,7 @@ class Admin extends React.Component{
   constructor(props) {
       super(props);
       this.state = {
-          view: 'signIn'
+          view: 'sign In'
       };
       this.changeViewDropdown = this.changeViewDropdown.bind(this);
       this.listPattern = this.listPattern.bind(this);
@@ -32,8 +32,7 @@ class Admin extends React.Component{
       this.uploadPattern = this.uploadPattern.bind(this);
 
   }
-  listPattern(){
-    console.log('list patt');
+  listPattern(){ 
     return(
       <ListPattern
               getListPattern = {this.props.PatternAct.GetListByAdmin}
@@ -43,13 +42,11 @@ class Admin extends React.Component{
     );
   }
 
-  uploadPattern(){
-      console.log("Goto: upload pattern");
+  uploadPattern(){ 
       return (
         <UpLoadShirt
           getUploadShirt = {this.props.UploadAct.UpLoadShirt}
-          adminData={this.props.AdminTodo}
-        />
+          adminData={this.props.AdminTodo}  />
       )
   }
 
@@ -61,8 +58,8 @@ class Admin extends React.Component{
   }
   adminHome(){
     return(
-      <DropDownMenu value={this.state.value} onChange={this.changeViewDropdown}>
-          <MenuItem value='upload shirt' primaryText="Upload" />
+      <DropDownMenu value={this.state.view} onChange={this.changeViewDropdown}>
+          <MenuItem value='upload shirt' primaryText="Upload shirt" />
           <MenuItem value='list pattern' primaryText="View Pattern" />
           <MenuItem value='sell program' primaryText="View sell program" />
           <MenuItem value= 'create sell program' primaryText="Create new sale program" />
@@ -73,8 +70,7 @@ class Admin extends React.Component{
     return(
       <AdminSignIn
             signInFunc={this.props.AdminAct.SignIn}
-            adminData={this.props.AdminTodo}
-      />
+            adminData={this.props.AdminTodo} />
     )
   }
 

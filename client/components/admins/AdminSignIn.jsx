@@ -8,8 +8,8 @@ class AdminSignIn extends React.Component{
         this.state = {
             open: false,
             admin: {
-                email: '',
-                psw: ''
+                email: 'abc@123',
+                password: '123'
             },
             openSignUp: false
         };
@@ -36,13 +36,13 @@ class AdminSignIn extends React.Component{
         return (
             <div>
                Email:
-               <input type = "text" name = "email"
+               <input type = "text" name = "email" value ={this.state.admin.email}
                onChange={(e) => this.handleChange('email', e)}
                />
                <br/>
                Password:
-               <input type = "text" name= "password"
-               onChange={(e) => this.handleChange('psw', e)}
+               <input type = "text" name= "password" value ={this.state.admin.password}
+               onChange={(e) => this.handleChange('password', e)}
                />
                <br/>
                <button onClick={this.getValueSignIn}>Sign In</button>

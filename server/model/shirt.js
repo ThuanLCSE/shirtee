@@ -20,10 +20,7 @@ var shirtSchema = new Schema({
         required: 'layout url required'
     },
     price: Number,
-    colorCode: {
-       type: String,
-        required: 'color code required',
-    }
+    colorCode: []
 });
 
 mongoose.model('Shirt', shirtSchema);
