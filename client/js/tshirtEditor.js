@@ -16,27 +16,29 @@ var initFunction = function(left, top) {
  		canvas.on({
 			 'object:moving': function(e) {		  	
 			    e.target.opacity = 0.5;
+			    $('#patternTop')[0].value = e.target.getTop();
+			    $('#patternLeft')[0].value = e.target.getLeft();
 			  },
 			  'object:modified': function(e) {		  	
 			    e.target.opacity = 1;
 			  },
-			 'object:selected':onObjectSelected,
+			 'angular.isObject(value):selected':onObjectSelected,
 			 'selection:cleared':onSelectedCleared
 		 });
 		// piggyback on `canvas.findTarget`, to fire "object:over" and "object:out" events
  		canvas.findTarget = (function(originalFn) {
-		  return function() {
+		  return function() { 
 		    var target = originalFn.apply(this, arguments);
-		    if (target) {
-		      if (this._hoveredTarget !== target) {
+		    if (target) { 
+		      	if (this._hoveredTarget !== target) { 
 		    	  canvas.fire('object:over', { target: target });
-		        if (this._hoveredTarget) {
+		        if (this._hoveredTarget) { 
 		        	canvas.fire('object:out', { target: this._hoveredTarget });
 		        }
 		        this._hoveredTarget = target;
 		      }
 		    }
-		    else if (this._hoveredTarget) {
+		    else if (this._hoveredTarget) { 
 		    	canvas.fire('object:out', { target: this._hoveredTarget });
 		      this._hoveredTarget = null;
 		    }
@@ -49,7 +51,7 @@ var initFunction = function(left, top) {
  		canvas.on('object:over', function(e) {		 
 		});
 		
- 		canvas.on('object:out', function(e) {		 
+ 		canvas.on('object:out', function(e) {	 
 		});
 		 		 	 
 		$(".shirtTypes").click(function(e){ 
@@ -94,14 +96,14 @@ var initFunction = function(left, top) {
 	
 		//canvas.add(new fabric.fabric.Object({hasBorders:true,hasControls:false,hasRotatingPoint:false,selectable:false,type:'rect'}));
 	   $("#drawingArea").hover(
-	        function() { 	        	
+	        function() { 	       
 	        	 canvas.add(line1);
 		         canvas.add(line2);
 		         canvas.add(line3);
 		         canvas.add(line4); 
 		         canvas.renderAll();
 	        },
-	        function() {	        	
+	        function() {	    	
 	        	 canvas.remove(line1);
 		         canvas.remove(line2);
 		         canvas.remove(line3);
@@ -124,10 +126,11 @@ var initFunction = function(left, top) {
 	  
 	 
 	 function onObjectSelected(e) {	 
+	 	
 	    var selectedObject = e.target;
 	    $("#text-string").val("");
-	    selectedObject.hasRotatingPoint = true
-	    if (selectedObject && selectedObject.type === 'text') {
+	    selectedObject.hasRotatingPoint = true;
+	    if (selectedObject && (selectedObject.type === 'text')) {
 	    	//display text editor	    	
 	    	$("#texteditor").css('display', 'block');
 	    	$("#text-string").val(selectedObject.getText());	    	
@@ -135,14 +138,15 @@ var initFunction = function(left, top) {
 	    	$('#text-strokecolor').miniColors('value',selectedObject.strokeStyle);	
 	    	$("#imageeditor").css('display', 'block');
 	    }
-	    else if (selectedObject && selectedObject.type === 'image'){
+	    else if (selectedObject && (selectedObject.type === 'image')){
 	    	//display image editor
 	    	$("#texteditor").css('display', 'none');	
 	    	$("#imageeditor").css('display', 'block');
 	    }
 	  }
-	 function onSelectedCleared(e){
+	 function onSelectedCleared(e){ 
 
+		    	console.log('clearrrrrrrr');
 	 }
 	 function setFont(font){
 		  var activeObject = canvas.getActiveObject();
@@ -158,14 +162,18 @@ var initFunction = function(left, top) {
 			  activeObject.applyFilters(canvas.renderAll.bind(canvas));
 		  }	        
 	 } 
-	 var event = new MouseEvent('click', {
+
+
+ var event = new MouseEvent('click', {
     'view': window,
     'bubbles': true,
     'cancelable': true
   });
-	  var hiddenDiv = document.getElementById('hiddenDiv'); 
-	  hiddenDiv.dispatchEvent(event);
-	  hiddenDiv.click = function(left, top){
+
+
+  var hiddenDiv = document.getElementById('hiddenDiv'); 
+  hiddenDiv.dispatchEvent(event);
+  hiddenDiv.click = function(left, top){
 	  	initFunction(left, top);
 	  	// alert('ok');
  	}

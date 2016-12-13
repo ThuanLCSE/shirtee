@@ -14,6 +14,7 @@ class ShirtItem extends React.Component{
             <img className="img-responsive" src={this.props.shirt.layoutUrl}/>
           </td>
           <td>{this.props.shirt.detail}</td>
+          <td>{this.props.shirt.price}</td>
           <td>{this.props.shirt.colorCode}</td>
         </tr>
       );

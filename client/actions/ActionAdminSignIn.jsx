@@ -6,7 +6,7 @@ import restApi from "./../service/restAPI.js";
 export function SignIn(adminData) {
     var data= {
         email: adminData.email,
-        password: adminData.psw
+        password: adminData.password
     };
     return function (dispatch) {
 	  	return restApi.post(apiAdmin.adminSignIn, data).then((response) => {
@@ -26,24 +26,4 @@ export function SignIn(adminData) {
 		});
 	};
 }
-
-export function SignUp(adminData) {
-    var data = {
-        email: adminData.email,
-        fullname: adminData.name,
-        password: adminData.pwd
-    };
-    return function (dispatch) {
-	  	return restApi.post(apiUser.adminSignOut, data).then((response) => {
-	    	console.log(response);
-	       dispatch({ type: 'SIGN_UP_SUCCESSFULLY',
-                     user : response.user}
-                   );
-	    }).catch((err) => {
-	    	console.log(err);
-	        dispatch({ type: 'SIGN_UP_ERROR',
-                    text: err.responseText
-                    });
-		});
-	};
-}
+ 
