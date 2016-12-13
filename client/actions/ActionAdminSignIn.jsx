@@ -1,11 +1,9 @@
 import * as apiAdmin from './../constant/ApiUri';
 import restApi from "./../service/restAPI.js";
 
-
-
 export function SignIn(adminData) {
     var data= {
-        email: adminData.email,
+        email: adminData.email, 
         password: adminData.password
     };
     return function (dispatch) {
@@ -26,4 +24,5 @@ export function SignIn(adminData) {
 		});
 	};
 }
+
  

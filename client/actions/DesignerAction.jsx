@@ -5,7 +5,7 @@ export function UploadPattern(patternData) {
     var data= {
         url: patternData.url,
  	    price: patternData.detail.price,
-     	category: patternData.categoryTotal,
+     	category: patternData.category,
         position: patternData.position,
         size: patternData.size,
         rotate: patternData.rotate,

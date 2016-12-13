@@ -3,6 +3,7 @@ import UserTodo from './UserList.jsx';
 import AdminTodo from './AdminList.jsx';
 
 import CategoryList from './CategoryList.jsx';
+import SaleList from './SaleList.jsx';
 import ShirtList from './ShirtList.jsx';
 import PatternList from './PatternList.jsx';
 import DesignerList from './DesignerList.jsx';
@@ -12,8 +13,9 @@ const RootReducers = combineReducers({
   ShirtList,
   CategoryList,
   PatternList,
-  DesignerList,
-  AdminTodo
+  DesignerList, 
+  AdminTodo,
+  SaleList
 })
 
 export default RootReducers

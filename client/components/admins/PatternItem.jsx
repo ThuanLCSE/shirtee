@@ -6,11 +6,11 @@ import ReactDOM from 'react-dom';
 class PatternItem extends React.Component{
     constructor(props) {
       super(props);
-      this.approve = this.approve.bind(this);
+      this.controlFunc = this.controlFunc.bind(this);
     }
     
-    approve() {
-        this.props.approvePattern(this.props.pattern._id)
+    controlFunc(e) {
+        this.props.funcOnControl(e, this.props.pattern._id);
     }
     
     render(){
@@ -23,11 +23,12 @@ class PatternItem extends React.Component{
           <td>{this.props.pattern.voteQuantity}</td>
           <td>{this.props.pattern.name}</td>
           <td>{this.props.pattern.available ? "true" : "false"}</td>
-          <td><button onClick={this.approve}>Approve</button></td>
+          <td>{this.props.control === "buttonApprove" ? <button onClick={this.controlFunc}>Approve</button> :
+              this.props.control === "checkboxSale" ?
+                  <z><input onChange={this.controlFunc} type="checkbox"/>Choose this</z> : null}</td>
         </tr>
       );
     }
 };
-
 
 export default PatternItem;

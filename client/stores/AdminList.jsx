@@ -2,7 +2,7 @@ import * as actType from '../constant/ActionTypes';
 var defaultState = {
     signInSuccess : false, 
     message: '',
-    patternList: [],
+    patternList: [], 
     listShirt: [] 
 }
 
@@ -27,6 +27,7 @@ export default function AdminTodo(state = defaultState, action) {
           return {
               text: 'Failed'
           };
+     
     case actType.adminUpShirtSuccess: 
         newState.signInSuccess = true; 
         newState.message = action.message;

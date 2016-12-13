@@ -5,10 +5,15 @@ import PatternItem from './PatternItem.jsx';
 
 
 class ViewAdminPattern extends React.Component{
+    constructor(props) {
+      super(props);
+    }
+    
     componentWillMount(){
       console.log('send api');
       this.props.getListPattern();
     }
+    
     render(){
       return (
         <table className="table table-bordered">
@@ -28,7 +33,8 @@ class ViewAdminPattern extends React.Component{
                <PatternItem
                key = {pattern._id}
                pattern = {pattern}
-               approvePattern={this.props.approvePattern}
+               funcOnControl={this.props.approvePattern}
+               control={"buttonApprove"}
                />
             )
           }
