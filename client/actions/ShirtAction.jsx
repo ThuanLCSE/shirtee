@@ -1,27 +1,69 @@
 import * as apiUser from './../constant/ApiUri';
 import restApi from "./../service/restAPI.js";
+import * as actType from '../constant/ActionTypes'; 
 
 // get list in shirt action
 export function GetList() {
     return function (dispatch) {
 	  	return restApi.get(apiUser.getListShirt).then((response) => {
-	    	console.log(response);
-	       dispatch({ type: 'GET_SHIRT_LIST_SUCCESS',
+	     
+	       dispatch({ type: actType.getListShirtSuccess,
                      listShirt : response.listShirt,
                      message: 'successful get list shirt'
                    }
                    );
 	    }).catch((err) => {
 	    	console.log(err);
-	        dispatch({ type: 'GET_SHIRT_LIST_FAILED',
-                    text: err.responseText
+	        dispatch({ type: actType.getListShirtFail,
+                    message: err.responseText
                   });
 		});
 	};
 }
 
-export function DelShirt() {
-    return function (dispatch) {
-      // get ... uri delete item
+export function UpLoadShirt(uploadInfo) {
+    var info = {
+            gender : uploadInfo.gender,
+            url: uploadInfo.url,
+            detail: uploadInfo.detail,
+            layoutUrl: uploadInfo.layoutUrl,
+            price: uploadInfo.price,
+            colorCode: uploadInfo.colorCode
+    };
+
+      return function (dispatch) {
+        return restApi.post(apiUser.uploadShirt, info).then((response) => { 
+           dispatch({ type: actType.adminUpShirtSuccess,
+                      message: 'succuess upload',
+                       shirt : response.shirt}
+                     );
+        }).catch((err) => {
+          console.log(err);
+            dispatch({ type: actType.adminUpShirtFail,
+                      message: err.responseText
+                      });
+      });
+    }
+}
+
+export function removeShirt(shirtId) {
+  var data = {
+       shirtId: shirtId
+      };
+    return function (dispatch) { 
+       return restApi.post(apiUser.removeShirt,data).then((response) => {
+ 
+               dispatch({ 
+                          type: actType.removeShirtSuccess, 
+                           message: 'successful remove shirt'
+                         }
+                         );
+            }).catch((err) => {
+              console.log(err);
+                dispatch({ 
+                          type: actType.removeShirtFail,
+                          message: err.responseText
+                        });
+          });  
     };
 }

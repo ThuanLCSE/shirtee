@@ -1,12 +1,6 @@
 import React from 'react'; 
 import UploadImg from './UploadImg';
-import Checkbox from 'material-ui/Checkbox';
-
-
-import * as UploadAct from './../../actions/ActionUploadShirt.jsx';
-
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import Checkbox from 'material-ui/Checkbox'; 
 
 
 
@@ -44,7 +38,7 @@ class UpLoadShirt extends React.Component{
   }
   getValueUploadShirt() {
       var shirtInfo = this.state.info;
-      this.props.UploadAct.UpLoadShirt(shirtInfo); 
+      this.props.uploadShirt(shirtInfo); 
 
   }
 
@@ -116,8 +110,7 @@ class UpLoadShirt extends React.Component{
             {this.state.info.url?<img style= {shirtPreview} src={this.state.info.url}/>:null}
             <UploadImg buttonName="shirt layout url" getUrl = {this.onLayoutUrlChange}/>
             {this.state.info.layoutUrl?<img style= {shirtPreview} src={this.state.info.layoutUrl}/>:null}
-
-             <form>
+ 
               Detail: <br/>
               <textarea rows="10" cols="30"
               onChange={(e) => this.handleChange('detail', e)}
@@ -143,22 +136,12 @@ class UpLoadShirt extends React.Component{
 
               <button onClick={this.getValueUploadShirt}>
               Create
-              </button>
-              </form>
+              </button> 
+              <p>{this.props.uploadMessage}</p>
           </div>
       );
     }
 };
+ 
 
-const mapStateToProps = state => ({
-  UserTodo : state.UserTodo
-});
-
-const mapDispatchToProps = dispatch => ({
-  UploadAct : bindActionCreators(UploadAct, dispatch),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(UpLoadShirt);
+export default UpLoadShirt;

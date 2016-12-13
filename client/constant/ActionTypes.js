@@ -1,17 +1,14 @@
 export const BOOK_NEW = 'BOOK_NEW'  
 export const SHOW_WEEK_TIME = 'SHOW_WEEK_TIME' 
-export const CANCEL_BOOKING = 'CANCEL_REGISTER' 
-export const BOOKING_INFO = 'REGISTER_INFO'
-export const REMOVE_BOOKING = 'REMOVE_BOOKING'
-export const NEAR_SHIFT = 'NEAR_SHIFT'
-export const EDIT_BOOKING = 'EDIT_BOOKING' 
-export const CREATE_SHIFT = 'CREATE_SHIFT'
-export const PATIENT_LIST = 'PATIENT_LIST'
-export const UPDATE_SHIFT = 'UPDATE_SHIFT'
-export const SIGN_IN = 'SIGN_IN' 
-export const SIGN_OUT = 'SIGN_OUT' 
-export const CHECK_AUTH = 'CHECK_AUTH' 
-export const CURRENT_AMOUNT = 'CURRENT_AMOUNT' 
-export const TREAT_PATIENT = 'TREAT_PATIENT'
-export const RESET_BOOKING = 'RESET_BOOKING'
+export const getListShirtSuccess = 'list shirt success' 
+export const getListShirtFail = 'list shirt fail' 
+
+export const removeShirtSuccess = 'remove shirt success' 
+export const removeShirtFail = 'remove shirt fail' 
+export const adminUpShirtSuccess = 'admin up shirt success' 
+export const adminUpShirtFail = 'admin up shirt fail' 
+
+
+
+
 

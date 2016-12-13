@@ -9,8 +9,7 @@ import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 
 
-import * as PatternAct from './../actions/PatternAction.jsx';
-import * as UploadAct from './../actions/ActionUploadShirt.jsx';
+import * as PatternAct from './../actions/PatternAction.jsx'; 
 import * as ShirtAct from './../actions/ShirtAction.jsx';
 
 import * as AdminAct from './../actions/ActionAdminSignIn.jsx';
@@ -33,7 +32,7 @@ class Admin extends React.Component{
       this.listPattern = this.listPattern.bind(this);
       this.adminHome = this.adminHome.bind(this);
       this.signInAdmin = this.signInAdmin.bind(this);
-      this.uploadPattern = this.uploadPattern.bind(this);
+      this.uploadShirt = this.uploadShirt.bind(this);
 
   }
   
@@ -41,9 +40,8 @@ class Admin extends React.Component{
     console.log("goto: delete shirt");
     return (
           <DelShirt
-            delShirt = {this.props.ShirtAct.DelShirt}
-            AdminStore={this.props.AdminTodo}
-          />
+            delShirt = {this.props.ShirtAct.removeShirt}
+            shirtData={this.props.ShirtList} />
     )
   }
   getListShirt(){
@@ -51,8 +49,7 @@ class Admin extends React.Component{
     return (
         <ListShirt
         getListShirt = {this.props.ShirtAct.GetList}
-        AdminStore={this.props.AdminTodo}
-        />
+        shirtData={this.props.ShirtList}  />
     )
   }
   listPattern(){
@@ -66,11 +63,11 @@ class Admin extends React.Component{
     );
   }
  
-  uploadPattern(){ 
+  uploadShirt(){ 
       return (
         <UpLoadShirt
-          getUploadShirt = {this.props.UploadAct.UpLoadShirt} 
-          adminData={this.props.AdminTodo}  />
+          uploadShirt = {this.props.ShirtAct.UpLoadShirt} 
+          uploadMessage={this.props.ShirtList.message}  />
       )
   }
 
@@ -105,7 +102,7 @@ class Admin extends React.Component{
       return (
           <div>
           {this.props.AdminTodo.signInSuccess?this.adminHome():this.signInAdmin()}
-          {this.state.view === 'upload shirt'?this.uploadPattern():null}
+          {this.state.view === 'upload shirt'?this.uploadShirt():null}
           {this.state.view === 'list shirt'?this.getListShirt():null}
           {this.state.view === 'delete shirt'?this.deleteShirt():null}
           {this.state.view === 'list pattern'?this.listPattern():null}
@@ -119,12 +116,12 @@ class Admin extends React.Component{
 
 const mapStateToProps = state => ({ 
   AdminTodo: state.AdminTodo,
+  ShirtList: state.ShirtList,
   PatternList: state.PatternList
 });
 const mapDispatchToProps = dispatch => ({
   AdminAct: bindActionCreators(AdminAct, dispatch),
-  PatternAct: bindActionCreators(PatternAct, dispatch), 
-  UploadAct: bindActionCreators(UploadAct, dispatch),
+  PatternAct: bindActionCreators(PatternAct, dispatch),  
   ShirtAct: bindActionCreators(ShirtAct, dispatch)
 
 });

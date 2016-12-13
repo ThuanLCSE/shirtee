@@ -5,8 +5,7 @@ import ShirtItem from './ShirtItem.jsx';
 
 
 class ListShirt extends React.Component{
-    componentWillMount(){
-      console.log('send api');
+    componentWillMount(){ 
       this.props.getListShirt();
     }
     render(){
@@ -25,7 +24,7 @@ class ListShirt extends React.Component{
              </tr>
            </thead>
            <tbody>
-            {this.props.AdminStore.listShirt.map(shirt =>
+            {this.props.shirtData.listShirt.map(shirt =>
                  <ShirtItem
                   key = {shirt._id}
                   shirt = {shirt}
@@ -35,7 +34,7 @@ class ListShirt extends React.Component{
 
            </tbody>
          </table>
-         <div>{this.props.AdminStore.message}</div>
+         <div>{this.props.shirtData.message}</div>
 
        </div>
       );
