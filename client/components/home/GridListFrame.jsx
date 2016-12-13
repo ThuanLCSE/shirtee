@@ -22,23 +22,7 @@ const styles = {
   },
 };
 
-const tilesData = [
-  {
-
-    title: 'Logo1',
-    author: 'Tien Dat',
-  },
-  {
-
-    title: 'Logo2',
-    author: 'Hung',
-  },
-  {
-
-    title: 'Logo3',
-    author: 'Thuan',
-  },
-];
+var patterns = [];
 
 /**
  * This example demonstrates the horizontal scrollable single-line grid list of images.
@@ -49,14 +33,15 @@ class  GridListFrame extends React.Component{
   };
     
   componentWillMount() {
-        this.props.getPattern();
+      this.props.getPattern();
   }
 
   render(){
+    patterns = this.props.patternList.listPattern.slice(0, 4);
     return (
       <div style={styles.root}>
-        <GridList style={styles.gridList} cols={3} padding={10} cellHeight='auto'>
-          {this.props.patternList.listPattern.map( (row, index) => (
+        <GridList style={styles.gridList} cols={4} padding={10} cellHeight='auto'>
+          {patterns.map( (row, index) => (
             <GridTile
               key={index}
               title={row.name}

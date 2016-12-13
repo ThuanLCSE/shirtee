@@ -75,7 +75,8 @@ class Home extends React.Component{
                   <GridListFour />
                   <h3 style={divStyle}>Promotion </h3>
                   <a href='#'>View All</a>
-                  <GridListFour />
+                  <GridListFrame patternList={this.props.PatternList}
+                                 getPattern={this.props.PatternAct.GetListSale}/> 
                 </div>
             </z>
         );

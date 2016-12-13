@@ -7,10 +7,16 @@ class PatternItem extends React.Component{
     constructor(props) {
       super(props);
       this.controlFunc = this.controlFunc.bind(this);
+      this.controlFunc2 = this.controlFunc2.bind(this);
     }
     
     controlFunc(e) {
         this.props.funcOnControl(e, this.props.pattern._id);
+    }
+    
+    controlFunc2(e) {
+        var cfm = confirm("Are you sure?");
+        if (cfm) this.props.funcOnControl2(e, this.props.pattern._id);
     }
     
     render(){
@@ -23,7 +29,8 @@ class PatternItem extends React.Component{
           <td>{this.props.pattern.voteQuantity}</td>
           <td>{this.props.pattern.name}</td>
           <td>{this.props.pattern.available ? "true" : "false"}</td>
-          <td>{this.props.control === "buttonApprove" ? <button onClick={this.controlFunc}>Approve</button> :
+              <td>{this.props.control === "buttonApprove" ? <z><button onClick={this.controlFunc}>Approve</button>
+                                                               <button onClick={this.controlFunc2}>Delete</button></z> :
               this.props.control === "checkboxSale" ?
                   <z><input onChange={this.controlFunc} type="checkbox"/>Choose this</z> : null}</td>
         </tr>

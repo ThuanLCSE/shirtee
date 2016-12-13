@@ -17,7 +17,7 @@ export function GetListByAdmin() {
 	};
 }
 
-export function ApprovePattern(id) {
+export function ApprovePattern(e, id) {
     return function (dispatch) {
         var adminApprovePattern = apiUser.adminApprovePattern + id;
 	  	return restApi.get(adminApprovePattern).then((response) => {
@@ -35,11 +35,44 @@ export function ApprovePattern(id) {
 	};
 }
 
+export function DeletePattern(e, id) {
+    return function (dispatch) {
+        var adminDeletePattern = apiUser.adminDeletePattern + id;
+	  	return restApi.get(adminDeletePattern).then((response) => {
+	    	console.log(response);
+	       dispatch({ type: 'DELETE_PATTERN_SUCCESS',
+                     message : response.message}
+                   );
+	    }).catch((err) => {
+	    	console.log(err);
+	        dispatch({ type: 'DELETE_PATTERN_FAILED',
+                    text: err.responseText
+                    });
+		});
+	};
+}
+
 export function GetList() {
     return function (dispatch) {
 	  	return restApi.get(apiUser.getListPattern).then((response) => {
 	    	console.log(response);
 	       dispatch({ type: 'GET_LIST_PATTERN_SUCCESS',
+                     listPattern : response.listPattern}
+                   );
+	    }).catch((err) => {
+	    	console.log(err);
+	        dispatch({ type: 'GET_LIST_PATTERN_FAILED',
+                    text: err.responseText
+                    });
+		});
+	};
+}
+
+export function GetListSale() {
+    return function (dispatch) {
+	  	return restApi.get(apiUser.getListPatternSale).then((response) => {
+	    	console.log(response);
+	       dispatch({ type: 'GET_LIST_PATTERN_SALE_SUCCESS',
                      listPattern : response.listPattern}
                    );
 	    }).catch((err) => {

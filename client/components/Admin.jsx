@@ -61,7 +61,8 @@ class Admin extends React.Component{
               getListPattern = {this.props.PatternAct.GetListByAdmin} 
               AdminStore={this.props.AdminTodo} 
               PatternList={this.props.PatternList}
-              approvePattern={this.props.PatternAct.ApprovePattern}/>
+              approvePattern={this.props.PatternAct.ApprovePattern}
+              deletePattern={this.props.PatternAct.DeletePattern}/>
     );
   }
     
@@ -125,8 +126,8 @@ class Admin extends React.Component{
           {this.state.view === 'list shirt'?this.getListShirt():null}
           {this.state.view === 'delete shirt'?this.deleteShirt():null}
           {this.state.view === 'list pattern'?this.listPattern():null}
-          {this.state.view === 'sell program'?this.listPattern():null}
-          {this.state.view === 'create sell program'? this.listPattern():null}
+          {this.state.view === 'sell program'?this.viewSale():null}
+          {this.state.view === 'create sell program'? this.createSale():null}
           </div>
       );
     }
@@ -136,11 +137,11 @@ class Admin extends React.Component{
 const mapStateToProps = state => ({ 
   AdminTodo: state.AdminTodo,
   ShirtList: state.ShirtList,
+  PatternList: state.PatternList,
   SaleList: state.SaleList
 });
 const mapDispatchToProps = dispatch => ({
   AdminAct: bindActionCreators(AdminAct, dispatch),
-
   PatternAct: bindActionCreators(PatternAct, dispatch), 
   ShirtAct: bindActionCreators(ShirtAct, dispatch),
   SaleAct: bindActionCreators(SaleAct, dispatch),
