@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import GridListFrame from './home/GridListFrame';
 import GridListFour from './home/GridListFour';
-import Navigator from './Navigator';
+import Navigator from './navigator/Navigator';
 //import CarouselLogo from './CarouselLogo';
 import CarouselModal from './CarouselModal';
 import Information from './user/Information';

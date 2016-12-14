@@ -12,42 +12,19 @@ import * as UserAct from './actions/ActionSignIn.jsx';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-import SignIn from './components/SignIn';
-import Navigator from './components/Navigator';
-import Bill from './components/Bill';
 import UploadDemo from './components/demo/UploadDemo';
 import DragDropDemo from './components/demo/DragDropDemo';
 
-//
 import { Router, Route, Link, browserHistory, IndexRoute  } from 'react-router';
-// import Component
+
 import Home from './components/Home';
 import Admin from './components/Admin';
-// import UpLoadShirt from './components/admins/UpLoadShirt';
-// import ViewAdminPattern from './components/admins/ViewAdminPattern';
-// import ViewSellProgram from './components/admins/ViewSellProgram';
-// import CreateSellProgram from './components/admins/CreateSellProgram';
 
 let store = createStore(
   RootReducers,
   applyMiddleware(thunk)
 );
 injectTapEventPlugin();
- 
-//   <Route path = "home" component = {ConnectedApp} />
-//               <Route path = "about" component = {ConnectedApp} />
-//               <Route path = "contact" component = {ConnectedApp} />
-
-// <Route path="admins">
-//   <IndexRoute component={Admin}/>
-//   <Route path="/admin-upload" component = {UpLoadShirt} />
-// </Route>
-
-// <Route path = "admin-upload" component = {UpLoadShirt} />
-// <Route path = "updemo" component = {UploadDemo} />
-// <Route path = "admin-view-pattern" component = {ViewAdminPattern} />
-// <Route path = "admin-view-sell-program" component = {ViewSellProgram} />
-// <Route path = "admin-create-sell-program" component = {CreateSellProgram} />
 
 if(typeof window !== 'undefined') {
   console.log("Router");

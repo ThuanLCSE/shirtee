@@ -9,8 +9,6 @@ import * as UserAct from '../../actions/ActionSignIn.jsx';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 
 import SideBar from './SideBar';
-import Navigator from '../Navigator';
-
 const orders = [
   {
     orderId: 'ID0023',
@@ -63,39 +61,34 @@ class HistoryOrder extends React.Component{
     
   render(){
     return(
-      <div>
-          <Navigator signInFunc={this.props.UserAct.SignIn}
-                     userData={this.props.UserTodo}
-                     signUpFunc={this.props.UserAct.SignUp}/>
-          <div className="container">
-            <div className="col-sm-3">
-                <SideBar/>
-            </div>
-            <div className="col-sm-1"></div>
-            <div className="col-sm-8">
-                <h2>History Order</h2>
-                <Table>
-                  <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-                    <TableRow>
-                      <TableHeaderColumn tooltip="Order ID">Order ID</TableHeaderColumn>
-                      <TableHeaderColumn tooltip="Date">Date</TableHeaderColumn>
-                      <TableHeaderColumn tooltip="Price">Price</TableHeaderColumn>
-                      <TableHeaderColumn tooltip="Status">Status</TableHeaderColumn>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody showRowHover={true} displayRowCheckbox={false}>
-                    {orders.map( (row, index) => (
-                      <TableRow key={index}>
-                        <TableRowColumn>{row.orderId}</TableRowColumn>
-                        <TableRowColumn>{row.date.toLocaleDateString()}</TableRowColumn>
-                        <TableRowColumn>{row.price}</TableRowColumn>
-                        <TableRowColumn>{row.status}</TableRowColumn>
-                      </TableRow>
-                      ))}
-                  </TableBody>
-                </Table>
-            </div>
-          </div>
+      <div className="container">
+        <div className="col-sm-3">
+            <SideBar/>
+        </div>
+        <div className="col-sm-1"></div>
+        <div className="col-sm-8">
+            <h2>History Order</h2>
+            <Table>
+              <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+                <TableRow>
+                  <TableHeaderColumn tooltip="Order ID">Order ID</TableHeaderColumn>
+                  <TableHeaderColumn tooltip="Date">Date</TableHeaderColumn>
+                  <TableHeaderColumn tooltip="Price">Price</TableHeaderColumn>
+                  <TableHeaderColumn tooltip="Status">Status</TableHeaderColumn>
+                </TableRow>
+              </TableHeader>
+              <TableBody showRowHover={true} displayRowCheckbox={false}>
+                {orders.map( (row, index) => (
+                  <TableRow key={index}>
+                    <TableRowColumn>{row.orderId}</TableRowColumn>
+                    <TableRowColumn>{row.date.toLocaleDateString()}</TableRowColumn>
+                    <TableRowColumn>{row.price}</TableRowColumn>
+                    <TableRowColumn>{row.status}</TableRowColumn>
+                  </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+        </div>
       </div>
     );
   }

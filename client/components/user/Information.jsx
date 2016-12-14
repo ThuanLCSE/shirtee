@@ -7,7 +7,6 @@ import Checkbox from 'material-ui/Checkbox';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 
 import SideBar from './SideBar';
-import Navigator from '../Navigator';
 
 class Information extends React.Component{
     constructor(props) {

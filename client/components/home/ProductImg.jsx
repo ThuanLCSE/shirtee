@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import Dialog from 'material-ui/Dialog';
 import CarouselLogo from './../CarouselLogo';
 import FlatButton from 'material-ui/FlatButton';
-import ImagePaper from './../ImagePaper';
 
 const customContentStyle = {
   width: '100%',
