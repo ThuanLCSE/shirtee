@@ -27,7 +27,6 @@ let store = createStore(
 injectTapEventPlugin();
 
 if(typeof window !== 'undefined') {
-  console.log("Router");
   ReactDOM.render(
     <Provider store={store}>
         <MuiThemeProvider>

@@ -55,7 +55,6 @@ class PatternInfor extends React.Component {
       }
     
     render() {
-        console.log(this.props.stateList.category);
         return (
             <Paper style={{padding: 20}}>
                 {this.fileUploadRedux()}

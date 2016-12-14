@@ -10,16 +10,12 @@ export default function SaleList(state = defaultState, action) {
           newState.sale = action.sale;
           return newState;
     case 'CREATE_SALE_ERROR':
-          return {
-              text: 'Failed'
-          };
+          return newState;
     case 'GET_SALE_SUCCESSFULLY':
           newState.listSale = action.listSale;
           return newState;
     case 'GET_SALE_ERROR':
-          return {
-              text: 'Failed'
-          };
+          return newState;
     default:
       return state;
   }

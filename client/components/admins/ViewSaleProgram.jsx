@@ -7,7 +7,6 @@ class ViewSaleProgram extends React.Component{
     }
     
     render(){
-        console.log("check loop");
       return (
           <table className="table table-bordered">
               <thead>

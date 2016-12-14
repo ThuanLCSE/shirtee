@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import GridListFrame from './home/GridListFrame';
 import GridListFour from './home/GridListFour';
 import Navigator from './navigator/Navigator';
-//import CarouselLogo from './CarouselLogo';
-import CarouselModal from './CarouselModal';
 import Information from './user/Information';
 import UserAccount from './user/UserAccount';
 import NewPattern from './pattern/NewPattern';
@@ -23,8 +21,6 @@ import * as DesignerAct from './../actions/DesignerAction.jsx';
 const divStyle = {
   color: 'blue'
 };
-
-
 
 class Home extends React.Component{
     constructor(props) {
@@ -61,7 +57,6 @@ class Home extends React.Component{
     }
     
     changeStateView(page){
-        console.log('view thay doi');
         this.setState({
             view : page
         });

@@ -7,7 +7,6 @@ export default function UserTodo(state = defaultState, action) {
     var newState = Object.assign({}, state);
   switch (action.type) {
     case 'SIGN_IN_SUCCESSFULLY':
-          console.log("Sign in");
           newState.isDesigner = action.designer ? true : false;
           newState.signInSuccess = true;
           newState.user = action.user;
@@ -17,7 +16,6 @@ export default function UserTodo(state = defaultState, action) {
           return newState;
           
     case 'SIGN_UP_SUCCESSFULLY':
-          console.log('ok');
           newState.signInSuccess = true;
           newState.user = action.user;
           return newState;
@@ -33,7 +31,6 @@ export default function UserTodo(state = defaultState, action) {
            return newState;
 
     case 'IS_SIGNED_IN_YET':
-          console.log("check sign in");
           newState.isDesigner = action.designer ? true : false;
           newState.signInSuccess = true;
           newState.user = action.user;

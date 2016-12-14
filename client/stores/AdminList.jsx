@@ -17,14 +17,11 @@ export default function AdminTodo(state = defaultState, action) {
           newState.message = action.message;
           return newState;
     case 'ADMIN_SIGN_UP_SUCCESSFULLY':
-          console.log('ok');
           newState.signInSuccess = true;
           newState.admin = action.admin;
           return newState;
     case 'ADMIN_SIGN_UP_ERROR':
-          return {
-              text: 'Failed'
-          };
+          return newState;
      
     case actType.adminUpShirtSuccess: 
         newState.signInSuccess = true; 

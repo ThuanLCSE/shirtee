@@ -46,7 +46,6 @@ class UserAccount extends React.Component{
                 this.setState({userData: newUser});
             };
         var userData = this.state.userData;
-        console.log(userData);
         this.props.updateInfo(userData);
     }
     

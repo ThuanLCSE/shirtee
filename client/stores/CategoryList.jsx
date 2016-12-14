@@ -10,9 +10,7 @@ export default function CategoryList(state = defaultState, action) {
           newState.listCategory = action.listCategory;
           return newState;
     case 'GET_LIST_CATEGORY_FAILED':
-          return {
-              text: 'Failed'
-          };
+          return newState;
     default:
       return state;
   }

@@ -106,7 +106,6 @@ export function UpdateInfo(userData) {
         birthday: userData.birthday
     };
     var UpdateAPI = apiUser.userUpdateInfo + userData.id;
-    console.log(UpdateAPI);
     return function (dispatch) {
 	  	return restApi.post(UpdateAPI, data).then((response) => {
 	    	console.log(response);

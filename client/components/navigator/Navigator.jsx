@@ -133,7 +133,6 @@ class Navigator extends React.Component {
     }
 //{this.props.categoryData.list.map()...}
     render() {
-        console.log(this.props.userData);
         return (
             <Paper style={stylePaper} zDepth={1}>
                 <div className="col-sm-2" style={logo}>

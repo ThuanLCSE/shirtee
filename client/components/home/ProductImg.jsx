@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Dialog from 'material-ui/Dialog';
-import CarouselLogo from './../CarouselLogo';
+import CarouselLogo from './CarouselLogo';
 import FlatButton from 'material-ui/FlatButton';
 
 const customContentStyle = {

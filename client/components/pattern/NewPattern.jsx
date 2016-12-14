@@ -69,12 +69,7 @@ class NewShirt extends React.Component {
     }
     
     handleSubmit() {
-//        var newCategory = this.state.categoryTotal;
-//        for(var categoryId in this.state.category)
-//           if (categoryId) newCategory.push(categoryId);
-//        this.setState({categoryTotal: newCategory});
         var patternData = this.state;
-        console.log(patternData);
         this.props.uploadPattern(patternData);
     }
     

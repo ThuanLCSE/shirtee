@@ -10,7 +10,6 @@ class ViewAdminPattern extends React.Component{
     }
     
     componentWillMount(){
-      console.log('send api');
       this.props.getListPattern();
     }
     

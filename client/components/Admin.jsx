@@ -38,7 +38,6 @@ class Admin extends React.Component{
   
     
   getListShirt(){
-    console.log("goto: get list shirt");
     return (
         <ListShirt
         removeShirt = {this.props.ShirtAct.removeShirt}
@@ -85,7 +84,6 @@ class Admin extends React.Component{
   }
 
   changeViewDropdown(event, index, value){
-      console.log('view thay doi '+ value);
       this.setState({
           view : value
       });
