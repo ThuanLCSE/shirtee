@@ -5,8 +5,6 @@ import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
 import {List, ListItem} from 'material-ui/List';
 
-//import userTodo from '../stores/UserList';
-
 const customContentStyle = {
     width: '25%',
     maxWidth: 'none'
@@ -20,6 +18,7 @@ class SignIn extends React.Component {
             user: {
                 email: '',
                 pwd: '',
+                cfmpwd: '',
                 name: ''
             },
             openSignUp: false
@@ -32,13 +31,32 @@ class SignIn extends React.Component {
     getValueSignIn() {
         var userData = this.state.user;
         this.props.signInFunc(userData);
-//        this.setState({open: false, openSignUp: false});
+        if (!this.props.userData.signInSuccess)
+            document.getElementById("ErrorSignIn").innerHTML="Wrong email or password";
     }
 
     getValueSignUp() {
         var userData = this.state.user;
+        var error = document.getElementById("ErrorSignUp");
+        if (userData.name === '') {
+            error.innerHTML="Name required";
+            return;
+        }
+        if (userData.email === '') {
+            error.innerHTML="Email required";
+            return;
+        }
+        if (userData.pwd === '') {
+            error.innerHTML="Password required";
+            return;
+        }
+        if (userData.pwd !== userData.cfmpwd) {
+            error.innerHTML="Password not match";
+            return;
+        }
         this.props.signUpFunc(userData);
-//        this.setState({open: false, openSignUp: false});
+        if (!this.props.userData.signInSuccess)
+            error.innerHTML="Email existed";
     }
 
     handleChange(att, e) {
@@ -73,7 +91,7 @@ class SignIn extends React.Component {
                                     hintText="Your password"
                                     fullWidth={true}
                                     onChange={(e) => this.handleChange('pwd', e)}/>
-                        <br/><br/>
+                        <br/><p id="ErrorSignIn"></p><br/>
                     <div style={{margin: 'auto', width: '40%'}}>
                         <RaisedButton label="Sign In" fullWidth={true} primary={true} onClick={this.getValueSignIn}/>
                     </div>
@@ -98,8 +116,12 @@ class SignIn extends React.Component {
                                     hintText="Your password"
                                     fullWidth={true}
                                     onChange={(e) => this.handleChange('pwd', e)}/><br/>
-                        <TextField type="password" floatingLabelText="Confirm password" hintText="Confirm password"/>
-                        <br/><br/>
+                        <TextField  type="password"
+                                    floatingLabelText="Confirm password"
+                                    hintText="Confirm password"
+                                    fullWidth={true}
+                                    onChange={(e) => this.handleChange('cfmpwd', e)}/>
+                        <br/><p id="ErrorSignUp"></p><br/>
                     <div style={{margin: 'auto', width: '40%'}}>
                         <RaisedButton label="Sign Up" fullWidth={true} primary={true} onClick={this.getValueSignUp}/>
                     </div>

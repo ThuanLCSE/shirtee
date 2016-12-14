@@ -24,12 +24,6 @@ const stylePaper = {
     paddingBottom: 10,
     marginBottom: 10
 }
-const logo = {
-    backgroundImage: "url(https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150)",
-    backgroundSize: "contain",
-    backgroundRepeat: 'no-repeat',
-    overflow:'auto'
-}
 
 class Profile extends React.Component {
     constructor(props) {
@@ -95,8 +89,7 @@ class Profile extends React.Component {
               </Popover>
               <BecomeDesigner openDialog = {this.state.openDialog}
                               closeDialog = {this.handleBecomeDesigner}
-                              becomeNewDesigner={this.props.becomeNewDesigner}
-                              designerData={this.props.designerData}/>
+                              becomeNewDesigner={this.props.becomeNewDesigner}/>
             </List>
         );
     }
@@ -134,47 +127,54 @@ class Navigator extends React.Component {
 //{this.props.categoryData.list.map()...}
     render() {
         return (
-            <Paper style={stylePaper} zDepth={1}>
-                <div className="col-sm-2" style={logo}>
+            <z>
+            <div className="col-sm-2" style={{padding:0, width:'13%'}}>
+                <div id="logo-inside">
+                    <img src="static/AoDs.png"/>
                 </div>
-                <div className="col-sm-7">
-                    <List style={flexContainer}>
-                      <ListItem primaryText={(<b>Best Sell</b>)} leftIcon={<ActionFavorite />} />
-                      <ListItem primaryText={(<b>Newest</b>)} leftIcon={<AvFiberNew />} />
-                      <ListItem primaryText={(<b>Promotion</b>)} leftIcon={<ActionCardGiftcard />} />
-                      <ListItem primaryText={(<b>Category</b>)} onClick={this.handleClickCategory} leftIcon={<ActionList />} />
-                      <Popover
-                          open={this.state.openCategory}
-                          anchorEl={this.state.anchorEl}
-                          anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-                          targetOrigin={{horizontal: 'left', vertical: 'top'}}
-                          onRequestClose={this.handleRequestClose}>
-                          <Menu>
-                              {this.props.categoryList.listCategory.map( (row, index) => (
-                                <MenuItem key={index} primaryText={<b>{row.name}</b>}/>
-                              ))}
-                          </Menu>
-                      </Popover>
-                    </List>
-                </div>
-                <div className="col-sm-3">
-                    <div className="col-sm-6">
+            </div>
+            <div className="col-sm-10" style={{padding:0, width:'87%'}}>
+                <Paper style={stylePaper} zDepth={1}>
+                    <div className="col-sm-9">
                         <List style={flexContainer}>
-                          <ListItem primaryText={(<b>Cart</b>)} leftIcon={<ActionShoppingCart />} />
+                          <ListItem primaryText={(<b>Best Sell</b>)} leftIcon={<ActionFavorite />} />
+                          <ListItem primaryText={(<b>Newest</b>)} leftIcon={<AvFiberNew />} />
+                          <ListItem primaryText={(<b>Promotion</b>)} leftIcon={<ActionCardGiftcard />} />
+                          <ListItem primaryText={(<b>Category</b>)} onClick={this.handleClickCategory} leftIcon={<ActionList />} />
+                          <Popover
+                              open={this.state.openCategory}
+                              anchorEl={this.state.anchorEl}
+                              anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+                              targetOrigin={{horizontal: 'left', vertical: 'top'}}
+                              onRequestClose={this.handleRequestClose}>
+                              <Menu>
+                                  {this.props.categoryList.listCategory.map( (row, index) => (
+                                    <MenuItem key={index} primaryText={<b>{row.name}</b>}/>
+                                  ))}
+                              </Menu>
+                          </Popover>
                         </List>
                     </div>
-                    <div className="col-sm-6">
-                        {!this.props.userData.signInSuccess ? <SignIn signInFunc={this.props.signInFunc}
-                                                            userData={this.props.userData}
-                                                            signUpFunc={this.props.signUpFunc}/> :
-                                                            <Profile becomeNewDesigner={this.props.becomeNewDesigner}
-                                                             userData={this.props.userData}
-                                                             signOutFunc={this.props.signOutFunc}
-                                                             changeView={this.props.changeView}/>}
+                    <div className="col-sm-3">
+                        <div className="col-sm-6">
+                            <List style={flexContainer}>
+                              <ListItem primaryText={(<b>Cart</b>)} leftIcon={<ActionShoppingCart />} />
+                            </List>
+                        </div>
+                        <div className="col-sm-6">
+                            {!this.props.userData.signInSuccess ? <SignIn signInFunc={this.props.signInFunc}
+                                                                userData={this.props.userData}
+                                                                signUpFunc={this.props.signUpFunc}/> :
+                                                                <Profile becomeNewDesigner={this.props.becomeNewDesigner}
+                                                                 userData={this.props.userData}
+                                                                 signOutFunc={this.props.signOutFunc}
+                                                                 changeView={this.props.changeView}/>}
+                        </div>
                     </div>
-                </div>
-                <br/>
-            </Paper>
+                    <br/>
+                </Paper>
+            </div>
+            </z>
         );
     }
 }

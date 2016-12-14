@@ -16,6 +16,9 @@ export default function UserTodo(state = defaultState, action) {
           return newState;
           
     case 'SIGN_UP_SUCCESSFULLY':
+          newState.message = action.message;
+          if (newState.message === "email already exist")
+              return newState;
           newState.signInSuccess = true;
           newState.user = action.user;
           return newState;
@@ -49,6 +52,11 @@ export default function UserTodo(state = defaultState, action) {
           newState.user = action.user;
           return newState;
     case 'UPDATE_ERROR':
+           return newState;
+    case 'VIEW_INFO_SUCCESSFULLY':
+          newState.user = action.user;
+          return newState;
+    case 'VIEW_INFO_ERROR':
            return newState;
      
     default:

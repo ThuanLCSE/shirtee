@@ -32,3 +32,27 @@
 .imageoutside:hover .img-shirt {
     display: block;
 }
+#ErrorSignIn, #ErrorSignUp, #ErrorDesignerRegisting, #ErrorUpdateAcc {
+    font-style: italic;
+    color: red;
+}
+#logo-inside {
+    width: 80%;
+    padding-top: 90%;
+    margin: auto;
+    margin-top: -10%;
+    background-color: #424242;
+    transform: skewY(10deg);
+    position: relative;
+    z-index: 100;
+}
+#logo-inside img{
+    width: 85%;
+    position:  absolute;
+    transform: skewY(-10deg);
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+}

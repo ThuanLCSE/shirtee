@@ -33,14 +33,20 @@ class Home extends React.Component{
     
     infoView() {
         return (
-           <Information userData = {this.props.UserTodo}/>
+           <Information userData = {this.props.UserTodo}
+                        viewInfo = {this.props.UserAct.ViewInfo}
+                        changeView = {this.changeStateView}
+                        becomeNewDesigner={this.props.UserAct.BecomeNewDesigner}/>
         );
     }
     
     accUpdateView() {
         return (
            <UserAccount userData = {this.props.UserTodo}
-                        updateInfo = {this.props.UserAct.UpdateInfo}/>
+                        updateInfo = {this.props.UserAct.UpdateInfo}
+                        viewInfo = {this.props.UserAct.ViewInfo}
+                        changeView = {this.changeStateView}
+                        becomeNewDesigner={this.props.UserAct.BecomeNewDesigner}/>
         );
     }
     

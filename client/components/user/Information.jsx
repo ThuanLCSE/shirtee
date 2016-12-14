@@ -13,17 +13,24 @@ class Information extends React.Component{
         super(props);
     }
     
+    componentWillMount() {
+        this.props.viewInfo();
+    }
+    
   render(){
     return(
       <div className="container">
         <div className="col-sm-3">
-            <SideBar/>
+            <SideBar changeView = {this.props.changeView}
+                     userData = {this.props.userData}
+                     becomeNewDesigner={this.props.becomeNewDesigner}/>
         </div>
         <div className="col-sm-1"></div>
         <div className="col-sm-8">
          <h2>Information</h2>
          {this.props.userData.user ?
           <table>
+           <tbody>
             <tr>
                 <td>
                     <label style={{padding: 20}}>Full name:</label>
@@ -56,8 +63,9 @@ class Information extends React.Component{
                     <p>{this.props.userData.user.email}</p>
                 </td>
             </tr>
+           </tbody>
           </table> : null}
-         <RaisedButton label="Update your information" primary={true}/>
+         <RaisedButton label="Update your information" onClick={() => this.props.changeView('accUpdate')} primary={true}/>
         </div>
       </div>
     );

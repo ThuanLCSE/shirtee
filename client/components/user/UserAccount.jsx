@@ -31,13 +31,23 @@ class UserAccount extends React.Component{
     }
     
     handleUpdate() {
-        if (this.state.userData.oldPwd !== this.state.userData.password) {
-            alert ("Wrong password!");
+        var userData = this.state.userData;
+        var error = document.getElementById("ErrorUpdateAcc");
+        if (userData.oldPwd !== userData.password) {
+            error.innerHTML="Wrong password";
+            return;
+        }
+        if (userData.fullname === '') {
+            error.innerHTML="Full name required";
             return;
         }
         if (this.state.changePwd)
-            if (this.state.userData.newPwd !== this.state.userData.cfmPwd) {
-                alert("Wrong confirm password!");
+            if (userData.newPwd === '') {
+                error.innerHTML="Password required";
+                return;
+            } else
+            if (userData.newPwd !== userData.cfmPwd) {
+                error.innerHTML="Wrong comfirm password";
                 return;
             }
             else {
@@ -45,8 +55,8 @@ class UserAccount extends React.Component{
                 newUser.password = newUser.newPwd;
                 this.setState({userData: newUser});
             };
-        var userData = this.state.userData;
         this.props.updateInfo(userData);
+        error.innerHTML="Successfully";
     }
     
     handleChangePwd() {
@@ -68,13 +78,19 @@ class UserAccount extends React.Component{
     getValueSignIn() {
         var userData = this.state.user;
         this.props.signInFunc(userData);
-    } 
+    }
+    
+    componentWillMount() {
+        this.props.viewInfo();
+    }
     
   render(){
     return(
       <div className="container">
         <div className="col-sm-3">
-            <SideBar/>
+            <SideBar changeView = {this.props.changeView}
+                     userData = {this.props.userData}
+                     becomeNewDesigner={this.props.becomeNewDesigner}/>
         </div>
         <div className="col-sm-1"></div>
         <div className="col-sm-8">
@@ -82,6 +98,7 @@ class UserAccount extends React.Component{
          {this.props.userData.user ?
           <z>
           <table>
+           <tbody>
             <tr>
                 <td>
                     <label style={{padding: 20}}>Full name:</label>
@@ -122,7 +139,7 @@ class UserAccount extends React.Component{
             </tr>
             <tr>
                 <td>
-                    <label style={{padding: 20}}>Current password:</label>
+                    <label style={{padding: 20}}>Check password:</label>
                 </td>
                 <td>
                      <TextField 
@@ -165,7 +182,9 @@ class UserAccount extends React.Component{
                             onChange={(e) => this.handleChange('cfmPwd', e)}/>
                 </td>
             </tr>
+           </tbody>
           </table>
+          <p id="ErrorUpdateAcc"></p>
          <RaisedButton label="Update" primary={true} onClick={this.handleUpdate}/>
         </z> : null}
         </div>

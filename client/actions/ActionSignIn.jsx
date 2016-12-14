@@ -32,6 +32,7 @@ export function SignUp(userData) {
 	  	return restApi.post(apiUser.UserSignUp, data).then((response) => {
 	    	console.log(response);
 	       dispatch({ type: 'SIGN_UP_SUCCESSFULLY',
+                     message: response.message,
                      user : response.user,
                     designer: response.designer}
                    );
@@ -115,6 +116,22 @@ export function UpdateInfo(userData) {
 	    }).catch((err) => {
 	    	console.log(err);
 	        dispatch({ type: 'UPDATE_ERROR',
+                    text: err.responseText
+                    });
+		});
+	};
+}
+
+export function ViewInfo() {
+    return function (dispatch) {
+	  	return restApi.get(apiUser.viewUserInfo).then((response) => {
+	    	console.log(response);
+	       dispatch({ type: 'VIEW_INFO_SUCCESSFULLY', 
+                    user: response.user}
+                   );
+	    }).catch((err) => {
+	    	console.log(err);
+	        dispatch({ type: 'VIEW_INFO_ERROR',
                     text: err.responseText
                     });
 		});
