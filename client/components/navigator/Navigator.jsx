@@ -85,7 +85,7 @@ class Profile extends React.Component {
                     <MenuItem primaryText="Manage account" onClick={(e, view) => this.handleChoosePopover(e, 'accUpdate')}/>
                     <MenuItem primaryText="History orders" />
                     {this.props.userData.isDesigner ?
-                        <MenuItem primaryText="Create new design" onClick={(e, view) => this.handleChoosePopover(e, 'newShirt')}/> :
+                        <MenuItem primaryText="Create new design" onClick={(e, view) => this.handleChoosePopover(e, 'NewPattern')}/> :
                         <MenuItem onClick={this.handleBecomeDesigner} primaryText={"Become designer"} />
                     }
                     {this.props.userData.isDesigner ?

@@ -31,14 +31,13 @@ class PatternInfor extends React.Component {
         console.log(response);
         console.log(err);
       }
-      onSuccessUpload(result, file){ 
-        this.props.callDragDropInit();
+      onSuccessUpload(result, file){  
         this.props.changeUrl(result.path); 
       }
       fileUploadRedux(){ 
         return(
             <div>
-              {this.props.url ? <img className="img-polaroid img-responsive"
+              {this.props.url ? <img id={this.props.imgTagId} className="img-polaroid img-responsive"
                style={{marginBottom:20}} src={this.props.url}/> : null}
 
               <Upload name="picture" onReady={this.onReadyUpload}
@@ -48,7 +47,7 @@ class PatternInfor extends React.Component {
               onSuccess={this.onSuccessUpload}
               onProgress={this.onProgressUpload}
               beforeUpload={this.beforeUpload}>
-                <RaisedButton style={{width: '100%'}} label="Upload image" primary={true}/>
+                <RaisedButton style={{width: '100%'}} label="Change picture" primary={true}/>
               </Upload>
             </div>
         )
@@ -60,10 +59,12 @@ class PatternInfor extends React.Component {
                 {this.fileUploadRedux()}
                 <TextField  floatingLabelText="Name"
                             hintText="Name"
+                            value={this.props.detail.name}
                             fullWidth={true}
                             onChange={(e) => this.props.handleChange('name', e)}/><br/>
                 <TextField  type="number"
                             floatingLabelText="Price"
+                            value={this.props.detail.price}
                             hintText="Price"
                             fullWidth={true}
                             onChange={(e) => this.props.handleChange('price', e)}/>

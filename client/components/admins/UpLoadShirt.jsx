@@ -112,13 +112,13 @@ class UpLoadShirt extends React.Component{
             {this.state.info.layoutUrl?<img style= {shirtPreview} src={this.state.info.layoutUrl}/>:null}
  
               Detail: <br/>
-              <textarea rows="10" cols="30"
+              <textarea rows="10" cols="30"  value ={this.state.info.detail}
               onChange={(e) => this.handleChange('detail', e)}
               >
               </textarea>
               <br/>
               Price:
-              <input type = "text" name = "price"
+              <input type = "text" name = "price" value ={this.state.info.price}
               onChange={(e) => this.handleChange('price', e)}
               />
               <br/>

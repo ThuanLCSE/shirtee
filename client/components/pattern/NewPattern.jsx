@@ -1,37 +1,28 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
 
+import UpPatternModal from './upPatternModal.jsx';
 import PatternInfor from './PatternInfor';
 
 class NewShirt extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            imgPaternTagId : 'patternTagId',
             category: [],
             expirationDate: 5,
             detail: {
                 name: '',
                 price: 0
             },
-            url: '',
-            designerId: this.props.userData.designer._id,
-            position: {x:0, y:0},
-            size: 1,
-            rotate: 0,
-            recommendShirtUrl: '',
-            recommendShirtId: '',
-            patternImg : "static/invisibleman.jpg",
-            selectedShirt: 0,
-            colorCodeList : [
-                {key: 1, value: '#ffffff'},
-                {key: 19, value: '#616161'},
-                {key: 16, value: '#f0f0f0'},
-                {key: 15, value: '#5b5b5b'},
-                {key: 13, value: '#aeba5e'},
-                {key: 12, value: '#222222'}],
-            shirtList: [
-                {url: 'ok', key: 1}
-            ]
+            url: '', 
+            position: {
+              x:200,
+              scale: 0.2,
+              rotate: 0, 
+              y:150
+            },
+            selectedShirt: 0
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleExpiration = this.handleExpiration.bind(this);
@@ -44,33 +35,69 @@ class NewShirt extends React.Component {
 
         this.customBar = this.customBar.bind(this);
          this.changeShirtType = this.changeShirtType.bind(this);
-        
-        
+        this.callAddPatternToShirt = this.callAddPatternToShirt.bind(this);
+         this.handleChangePosition = this.handleChangePosition.bind(this);
+  
 
     }
+
     componentWillMount(){ 
       this.props.getListShirt();
     }
-    componentDidMount(){
+    callAddPatternToShirt(top, left, scale){
+      var patternId = this.state.imgPaternTagId;
       setTimeout(function(){
-            var hiddenDiv = document.getElementById('hiddenDiv'); 
-            hiddenDiv.click(100,200);
-         }, 1200);
+            var addPatternToShirt = document.getElementById('addPatternToShirt'); 
+            addPatternToShirt.click(patternId, top, left, scale);
+         }, 1500);
     }
-    callDragDropInit(){  
-        var hiddenDiv = document.getElementById('hiddenDiv'); 
-        hiddenDiv.click(100,200);  
+
+    callApplyShirtCanvas(){  
+      setTimeout(function(){
+          var applyShirtCanvas = document.getElementById('applyShirtCanvas'); 
+          applyShirtCanvas.click();  
+      }, 1500);
+       
     }
-       handleChangeUrl(url) {
-        this.setState({url: url});
+    callApplyColorChange(){  
+      setTimeout(function(){
+          var applyColorChange = document.getElementById('applyColorChange'); 
+          applyColorChange.click();  
+      }, 1500);
+       
+    }
+     
+    componentDidUpdate(prevProps, prevState) {
+      if (this.state.url){
+        this.callAddPatternToShirt(this.state.position.x,this.state.position.y,this.state.position.scale);
+      }
+       if (this.props.shirtData.listShirt.length > 0 ){
+        this.callApplyShirtCanvas(); 
+        this.callApplyColorChange();
+      
+      }
+      
+   }
+    
+    handleChangePosition(att, e) {
+        var newPosition = this.state.position;
+        newPosition[att] = e.target.value;
+        this.setState({
+          position: newPosition
+        });
     }
     handleChangeUrl(url) {
         this.setState({url: url});
     }
     
     handleSubmit() {
-        var patternData = this.state;
-        this.props.uploadPattern(patternData);
+      // console.log(this.state.position); 
+        var newShirt = this.props.shirtData.listShirt[this.state.selectedShirt]; 
+        var newPattern = Object.assign({},this.state); 
+        newPattern.recommendShirtUrl = newShirt.url;
+        newPattern.recommendShirtId = newShirt._id;
+        newPattern.designerId = this.props.userData.designer._id;
+      this.props.uploadPattern(newPattern);
     }
     
     handleCategory(e, id) {
@@ -107,7 +134,7 @@ class NewShirt extends React.Component {
               <div id="shirtDiv" className="page" >
                 <img id="tshirtFacing" src="static/TeeShirt1.png"></img>
                 <div id="drawingArea" style={drawingAreae}>         
-                  <canvas id="tcanvas" width="200" height="400" className="hover" style={webKitUser}>
+                  <canvas id="shirtCanvas" width="200" height="400" className="hover" style={webKitUser}>
                   
                   </canvas>
                 </div>
@@ -137,9 +164,10 @@ class NewShirt extends React.Component {
           )
       }
     changeShirtType(index){ 
+      var newShirt = this.props.shirtData.listShirt[index]; 
       this.setState({
         selectedShirt: index
-      })
+      });
     }
     shirtItem(shirt, index){ 
         let shirtIcon = {
@@ -175,8 +203,7 @@ class NewShirt extends React.Component {
       }
 
     customBar(){ 
-      var listColor = [];
-      console.log(this.props.shirtData.listShirt[this.state.selectedShirt].colorCode);
+      var listColor = []; 
       if (this.props.shirtData.listShirt.length> 0) {
         listColor = this.props.shirtData.listShirt[this.state.selectedShirt].colorCode
       }
@@ -191,18 +218,20 @@ class NewShirt extends React.Component {
         )
     }   
     
-    render() { 
+    render() {  
         return (
             <div className="container">
                 <div className="col-sm-3">
-                    <PatternInfor callDragDropInit = {this.callDragDropInit}
+                    <PatternInfor  
                                     categoryList={this.props.categoryList}
                                   getCategory={this.props.getCategory}
                                   handleCategory={this.handleCategory}
                                   handleChange={this.handleChange}
+                                  detail = {this.state.detail}
                                   handleExpiration={this.handleExpiration}
                                   stateList={this.state}
                                   changeUrl={this.handleChangeUrl}
+                                  imgTagId = {this.state.imgPaternTagId}
                                   url={this.state.url}
                                   submit={this.handleSubmit}/>
                 </div>
@@ -212,8 +241,8 @@ class NewShirt extends React.Component {
                         <Paper style={{height:500}}>
                            {this.imageEditor()}
                            {this.editor()}
-                            <input type="text" id="patternTop" value=""/>
-                            <input type="text" id="patternLeft" value=""/>
+                           
+                          
                         </Paper>
                     </div>
                     <div className="col-sm-1"></div>
@@ -223,9 +252,19 @@ class NewShirt extends React.Component {
                          {this.customBar()}
                     </Paper>
                 </div>
+                <UpPatternModal patternUrlChange={this.handleChangeUrl} />
+                  <input type="hidden" id="patternTop"
+                  onClick = {(e) => this.handleChangePosition('x', e)} />
+                  <input type="hidden" id="patternLeft" 
+                  onClick = {(e) => this.handleChangePosition('y', e)} />
+                    <input type="hidden" id="patternScale"
+                  onClick = {(e) => this.handleChangePosition('scale', e)} />
+                  <input type="hidden" id="patternAngle"
+                  onClick = {(e) => this.handleChangePosition('rotate', e)} />
+                  
+                  
             </div>
         );
     }
-}
-
+} 
 export default NewShirt;

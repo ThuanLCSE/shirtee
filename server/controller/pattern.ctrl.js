@@ -23,7 +23,8 @@ exports.create = function(req,res){
     };
 	reqPattern.recommendShirt = {
 		url: req.body.recommendShirtUrl?req.body.recommendShirtUrl:null,
-        id: req.body.recommendShirtId?req.body.recommendShirtId:null
+        id: req.body.recommendShirtId?req.body.recommendShirtId:null,
+        colorCode: req.body.recommendShirtId?req.body.colorCode:null
     };
     var newPattern = new Pattern(reqPattern);
 	

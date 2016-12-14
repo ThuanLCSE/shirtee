@@ -7,8 +7,8 @@ export function UploadPattern(patternData) {
  	    price: patternData.detail.price,
      	category: patternData.category,
         position: patternData.position,
-        size: patternData.size,
-        rotate: patternData.rotate,
+        size: patternData.position.scale,
+        rotate: patternData.position.rotate,
      	name: patternData.detail.name,
  	    recommendShirtUrl: patternData.recommendShirtUrl,
         recommendShirtId: patternData.recommendShirtId

@@ -34,7 +34,8 @@ var patternSchema = new Schema({
     },
     recommendShirt:{
         url:  String,
-        id:  ObjectId
+        id:  ObjectId,
+        colorCode: String
     },
     recommendPattern: {
     	position: {

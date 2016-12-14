@@ -64,8 +64,7 @@ class GridListFour extends React.Component{
         <div style={styles.root}>
           <GridList style={styles.gridList} cols={4} cellHeight='auto'>
             {tilesData.map((tile) => (
-              <GridTile
-                zDepth={5}
+              <GridTile 
                 title={tile.title}
                 actionIcon={<IconButton><StarBorder color="yellow" /></IconButton>}
                 titleStyle={styles.titleStyle}
