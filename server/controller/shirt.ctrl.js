@@ -59,15 +59,15 @@ exports.getAll = function(req,res){
  
 exports.remove = function(req,res){
 	
-	var patternId = req.body.shirtId;
+	var shirtId = req.body.shirtId;
 
-  	pattern.findByIdAndRemove(patternId,
+  	Shirt.findByIdAndRemove(shirtId,
   		function (err) {
 	 	 if (err ) {
 	  		res.status(400).send(err);
 	    } else { 
 		  	res.status(200).send({
-		  		message: 'remove pattern success' 
+		  		message: 'remove shirt success' 
 		  	}); 
 	  	}
  	});

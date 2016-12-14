@@ -19,8 +19,7 @@ import UpLoadShirt from './admins/UpLoadShirt';
 import ListPattern from './admins/ListPattern';
 import ViewSaleProgram from './admins/ViewSaleProgram';
 import CreateSaleProgram from './admins/CreateSaleProgram';
-import ListShirt from './admins/ListShirt';
-import DelShirt from './admins/DelShirt';
+import ListShirt from './admins/ListShirt'; 
 
 class Admin extends React.Component{
   constructor(props) {
@@ -37,19 +36,12 @@ class Admin extends React.Component{
 
   }
   
-  deleteShirt(){
-    console.log("goto: delete shirt");
-    return (
-          <DelShirt
-            delShirt = {this.props.ShirtAct.removeShirt}
-            shirtData={this.props.ShirtList} />
-    )
-  }
     
   getListShirt(){
     console.log("goto: get list shirt");
     return (
         <ListShirt
+        removeShirt = {this.props.ShirtAct.removeShirt}
         getListShirt = {this.props.ShirtAct.GetList}
         shirtData={this.props.ShirtList}  />
     )
@@ -58,6 +50,7 @@ class Admin extends React.Component{
   listPattern(){
     return(
       <ListPattern
+
               getListPattern = {this.props.PatternAct.GetListByAdmin} 
               AdminStore={this.props.AdminTodo} 
               PatternList={this.props.PatternList}
@@ -105,8 +98,7 @@ class Admin extends React.Component{
           <MenuItem value='list pattern' primaryText="View Pattern" />
           <MenuItem value='sell program' primaryText="View sell program" />
           <MenuItem value= 'create sell program' primaryText="Create new sale program" />
-          <MenuItem value='list shirt' primaryText= "Get List shirt" />
-          <MenuItem value='delete shirt' primaryText= "Delete shirt" />
+          <MenuItem value='list shirt' primaryText= "Get List shirt" /> 
         </DropDownMenu>
     )
   }
@@ -123,8 +115,7 @@ class Admin extends React.Component{
           <div>
           {this.props.AdminTodo.signInSuccess?this.adminHome():this.signInAdmin()}
           {this.state.view === 'upload shirt'?this.uploadShirt():null}
-          {this.state.view === 'list shirt'?this.getListShirt():null}
-          {this.state.view === 'delete shirt'?this.deleteShirt():null}
+          {this.state.view === 'list shirt'?this.getListShirt():null} 
           {this.state.view === 'list pattern'?this.listPattern():null}
           {this.state.view === 'sell program'?this.viewSale():null}
           {this.state.view === 'create sell program'? this.createSale():null}

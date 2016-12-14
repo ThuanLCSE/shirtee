@@ -46,15 +46,16 @@ export function UpLoadShirt(uploadInfo) {
     }
 }
 
-export function removeShirt(shirtId) {
+export function removeShirt(shirt) {
   var data = {
-       shirtId: shirtId
+       shirtId: shirt._id
       };
     return function (dispatch) { 
        return restApi.post(apiUser.removeShirt,data).then((response) => {
  
                dispatch({ 
                           type: actType.removeShirtSuccess, 
+                          shirtId: shirt._id,
                            message: 'successful remove shirt'
                          }
                          );

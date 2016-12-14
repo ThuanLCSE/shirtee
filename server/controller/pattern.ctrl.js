@@ -137,7 +137,7 @@ exports.getAll = function(req,res){
 };
 
 exports.getAllAvailable = function(req,res){ 
-  	Pattern.find({status: 'approve'}).exec(function (err, patterns) {
+  	Pattern.find({status: 'approve', available: true}).exec(function (err, patterns) {
 	  if (err) {
 	  	res.status(400).send(err);
 	  }  else { 

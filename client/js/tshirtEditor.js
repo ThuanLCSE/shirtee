@@ -59,7 +59,6 @@ var initFunction = function(left, top) {
   			$("#tshirtFacing")[0].src = e.currentTarget.src;
 		});
 
-		// left frame
 	  	$(".img-polaroid").click(function(e){
 	  		var el = e.target; 
 
@@ -72,7 +71,7 @@ var initFunction = function(left, top) {
 		            cornersize: 10,
 	      	  		hasRotatingPoint:true
 		          });
-		          //image.scale(getRandomNum(0.1, 0.25)).setCoords();
+		          image.scale(getRandomNum(0.1, 0.25)).setCoords();
 		          canvas.add(image);
 		        });
 	  	});	      
@@ -95,22 +94,22 @@ var initFunction = function(left, top) {
 	
 	
 		//canvas.add(new fabric.fabric.Object({hasBorders:true,hasControls:false,hasRotatingPoint:false,selectable:false,type:'rect'}));
-	   $("#drawingArea").hover(
-	        function() { 	       
-	        	 canvas.add(line1);
-		         canvas.add(line2);
-		         canvas.add(line3);
-		         canvas.add(line4); 
-		         canvas.renderAll();
-	        },
-	        function() {	    	
-	        	 canvas.remove(line1);
-		         canvas.remove(line2);
-		         canvas.remove(line3);
-		         canvas.remove(line4);
-		         canvas.renderAll();
-	        }
-	    );
+	   // $("#drawingArea").hover(
+	   //      function() { 	       
+	   //      	 // canvas.add(line1);
+		  //        // canvas.add(line2);
+		  //        // canvas.add(line3);
+		  //        // canvas.add(line4); 
+		  //        canvas.renderAll();
+	   //      },
+	   //      function() {	    	
+	   //      	 // canvas.remove(line1);
+		  //        // canvas.remove(line2);
+		  //        // canvas.remove(line3);
+		  //        // canvas.remove(line4);
+		  //        canvas.renderAll();
+	   //      }
+	   //  );
 	   
 	   $('.color-preview').click(function(){
 		   var color = $(this).css("background-color");
@@ -123,7 +122,9 @@ var initFunction = function(left, top) {
 	   line3 = new fabric.Line([0,0,0,400], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
 	   line4 = new fabric.Line([0,400,200,399], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
 }//end
-	  
+	 function getRandomNum(min,max){
+	 	return Math.random() * (max-min) +min;
+	 }
 	 
 	 function onObjectSelected(e) {	 
 	 	

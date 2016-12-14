@@ -12,32 +12,18 @@ export default function PatternList(state = defaultState, action) {
           newState.listPatternAdmin = action.listPattern;
           return newState;
     case 'GET_LIST_PATTERN_BY_ADMIN_FAILED':
-          return {
-              text: 'Failed'
-          };
+           return newState;
     case 'GET_LIST_PATTERN_SUCCESS':
-          newState.listPattern = action.listPattern;
-          return newState;
-    case 'GET_LIST_PATTERN_SALE_SUCCESS':
+          console.log("get list");
           newState.listPattern = action.listPattern;
           return newState;
     case 'GET_LIST_PATTERN_FAILED':
-          return {
-              text: 'Failed'
-          };
+           return newState;
     case 'APPROVE_PATTERN_SUCCESS':
           newState.pattern = action.pattern;
           return newState;
     case 'APPROVE_PATTERN_FAILED':
-          return {
-              text: 'Failed'
-          };
-    case 'DELETE_PATTERN_SUCCESS':
           return newState;
-    case 'DELETE_PATTERN_FAILED':
-          return {
-              text: 'Failed'
-          };
     default:
       return state;
   }

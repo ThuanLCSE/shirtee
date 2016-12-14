@@ -22,31 +22,24 @@ class PatternInfor extends React.Component {
         var fd = new FormData();
         fd.append( "fileInput", $("#fileInput")[0].files[0]);
       }
-      beforeUpload(file) {
-            console.log('beforeUpload');
-            console.log(file);
+      beforeUpload(file) { 
       };
-      onStartUpload(file){
-        console.log('on start');
-        console.log(file);
+      onStartUpload(file){ 
       }
       onErrorUpload(err,response){
         console.log('on error');
         console.log(response);
         console.log(err);
       }
-      onSuccessUpload(result, file){
-        console.log('on success');
-//        this.setState({previewUrl: result.path});
-        this.props.changeUrl(result.path);
-        console.log(result);
-        console.log(file);
+      onSuccessUpload(result, file){ 
+        this.props.callDragDropInit();
+        this.props.changeUrl(result.path); 
       }
-      fileUploadRedux(){
-          console.log(uploadFileUrl);
+      fileUploadRedux(){ 
         return(
             <div>
-              {this.props.url ? <img className="img-responsive" style={{marginBottom:20}} src={this.props.url}/> : null}
+              {this.props.url ? <img className="img-polaroid img-responsive"
+               style={{marginBottom:20}} src={this.props.url}/> : null}
 
               <Upload name="picture" onReady={this.onReadyUpload}
               action = {uploadFileUrl}

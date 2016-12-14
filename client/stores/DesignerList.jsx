@@ -1,4 +1,5 @@
 var defaultState = {
+  pattern: {}
 }
 
 export default function DesignerList(state = defaultState, action) {
@@ -8,9 +9,8 @@ export default function DesignerList(state = defaultState, action) {
           newState.pattern = action.pattern;
           return newState;
     case 'UPLOAD_PATTERN_ERROR':
-          return {
-              text: 'Failed'
-          };
+          return newState;
+          
     default:
       return state;
   }

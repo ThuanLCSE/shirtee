@@ -20,12 +20,14 @@ class ListShirt extends React.Component{
                <th>detail</th>
                <th>price</th>
                <th>colorCode</th>
-
+               <th>Action</th>
+               
              </tr>
            </thead>
            <tbody>
             {this.props.shirtData.listShirt.map(shirt =>
                  <ShirtItem
+                 removeShirt = {this.props.removeShirt}
                   key = {shirt._id}
                   shirt = {shirt}
                  />

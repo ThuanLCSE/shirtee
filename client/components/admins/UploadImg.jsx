@@ -1,9 +1,5 @@
 import React from 'react';
-import Upload from 'rc-upload';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import Upload from 'rc-upload';  
 
 import {uploadFileUrl} from './../../constant/ApiUri';
 
@@ -62,17 +58,6 @@ class UploadImg extends React.Component{
       </div>
     );
   }
-}
+} 
 
-const mapStateToProps = state => ({
-  // UserTodo: state.UserTodo
-});
-
-const mapDispatchToProps = dispatch => ({
-    // UserAct: bindActionCreators(UserAct, dispatch),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(UploadImg);
+export default  UploadImg;

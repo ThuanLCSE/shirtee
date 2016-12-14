@@ -16,6 +16,11 @@ class ShirtItem extends React.Component{
           <td>{this.props.shirt.detail}</td>
           <td>{this.props.shirt.price}</td>
           <td>{this.props.shirt.colorCode}</td>
+           <td>
+             <button onClick={(id) => this.props.removeShirt(this.props.shirt)}>
+                Remove
+              </button> 
+           </td>
         </tr>
       );
     }
