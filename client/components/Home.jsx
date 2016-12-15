@@ -109,9 +109,7 @@ class Home extends React.Component{
                         votePattern={this.props.PatternAct.VotePattern}
 
                         shirtData = {this.props.ShirtList}
-                        listShirt = {this.props.ShirtAct}
-
-                        />
+                        listShirt = {this.props.ShirtAct}/>
         );
     }
 
