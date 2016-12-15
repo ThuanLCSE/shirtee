@@ -68,3 +68,17 @@ export function removeShirt(shirt) {
           });
     };
 }
+
+
+export function selectCurrentShirt(index) { 
+      
+       return  {  type: actType.selectCurrentShirt,
+                  index: index,
+               } 
+}
+export function selectCurrentColor(colorCode) { 
+   return  {  type: actType.selectCurrentColor,
+                  colorCode: colorCode,
+           } 
+}
+

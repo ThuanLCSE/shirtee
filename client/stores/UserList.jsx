@@ -1,6 +1,10 @@
 var defaultState = {
     signInSuccess : false,
-    isDesigner: false
+    isDesigner: false,
+    message: '',
+    designer: {
+        expireTime: 0
+    }
 }
 
 export default function UserTodo(state = defaultState, action) {
@@ -11,8 +15,10 @@ export default function UserTodo(state = defaultState, action) {
           newState.signInSuccess = true;
           newState.user = action.user;
           newState.designer = action.designer;
+          newState.message = '';
           return newState;
     case 'SIGN_IN_ERROR':
+          newState.message = 'Wrong email or password';
           return newState;
           
     case 'SIGN_UP_SUCCESSFULLY':
@@ -20,9 +26,11 @@ export default function UserTodo(state = defaultState, action) {
           if (newState.message === "email already exist")
               return newState;
           newState.signInSuccess = true;
+          newState.message = '';
           newState.user = action.user;
           return newState;
     case 'SIGN_UP_ERROR':
+          newState.message = 'Something errors';
            return newState;
 
     case 'BECOME_DESIGNER_SUCCESSFULLY':

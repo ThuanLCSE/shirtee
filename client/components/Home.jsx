@@ -75,10 +75,14 @@ class Home extends React.Component{
         return (
            <NewPattern categoryList={this.props.CategoryList}
                       getCategory={this.props.CategoryAct.GetList}
-                      userData={this.props.UserTodo}
+                      userData={this.props.UserTodo} 
                       getListShirt ={this.props.ShirtAct.GetList}
+                      changeShirt = {this.props.ShirtAct.selectCurrentShirt}
+                      changeColor = {this.props.ShirtAct.selectCurrentColor}
                       shirtData = {this.props.ShirtList}
-                      designerList={this.props.DesignerList}
+                      closeMessage = {this.props.DesignerAct.removeMessage}
+                      designerData={this.props.DesignerList}
+                      getLevelInfo={this.props.DesignerAct.GetLevelInfo}
                     uploadPattern={this.props.DesignerAct.UploadPattern}/>
         );
     }
@@ -129,6 +133,7 @@ class Home extends React.Component{
 
 const mapStateToProps = state => ({
   UserTodo: state.UserTodo,
+  DesignerList : state.DesignerList,
   CategoryList: state.CategoryList,
   PatternList: state.PatternList,
    ShirtList: state.ShirtList

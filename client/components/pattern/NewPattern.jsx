@@ -1,8 +1,11 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
+import Dialog from 'material-ui/Dialog';
+import CircularProgress from 'material-ui/CircularProgress';
 
 import UpPatternModal from './upPatternModal.jsx';
+import DialogMessage from './../utils/DialogMessage.jsx';
 import PatternInfor from './PatternInfor';
 
 class NewShirt extends React.Component {
@@ -11,96 +14,108 @@ class NewShirt extends React.Component {
         this.state = {
             imgPaternTagId : 'patternTagId',
             category: [],
-            expirationDate: 5,
+        
             detail: {
                 name: '',
                 price: 0
             },
-            url: '',
-            position: {
+            url: '',  
+            recommend: { 
               x:200,
               scale: 0.2,
               rotate: 0,
               y:150
             },
-            selectedShirt: 0
+           
+            canvas: {
+              height: 100,
+              width: 100
+            } 
         };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleExpiration = this.handleExpiration.bind(this);
+        this.handleChange = this.handleChange.bind(this); 
         this.handleCategory = this.handleCategory.bind(this);
         this.handleChangeUrl = this.handleChangeUrl.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-
+        this.submitAfterHavePreview = this.submitAfterHavePreview.bind(this);
+        
         this.listTypeShirt = this.listTypeShirt.bind(this);
         this.shirtItem = this.shirtItem.bind(this);
+           this.colorItem = this.colorItem.bind(this);
 
  
          this.customBar = this.customBar.bind(this);
          this.changeShirtType = this.changeShirtType.bind(this);
- 
+         this.changeColorCode = this.changeColorCode.bind(this);
+        
          this.callAddPatternToShirt = this.callAddPatternToShirt.bind(this);
-         this.handleChangePosition = this.handleChangePosition.bind(this);
+         this.handleChangeRecommend = this.handleChangeRecommend.bind(this);
+         this.loadCanvasInit = this.loadCanvasInit.bind(this);
 
 
     }
 
     componentWillMount(){
+      this.props.getLevelInfo(this.props.userData.designer._id);
       this.props.getListShirt();
     }
+     componentDidMount() { 
+      var mountedCanvas = this.state.canvas; 
+      mountedCanvas.width = document.getElementById('tshirtFacing').clientWidth;
+      mountedCanvas.height = mountedCanvas.width *63/53;
+      this.setState({ canvas: mountedCanvas });
+    }
+
     callAddPatternToShirt(top, left, scale){
       var patternId = this.state.imgPaternTagId;
-      setTimeout(function(){
-            var addPatternToShirt = document.getElementById('addPatternToShirt');
-            addPatternToShirt.click(patternId, top, left, scale);
-         }, 1500);
+      var addPatternToShirt = document.getElementById('addPatternToShirt').click(patternId, top, left, scale); 
     }
 
-    callApplyShirtCanvas(){
-      setTimeout(function(){
-          var applyShirtCanvas = document.getElementById('applyShirtCanvas');
-          applyShirtCanvas.click();
-      }, 1500);
-
+    callApplyShirtCanvas(){ 
+      document.getElementById('applyShirtCanvas').click(); 
     }
-    callApplyColorChange(){
-      setTimeout(function(){
-          var applyColorChange = document.getElementById('applyColorChange');
-          applyColorChange.click();
-      }, 1500);
-
+    callApplyColorChange(){ 
+     document.getElementById('applyColorChange').click(); 
     }
-
-    componentDidUpdate(prevProps, prevState) {
-      if (this.state.url){
-        this.callAddPatternToShirt(this.state.position.x,this.state.position.y,this.state.position.scale);
-      }
-       if (this.props.shirtData.listShirt.length > 0 ){
+    componentDidUpdate(prevProps, prevState){
+      if (prevState.url !== this.state.url){
+        this.callAddPatternToShirt(this.state.recommend.x,this.state.recommend.y,this.state.recommend.scale);
+      }  
+      if (this.props.shirtData.listShirt.length > 0){
         this.callApplyShirtCanvas();
+      } 
+      if (prevProps.shirtData.currentSelect !== this.props.shirtData.currentSelect){
         this.callApplyColorChange();
-
       }
+    }
+    loadCanvasInit() {  
+      return (
+        <UpPatternModal patternUrlChange={this.handleChangeUrl} />
+      )
 
    }
 
-    handleChangePosition(att, e) {
-        var newPosition = this.state.position;
-        newPosition[att] = e.target.value;
+    handleChangeRecommend(att, e) {
+        var newRecommend = this.state.recommend;
+        newRecommend[att] = e.target.value;
         this.setState({
-          position: newPosition
+          recommend: newRecommend
         });
     }
     handleChangeUrl(url) {
         this.setState({url: url});
     }
-
-    handleSubmit() {
-      // console.log(this.state.position);
-        var newShirt = this.props.shirtData.listShirt[this.state.selectedShirt];
+    takePreviewBeforSubmit() {
+      document.getElementById('screenShot').click(); 
+    }
+    submitAfterHavePreview(e) {
+         
+        var newShirt = this.props.shirtData.listShirt[this.props.shirtData.currentSelect];
         var newPattern = Object.assign({},this.state);
         newPattern.recommendShirtUrl = newShirt.url;
         newPattern.recommendShirtId = newShirt._id;
+        newPattern.previewUrl = e.target.value; 
+        newPattern.colorCode = this.props.shirtData.currentColor;
         newPattern.designerId = this.props.userData.designer._id;
-      this.props.uploadPattern(newPattern);
+        this.props.uploadPattern(newPattern); 
     }
 
     handleCategory(e, id) {
@@ -117,9 +132,7 @@ class NewShirt extends React.Component {
         this.setState({detail: newDetail});
     }
 
-    handleExpiration(e, value) {
-        this.setState({expirationDate: value > 10 ? 10 : value});
-    };
+  
      editor(){
 
         let drawingAreae = {
@@ -131,6 +144,8 @@ class NewShirt extends React.Component {
           height: '100%'
         }
         let webKitUser = {
+          width: '100%',
+          height: '100%',
           WebkitUserSelect : 'none'
         }
         let shirtDiv = {
@@ -147,7 +162,9 @@ class NewShirt extends React.Component {
                 <img id="tshirtFacing" src="static/TeeShirt1.png" style={shirtFacing}></img>
                 <div id="drawingArea" style={drawingAreae}>
       
-                  <canvas id="shirtCanvas"className="hover" style={webKitUser}>
+                  <canvas id="shirtCanvas" height={this.state.canvas.height}
+                  width={this.state.canvas.width}
+                   className="hover" style={webKitUser}>
                   </canvas>
                 </div>
               </div>
@@ -175,10 +192,10 @@ class NewShirt extends React.Component {
           )
       }
     changeShirtType(index){
-      var newShirt = this.props.shirtData.listShirt[index];
-      this.setState({
-        selectedShirt: index
-      });
+      this.props.changeShirt(index);  
+    }
+    changeColorCode(colorCode){ 
+      this.props.changeColor(colorCode); 
     }
     shirtItem(shirt, index){
       
@@ -192,7 +209,7 @@ class NewShirt extends React.Component {
 
         return (
          
-             <div key= {shirt._id} className="col-sm-5" style = {shirtFrame}
+             <div key= {index} className="col-sm-5" style = {shirtFrame}
              onClick={() => this.changeShirtType(index)} >
                <img className="shirtTypes" style={shirtItem} src={shirt.url}/>
               {shirt.detail}
@@ -217,14 +234,15 @@ class NewShirt extends React.Component {
               backgroundColor: color
           }
          return (
-             <li key={color} className="color-preview" title="sample" style={background}></li>
+             <li key={color}  onClick={() => this.changeColorCode(color)}
+             className="color-preview" title="sample" style={background}></li>
           )
       }
 
     customBar(){
       var listColor = [];
       if (this.props.shirtData.listShirt.length> 0) {
-        listColor = this.props.shirtData.listShirt[this.state.selectedShirt].colorCode
+        listColor = this.props.shirtData.listShirt[this.props.shirtData.currentSelect].colorCode
       }
         return (
           <div className="form well">
@@ -247,27 +265,48 @@ class NewShirt extends React.Component {
         </div>
         )
     }
+    waitingProgress(){
+      return(
+            <Dialog
+              title="waiting" 
+              modal={false}
+              open={this.props.shirtData.listShirt.length <= 0 }
+              > 
+              <CircularProgress size={80} thickness={5} />
+              <CircularProgress size={80} thickness={5} />
+            </Dialog>  
+        )
+    } 
+    noticeDialog(message){ 
+      return(
+        <DialogMessage message={message} 
+            closeMessage ={this.props.closeMessage}  
+            pattern = {this.props.designerData.pattern}/>
+      )
+    }
+       
 
     render() {
         return (
             <div className="container">
+            
                 <div className="col-sm-3">
-                    <PatternInfor
+                 <PatternInfor
                                   categoryList={this.props.categoryList}
                                   getCategory={this.props.getCategory}
                                   handleCategory={this.handleCategory}
                                   handleChange={this.handleChange}
-                                  detail = {this.state.detail}
-                                  handleExpiration={this.handleExpiration}
+                                  detail = {this.state.detail} 
                                   stateList={this.state}
+                                  expireTime = {this.props.designerData.level.expireTime}
                                   changeUrl={this.handleChangeUrl}
                                   imgTagId = {this.state.imgPaternTagId}
                                   url={this.state.url}
-                                  submit={this.handleSubmit}/>
+                                  submit={this.takePreviewBeforSubmit}/>
+            
                 </div>
  
-                <Paper className="col-sm-5" style={{height:'80vh'}}>
- 
+                <Paper className="col-sm-5" style={{height:'80vh'}}> 
                           {this.editor()}
                           {this.imageEditor()}
 
@@ -278,15 +317,18 @@ class NewShirt extends React.Component {
                          {this.customBar()}
                     </Paper>
                 </div>
-                <UpPatternModal patternUrlChange={this.handleChangeUrl} />
+                {this.props.shirtData.listShirt.length <= 0 ?this.waitingProgress():this.loadCanvasInit()} 
+                {this.props.designerData.message !== '' ?this.noticeDialog(this.props.designerData.message):null}
                   <input type="hidden" id="patternTop"
-                  onClick = {(e) => this.handleChangePosition('x', e)} />
+                  onClick = {(e) => this.handleChangeRecommend('x', e)} />
                   <input type="hidden" id="patternLeft"
-                  onClick = {(e) => this.handleChangePosition('y', e)} />
+                  onClick = {(e) => this.handleChangeRecommend('y', e)} />
                     <input type="hidden" id="patternScale"
-                  onClick = {(e) => this.handleChangePosition('scale', e)} />
+                  onClick = {(e) => this.handleChangeRecommend('scale', e)} />
                   <input type="hidden" id="patternAngle"
-                  onClick = {(e) => this.handleChangePosition('rotate', e)} />
+                  onClick = {(e) => this.handleChangeRecommend('rotate', e)} />
+                  <input type="hidden" id="screenShotUrl"
+                  onClick = {(e) => this.submitAfterHavePreview(e)} />
                   
             </div>
         );

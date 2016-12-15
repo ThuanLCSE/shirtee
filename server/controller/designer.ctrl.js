@@ -65,6 +65,14 @@ exports.getById = function(req,res,next){
 		  }
 	  });
 };
+exports.returnLevel = function(req,res){
+	var level = req.level; 
+
+  	res.status(200).send({
+  		message: 'update status success',
+  		level: level,
+  	});  
+}
 
 exports.getLevelById = function(req,res,next){
 	Level.findById(req.designer.level.levelId).exec(function (err, level) {

@@ -31,8 +31,7 @@ class SignIn extends React.Component {
     getValueSignIn() {
         var userData = this.state.user;
         this.props.signInFunc(userData);
-        if (!this.props.userData.signInSuccess)
-            document.getElementById("ErrorSignIn").innerHTML="Wrong email or password";
+
     }
 
     getValueSignUp() {
@@ -91,7 +90,7 @@ class SignIn extends React.Component {
                                     hintText="Your password"
                                     fullWidth={true}
                                     onChange={(e) => this.handleChange('pwd', e)}/>
-                        <br/><p id="ErrorSignIn"></p><br/>
+                        <br/><p id="ErrorSignIn">{this.props.userData.message}</p><br/>
                     <div style={{margin: 'auto', width: '40%'}}>
                         <RaisedButton label="Sign In" fullWidth={true} primary={true} onClick={this.getValueSignIn}/>
                     </div>
@@ -121,7 +120,7 @@ class SignIn extends React.Component {
                                     hintText="Confirm password"
                                     fullWidth={true}
                                     onChange={(e) => this.handleChange('cfmpwd', e)}/>
-                        <br/><p id="ErrorSignUp"></p><br/>
+                        <br/><p id="ErrorSignUp">{this.props.userData.message}</p><br/>
                     <div style={{margin: 'auto', width: '40%'}}>
                         <RaisedButton label="Sign Up" fullWidth={true} primary={true} onClick={this.getValueSignUp}/>
                     </div>

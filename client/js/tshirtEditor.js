@@ -11,6 +11,7 @@ var applyColor = function(){
 		   var color = $(this).css("background-color");
 		   document.getElementById("shirtDiv").style.backgroundColor = color;
 	   });
+	 document.getElementsByClassName('color-preview')[0].click(); 
 }
 var setPatternIntoCanvas = function(patternId,left, top, scale){
 
@@ -30,11 +31,13 @@ var setPatternIntoCanvas = function(patternId,left, top, scale){
 		          canvas.add(image);
 		        });
   	});
-  	// $('#'+patternId).click();
+  	$('#'+patternId).click(); 
+   
 }
 var applyCanvasAndShirt = function() {
 		//setup front side canvas
 	 	if (!canvas){
+	 		console.log($('canvas'));
 	 		// var event = new Event('input', { bubbles: true });
 			 // $('#patternTop')[0].dispatchEvent(event);
 			 // $('#patternLeft')[0].dispatchEvent(event);
@@ -44,26 +47,26 @@ var applyCanvasAndShirt = function() {
 			  selection: false,
 			  selectionBorderColor:'blue'
 			});
-			// 	canvas.on({
-			// 	 'object:moving': function(e) {
-			// 	    e.target.opacity = 0.5;
-			//
-			// 	  },
-			// 	  'object:modified': function(e) {
-			// 	  	$('#patternTop')[0].value = e.target.getTop();
-			// 	    $('#patternLeft')[0].value = e.target.getLeft();
-			// 	    $('#patternScale')[0].value = e.target.getScaleX();
-			// 	    $('#patternAngle')[0].value = e.target.getAngle();
-			// 	     $('#patternAngle').trigger("click");
-			// 	    $('#patternTop').trigger("click");
-			// 	    $('#patternLeft').trigger("click");
-			//         $('#patternScale').trigger("click");
-			//
-			// 	    e.target.opacity = 1;
-			// 	  },
-			// 	//  'angular.isObject(value):selected':onObjectSelected,
-			// 	//  'selection:cleared':onSelectedCleared
-			//  });
+				canvas.on({
+				 'object:moving': function(e) {
+				    e.target.opacity = 0.5;
+			
+				  },
+				  'object:modified': function(e) {
+				  	$('#patternTop')[0].value = e.target.getTop();
+				    $('#patternLeft')[0].value = e.target.getLeft();
+				    $('#patternScale')[0].value = e.target.getScaleX();
+				    $('#patternAngle')[0].value = e.target.getAngle();
+				     $('#patternAngle').trigger("click");
+				    $('#patternTop').trigger("click");
+				    $('#patternLeft').trigger("click");
+			        $('#patternScale').trigger("click");
+			
+				    e.target.opacity = 1;
+				  },
+				 // 'angular.isObject(value):selected':onObjectSelected,
+				 'selection:cleared':onSelectedCleared
+			 });
 			// piggyback on `canvas.findTarget`, to fire "object:over" and "object:out" events
 	 		canvas.findTarget = (function(originalFn) {
 			  return function() {
@@ -72,30 +75,27 @@ var applyCanvasAndShirt = function() {
 			    return target;
 			  };
 			})(canvas.findTarget);
-			// canvas.add(new fabric.Object({hasBorders:true,hasControls:false,hasRotatingPoint:false,selectable:false,type:'rect'}));
-	 	}
+			$(".shirtTypes").click(function(e){ 
+	  			$("#tshirtFacing")[0].src = e.currentTarget.src;
+			});
+			document.getElementsByClassName('shirtTypes')[0].click();
+			applyColor();
 
-
-		$(".shirtTypes").click(function(e){
-			 
-			 
-  			$("#tshirtFacing")[0].src = e.currentTarget.src;
-		});
-		  document.getElementById('remove-selected').onclick = function() {
-		    var activeObject = canvas.getActiveObject(),
-		        activeGroup = canvas.getActiveGroup();
-		    if (activeObject) {
-		      canvas.remove(activeObject);
-		    }
-		    else if (activeGroup) {
-		      var objectsInGroup = activeGroup.getObjects();
-		      canvas.discardActiveGroup();
-		      objectsInGroup.forEach(function(object) {
-		        canvas.remove(object);
-		      });
-		    }
-	  };
-
+			document.getElementById('remove-selected').onclick = function() {
+			    var activeObject = canvas.getActiveObject(),
+			        activeGroup = canvas.getActiveGroup();
+			    if (activeObject) {
+			      canvas.remove(activeObject);
+			    }
+			    else if (activeGroup) {
+			      var objectsInGroup = activeGroup.getObjects();
+			      canvas.discardActiveGroup();
+			      objectsInGroup.forEach(function(object) {
+			        canvas.remove(object);
+			      });
+			    }
+		  	};
+	 	} 
 
 	   $(".clearfix button,a").tooltip();
 	   
@@ -106,60 +106,17 @@ var applyCanvasAndShirt = function() {
 		// });
 
 
-
-	  	// $(".img-polaroid").click(function(e){
-	  	// 	var el = e.target;
-
-	  	// 	fabric.Image.fromURL(el.src, function(image) {
-		  //         image.set({
-		  //           left: left,
-		  //           top: top,
-		  //           angle: 0,
-		  //           padding: 10,
-		  //           cornersize: 10,
-	   //    	  		hasRotatingPoint:true
-		  //         });
-		  //         image.scale(getRandomNum(0.1, 0.25)).setCoords();
-		  //         canvas.add(image);
-		  //       });
-	  	// });
-
+ 
 }//end
 	 function getRandomNum(min,max){
 	 	return Math.random() * (max-min) +min;
 	 }
 
-	//  function onObjectSelected(e) {
-	 //
-	//     var selectedObject = e.target;
-	//     $("#text-string").val("");
-	//     selectedObject.hasRotatingPoint = true;
-	//     if (selectedObject && (selectedObject.type === 'text')) {
-	//     	//display text editor
-	//     	$("#texteditor").css('display', 'block');
-	//     	$("#text-string").val(selectedObject.getText());
-	//     	$('#text-fontcolor').miniColors('value',selectedObject.fill);
-	//     	$('#text-strokecolor').miniColors('value',selectedObject.strokeStyle);
-	//     	$("#imageeditor").css('display', 'block');
-	//     }
-	//     else if (selectedObject && (selectedObject.type === 'image')){
-	//     	//display image editor
-	//     	$("#texteditor").css('display', 'none');
-	//     	$("#imageeditor").css('display', 'block');
-	//     }
-	//   }
-	//  function onSelectedCleared(e){
-	 //
-	// 	    	console.log('clearrrrrrrr');
-	//  }
-
-	 // function removeWhite(){
-		//   var activeObject = canvas.getActiveObject();
-		//   if (activeObject && activeObject.type === 'image') {
-		// 	  activeObject.filters[2] =  new fabric.Image.filters.RemoveWhite({hreshold: 100, distance: 10});//0-255, 0-255
-		// 	  activeObject.applyFilters(canvas.renderAll.bind(canvas));
-		//   }
-	 // }
+ 
+	 function onSelectedCleared(e){
+	 
+		// console.log('clearrrrrrrr');
+	 } 
 
 
  var applyEvent = new MouseEvent('click', {
@@ -213,7 +170,9 @@ var applyCanvasAndShirt = function() {
 		        },
 		        dataType: 'json',
 		        success: function(response) { 
-		               console.log(response); 
+		         
+		        	$('#screenShotUrl')[0].value = response.pictureUrl;
+				    $('#screenShotUrl').trigger("click"); 
 		        }
 		});
  		});

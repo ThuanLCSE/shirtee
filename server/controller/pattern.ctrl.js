@@ -11,6 +11,7 @@ exports.create = function(req,res){
     	designerId:  req.designer._id,
 	    price: req.body.price,
     	category: req.body.category,
+    	recommendPreviewUrl: req.body.recommendPreviewUrl,
 	    expireDay: expireDay, 
 	    recommendShirt: {},
     	recommendPattern: {}, 
@@ -57,8 +58,10 @@ exports.delete = function(req,res){
  
 exports.updateVoting = function(req,res,next){
 	var newVoteQuantity = req.pattern.voteQuantity + 1;
-	req.pattern.vote = (req.body.vote + (req.pattern.vote * req.pattern.voteQuantity))/newVoteQuantity;
-	req.pattern.voteQuantity = newVoteQuantity;
+	console.log(req.body.vote + (req.pattern.vote * req.pattern.voteQuantity));
+	var newVote = (req.body.vote + (req.pattern.vote * req.pattern.voteQuantity))/newVoteQuantity
+	req.pattern.vote = newVote;
+	req.pattern.voteQuantity = newVoteQuantity; 
 	next();
 };
 

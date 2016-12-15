@@ -16,6 +16,7 @@ export const uploadPattern = '/api/designer/pattern/create/'//:designerId'
 //     	category: 'array of categoryId ex: [id1,id2]',
 //     	position : {x: numeber, y: number},
 // size: number,
+// recommendPreviewUrl: string
 // rotate: number,
 // recommendShirtUrl : string
 // recommendShirtId: id of shirt
@@ -134,3 +135,8 @@ export const userVotePattern = '/api/pattern/voting/'//:patternId'
 // 	message: 'update success',
 // 	pattern: object
 // }
+export const getLevelInfo = '/api/designer/level/'//:designerId'
+//http get
+export const getPatternInfo = '/api/pattern/info/:patternId'
+//http get
+

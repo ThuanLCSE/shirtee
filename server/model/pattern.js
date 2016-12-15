@@ -1,10 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var   ObjectId = Schema.ObjectId;
-var categorySchema = new Schema({
-    catId: ObjectId
-});
-
+ 
 var patternSchema = new Schema({
 	status : {
         type: String, 
@@ -23,7 +20,7 @@ var patternSchema = new Schema({
         type: Number,
         required: 'price required'
     },
-    category: [categorySchema],
+    category: [],
     expireDay: {
     	type:Date,
     	 required: 'expire required'
@@ -37,6 +34,7 @@ var patternSchema = new Schema({
         id:  ObjectId,
         colorCode: String
     },
+    recommendPreviewUrl : String,
     recommendPattern: {
     	position: {
     		x: Number,

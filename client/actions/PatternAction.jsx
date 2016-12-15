@@ -72,7 +72,7 @@ export function GetListSale() {
     return function (dispatch) {
 	  	return restApi.get(apiUser.getListPatternSale).then((response) => {
 	    	console.log(response);
-	       dispatch({ type: 'GET_LIST_PATTERN_SUCCESS',
+	     
                      listPattern : response.listPattern}
                    );
 	    }).catch((err) => {

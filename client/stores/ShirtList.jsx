@@ -1,7 +1,9 @@
 import * as actType from '../constant/ActionTypes';
 var defaultState = {
     message: '',
-    listShirt: []
+    listShirt: [],
+    currentSelect: -1,
+    currentColor: ''
 }
 
 export default function PatternList(state = defaultState, action) {
@@ -17,6 +19,8 @@ export default function PatternList(state = defaultState, action) {
 
     case actType.getListShirtSuccess:
         newState.listShirt = action.listShirt;
+        newState.currentSelect = 0;
+        newState.currentColor = action.listShirt[0].colorCode[0];
         newState.message = action.message;
         return newState;
     case actType.getListShirtFail:
@@ -36,6 +40,14 @@ export default function PatternList(state = defaultState, action) {
          newState.message = action.message;
         return newState;
 
+    case actType.selectCurrentShirt:
+         newState.currentSelect = action.index; 
+        newState.currentColor = newState.listShirt[action.index].colorCode[0];
+        return newState;
+     case actType.selectCurrentColor: 
+        newState.currentColor = action.colorCode; 
+        return newState; 
+   
     default:
       return state;
   }

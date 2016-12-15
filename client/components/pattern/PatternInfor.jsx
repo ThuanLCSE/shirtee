@@ -2,8 +2,7 @@ import React from 'react';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import Checkbox from 'material-ui/Checkbox';
-import Slider from 'material-ui/Slider';
+import Checkbox from 'material-ui/Checkbox'; 
 import Upload from 'rc-upload';
 import {uploadFileUrl} from './../../constant/ApiUri';
 
@@ -54,9 +53,12 @@ class PatternInfor extends React.Component {
       }
     
     render() {
+      var today = new Date();
+      var expireDay = today.setDate(today.getDate() + this.props.expireTime);
         return (
             <Paper style={{padding: 20}}>
                 {this.fileUploadRedux()}
+                Logo will expire in {(new Date(expireDay)).toLocaleDateString()} 
                 <TextField  floatingLabelText="Name"
                             hintText="Name"
                             value={this.props.detail.name}
@@ -68,19 +70,7 @@ class PatternInfor extends React.Component {
                             hintText="Price"
                             fullWidth={true}
                             onChange={(e) => this.props.handleChange('price', e)}/>
-                <TextField  type="number"
-                            floatingLabelText="Expiration date"
-                            min={0}
-                            max={10}
-                            value={this.props.stateList.expirationDate}
-                            fullWidth={true}
-                            onChange={(e, value) => this.props.handleExpiration(e, value)}/><br/>
-                <Slider
-                  min={0}
-                  max={10}
-                  step={1}
-                  value={this.props.stateList.expirationDate}
-                  onChange={(e, value) => this.props.handleExpiration(e, value)}  />
+                
                 {this.props.categoryList.listCategory.map( (row, index) => (
                   <Checkbox key={index}
                             label={<b>{row.name}</b>}

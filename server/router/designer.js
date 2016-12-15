@@ -8,5 +8,8 @@ module.exports = function(app){
 	.post(designerCtrller.getById,designerCtrller.getLevelById, patternCtrller.create); 
 	app.route('/api/designer/pattern/listAll/:designerId')
 	.get(designerCtrller.getById, patternCtrller.getAllOfDesigner); 
+	app.route('/api/designer/level/:designerId')
+	.get(designerCtrller.getById,designerCtrller.getLevelById, designerCtrller.returnLevel); 
+	
 
 }
