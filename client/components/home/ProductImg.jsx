@@ -31,7 +31,7 @@ class ProductImg extends React.Component{
 
         <div className="img-square">
               <img className="img-pattern img-responsive" src={this.props.url} />
-              <img className="img-shirt img-responsive" src="https://image.freepik.com/free-vector/amazing-full-color-background-with-wavy-shapes_1126-105.jpg" />
+              <img className="img-shirt img-responsive" src={this.props.previewUrl} />
         </div>
 
 

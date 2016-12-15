@@ -79,6 +79,7 @@ class  GridListFrame extends React.Component{
                   titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
                 >
                 <ProductImg url={row.url}
+                          previewUrl = {row.recommendPreviewUrl}
                           openModal = {this.props.openModal}
                           shirtData = {this.props.shirtData}
                           listShirt = {this.props.listShirt}

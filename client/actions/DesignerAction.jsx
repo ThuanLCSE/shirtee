@@ -16,7 +16,7 @@ export function UploadPattern(patternData) {
      	name: patternData.detail.name,
  	    recommendShirtUrl: patternData.recommendShirtUrl,
         recommendShirtId: patternData.recommendShirtId,
-        recommendPreviewUrl: patternData.recommend.previewUrl,
+        recommendPreviewUrl: patternData.previewUrl,
         colorCode: patternData.colorCode
     };
     var validateMessage = '';
