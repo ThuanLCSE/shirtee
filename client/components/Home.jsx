@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import GridListFrame from './home/GridListFrame';
 import GridListFour from './home/GridListFour';
 import Navigator from './navigator/Navigator';
+
+//import CarouselLogo from './CarouselLogo';
+import CarouselModal from './home/CarouselModal';
 import Information from './user/Information';
 import UserAccount from './user/UserAccount';
 import NewPattern from './pattern/NewPattern';
@@ -22,6 +25,8 @@ const divStyle = {
   color: 'blue'
 };
 
+
+
 class Home extends React.Component{
     constructor(props) {
         super(props);
@@ -30,7 +35,7 @@ class Home extends React.Component{
         };
         this.changeStateView = this.changeStateView.bind(this);
     }
-    
+
     infoView() {
         return (
            <Information userData = {this.props.UserTodo}
@@ -39,7 +44,7 @@ class Home extends React.Component{
                         becomeNewDesigner={this.props.UserAct.BecomeNewDesigner}/>
         );
     }
-    
+
     accUpdateView() {
         return (
            <UserAccount userData = {this.props.UserTodo}
@@ -49,7 +54,7 @@ class Home extends React.Component{
                         becomeNewDesigner={this.props.UserAct.BecomeNewDesigner}/>
         );
     }
-    
+
     CreatePattern() {
         return (
            <NewPattern categoryList={this.props.CategoryList}
@@ -61,20 +66,22 @@ class Home extends React.Component{
                     uploadPattern={this.props.DesignerAct.UploadPattern}/>
         );
     }
-    
+
     changeStateView(page){
+        console.log('view thay doi');
         this.setState({
             view : page
         });
     }
-    
+
     homeView(){
         return (
             <z>
               <a href="admins">Go to Admin </a>
                 <div className="container">
                   <GridListFrame patternList={this.props.PatternList}
-                                 getPattern={this.props.PatternAct.GetList}/>    
+                              
+                                 getPattern={this.props.PatternAct.GetList}/>
                   <h3 style={divStyle}>Best Sell </h3>
                   <a href="#">View All</a>
                   <GridListFour />
@@ -84,16 +91,18 @@ class Home extends React.Component{
                   <h3 style={divStyle}>Promotion </h3>
                   <a href='#'>View All</a>
                   <GridListFrame patternList={this.props.PatternList}
-                                 getPattern={this.props.PatternAct.GetListSale}/> 
+                                
+                                 getPattern={this.props.PatternAct.GetListSale}/>
                 </div>
             </z>
         );
     }
-    
+
   render(){
     return(
       <div>
-        <Navigator changeView = {this.changeStateView} 
+        
+        <Navigator changeView = {this.changeStateView}
                    signInFunc={this.props.UserAct.SignIn}
                     userData={this.props.UserTodo}
                     signUpFunc={ this.props.UserAct.SignUp }
@@ -106,7 +115,7 @@ class Home extends React.Component{
            {this.state.view === 'info'?this.infoView():null}
            {this.state.view === 'accUpdate'?this.accUpdateView():null}
            {this.state.view === 'NewPattern'?this.CreatePattern():null}
-          
+
       </div>
     );
   }

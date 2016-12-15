@@ -1,19 +1,19 @@
 export const UserSignIn = '/api/user/signIn'
 export const UserSignUp = '/api/user/signUp'
-export const DesignerRegister = '/api/designer/register' 
+export const DesignerRegister = '/api/designer/register'
 // send data = {
-// 	   displayName : 'require', 
+// 	   displayName : 'require',
 //     bankAccount: {
 //     	name: String,
-//         number: String    
+//         number: String
 //     }
 // }
-export const uploadFileUrl = '/api/upload' 
+export const uploadFileUrl = '/api/upload'
 export const uploadPattern = '/api/designer/pattern/create/'//:designerId'
-// send data = { 
-//     	url: 'require', 
+// send data = {
+//     	url: 'require',
 // 	    price: 'require',
-//     	category: 'array of categoryId ex: [id1,id2]', 
+//     	category: 'array of categoryId ex: [id1,id2]',
 //     	position : {x: numeber, y: number},
 // size: number,
 // rotate: number,
@@ -30,9 +30,9 @@ export const removeShirt = '/api/shirt/remove'
 // send data = {
 // 	shirtId: 'id'
 // }
-export const uploadShirt = '/api/shirt/create' 
-// send data = { 
-//     	gender : 'require', 
+export const uploadShirt = '/api/shirt/create'
+// send data = {
+//     	gender : 'require',
 //    		url: 'picture url',
 //     	detail: 'require',
 // 	    layoutUrl: 'layout Url',
@@ -46,7 +46,7 @@ export const checkUserSignIn = 'api/user/checkSignin'
 //http method: get
 // success: {
 // 			user: object,
-// 	  		designer: 'neu nhu la designer', 
+// 	  		designer: 'neu nhu la designer',
 // 	  		message: "...",
 // 	  	}
 export const userSignOut = '/api/user/signOut'
@@ -55,11 +55,11 @@ export const adminSignOut = '/api/admin/signOut'
 //http method: get
 export const adminSignIn = '/api/admin/signIn'
 // send data = {
-// 	   email : 'require', 
+// 	   email : 'require',
 //     password: 'require'
 // }
 // success :{
-// 			admin: object, 
+// 			admin: object,
 // 	  		message: "...",
 // 	  	}
 export const adminApprovePattern = '/api/pattern/approve/'//:patternId'
@@ -71,10 +71,10 @@ export const adminApprovePattern = '/api/pattern/approve/'//:patternId'
 export const adminDeletePattern = '/api/pattern/remove/'//:patternId'
 // http method get
 // success :{
-// 	message: 'remove pattern success' 
+// 	message: 'remove pattern success'
 // }
 export const getListPattern = '/api/user/pattern/listAll'
-// http method get 
+// http method get
 export const getListPatternBestSell = '/api/user/pattern/listAll/bestSell'
 // http method get
 // return {
@@ -92,7 +92,7 @@ export const getListPatternSale = '/api/user/pattern/listAll/getAllSale'
 // return {
 // 	listPattern : [],
 // 	saleProgramme: sale,
-// 	message : 'get all sale success',	
+// 	message : 'get all sale success',
 // }
 
 export const adminGetListPattern = '/api/admin/pattern/listAll'
@@ -102,7 +102,7 @@ export const userUpdateInfo = '/api/user/update/'//userId
 // 	   fullname
 	// password
 	// gender
-	// birthday   
+	// birthday
 // }
 // success :{
 // 			message: 'update user success',
@@ -110,8 +110,8 @@ export const userUpdateInfo = '/api/user/update/'//userId
 // 	  	}
 export const adminCreateSale = '/api/sale/create/'
 //http method: post
-// { 
-//     	percentage : number (<100), 
+// {
+//     	percentage : number (<100),
 //    		detail: string,
 //     	patternSale: array of pattern Id,
 // 	    endDay: date,
@@ -124,4 +124,3 @@ export const adminRemoveSale = '/api/sale/remove/'
 // {
 // 	saleId : id
 // }
-

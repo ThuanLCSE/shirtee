@@ -1,5 +1,7 @@
-import React from 'react'; 
+
+import React from 'react';
 import UploadImg from './UploadImg';
+
 import Checkbox from 'material-ui/Checkbox'; 
 
 
@@ -18,12 +20,13 @@ class UpLoadShirt extends React.Component{
          colorCode: []
        },
        listColorDefault : [
-          {key: 1, value: '#ffffff', name: 'red'},
-          {key: 19, value: '#616161', name: 'vang'},
-          {key: 16, value: '#f0f0f0', name: 'hogn'},
-          {key: 15, value: '#5b5b5b', name: 'xanh cu chuoi'},
-          {key: 13, value: '#aeba5e', name: 'tim moc meo'},
-          {key: 12, value: '#222222', name: 'nau ruc ro'}
+        
+          {key: 1, value: '#ffffff', name: '#ffffff'},
+          {key: 19, value: '#0277BD', name: '#0277BD'},
+          {key: 16, value: '#EC407A', name: '#EC407A'},
+          {key: 15, value: '#9C27B0', name: '#9C27B0'},
+          {key: 13, value: '#212121', name: '#212121'},
+          {key: 12, value: '#FF5722', name: '#FF5722'}
        ]
     };
     this.getValueUploadShirt = this.getValueUploadShirt.bind(this);
@@ -34,10 +37,12 @@ class UpLoadShirt extends React.Component{
 
     this.handleCheckColorBox = this.handleCheckColorBox.bind(this);
     this.colorItem = this.colorItem.bind(this);
-    this.colorCheckList = this.colorCheckList.bind(this); 
+   
+    this.colorCheckList = this.colorCheckList.bind(this);
   }
   getValueUploadShirt() {
       var shirtInfo = this.state.info;
+
       this.props.uploadShirt(shirtInfo); 
 
   }
@@ -46,7 +51,8 @@ class UpLoadShirt extends React.Component{
       var newInfo = this.state.info;
       newInfo[att] = e.target.value;
       this.setState({info: newInfo});
-  } 
+   
+  }
   onGenderChanged(e) {
     var newInfo = this.state.info;
     newInfo.gender = e.currentTarget.value;
@@ -68,9 +74,11 @@ class UpLoadShirt extends React.Component{
     this.setState({
       info: newInfo
     });
-  } 
+  
+  }
   handleCheckColorBox(e,isChecked, code){
-    var newInfo = this.state.info; 
+     
+    var newInfo = this.state.info;
     if (isChecked && (newInfo.colorCode.indexOf(code) === -1)){
       newInfo.colorCode.push(code);
     } else if (!isChecked && (newInfo.colorCode.indexOf(code) > -1)){
@@ -82,14 +90,21 @@ class UpLoadShirt extends React.Component{
 
   }
   colorItem(color){
-    let background = {
-      backgroundColor: color.value
+   
+
+    let checkboxStyle = {
+      backgroundColor: color.value,
+      width: '40px',
+      display: 'inline-block',
+      marginRight: '10px'
     }
 
-     return ( 
+   
+     return (
                   <Checkbox key = {color.key}
-                            label={<b style={background}>{color.name}</b>}
-                            onCheck={(e,isChecked, code) => this.handleCheckColorBox(e, isChecked,color.value)}/> 
+                           
+                            style = {checkboxStyle}
+                            onCheck={(e,isChecked, code) => this.handleCheckColorBox(e, isChecked,color.value)}/>
       )
   }
   colorCheckList(){
@@ -110,6 +125,7 @@ class UpLoadShirt extends React.Component{
             {this.state.info.url?<img style= {shirtPreview} src={this.state.info.url}/>:null}
             <UploadImg buttonName="shirt layout url" getUrl = {this.onLayoutUrlChange}/>
             {this.state.info.layoutUrl?<img style= {shirtPreview} src={this.state.info.layoutUrl}/>:null}
+           
  
               Detail: <br/>
               <textarea rows="10" cols="30"  value ={this.state.info.detail}
@@ -136,6 +152,7 @@ class UpLoadShirt extends React.Component{
 
               <button onClick={this.getValueUploadShirt}>
               Create
+
               </button> 
               <p>{this.props.uploadMessage}</p>
           </div>
@@ -143,5 +160,6 @@ class UpLoadShirt extends React.Component{
     }
 };
  
+
 
 export default UpLoadShirt;

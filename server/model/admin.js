@@ -22,6 +22,7 @@ var adminSchema = new Schema({
 
 var Admin = mongoose.model('Admin', adminSchema);
 
+
 // var admin = new Admin({
 //  email: 'abc@123',
 //  password: '123'

@@ -5,7 +5,7 @@ import ShirtItem from './ShirtItem.jsx';
 
 
 class ListShirt extends React.Component{
-    componentWillMount(){ 
+    componentWillMount(){
       this.props.getListShirt();
     }
     render(){
@@ -21,7 +21,6 @@ class ListShirt extends React.Component{
                <th>price</th>
                <th>colorCode</th>
                <th>Action</th>
-               
              </tr>
            </thead>
            <tbody>
@@ -30,10 +29,10 @@ class ListShirt extends React.Component{
                  removeShirt = {this.props.removeShirt}
                   key = {shirt._id}
                   shirt = {shirt}
+                  shirtData={this.props.shirtData}
                  />
               )
             }
-
            </tbody>
          </table>
          <div>{this.props.shirtData.message}</div>

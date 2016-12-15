@@ -1,12 +1,12 @@
 import * as apiUser from './../constant/ApiUri';
 import restApi from "./../service/restAPI.js";
-import * as actType from '../constant/ActionTypes'; 
+import * as actType from '../constant/ActionTypes';
 
 // get list in shirt action
 export function GetList() {
     return function (dispatch) {
 	  	return restApi.get(apiUser.getListShirt).then((response) => {
-	     
+
 	       dispatch({ type: actType.getListShirtSuccess,
                      listShirt : response.listShirt,
                      message: 'successful get list shirt'
@@ -32,7 +32,7 @@ export function UpLoadShirt(uploadInfo) {
     };
 
       return function (dispatch) {
-        return restApi.post(apiUser.uploadShirt, info).then((response) => { 
+        return restApi.post(apiUser.uploadShirt, info).then((response) => {
            dispatch({ type: actType.adminUpShirtSuccess,
                       message: 'succuess upload',
                        shirt : response.shirt}
@@ -50,21 +50,21 @@ export function removeShirt(shirt) {
   var data = {
        shirtId: shirt._id
       };
-    return function (dispatch) { 
+    return function (dispatch) {
        return restApi.post(apiUser.removeShirt,data).then((response) => {
- 
-               dispatch({ 
-                          type: actType.removeShirtSuccess, 
+
+               dispatch({
+                          type: actType.removeShirtSuccess,
                           shirtId: shirt._id,
-                           message: 'successful remove shirt'
+                          message: 'successful remove shirt'
                          }
                          );
             }).catch((err) => {
               console.log(err);
-                dispatch({ 
+                dispatch({
                           type: actType.removeShirtFail,
                           message: err.responseText
                         });
-          });  
+          });
     };
 }

@@ -1,5 +1,5 @@
-import * as actType from '../constant/ActionTypes'; 
-var defaultState = { 
+import * as actType from '../constant/ActionTypes';
+var defaultState = {
     message: '',
     listShirt: []
 }
@@ -8,12 +8,12 @@ export default function PatternList(state = defaultState, action) {
   var newState = Object.assign({}, state);
   switch (action.type) {
 
-    case actType.adminUpShirtSuccess:  
+    case actType.adminUpShirtSuccess:
         newState.message = action.message;
-        return newState; 
+        return newState;
     case actType.adminUpShirtFail:
       newState.message = action.message;
-       return  newState; 
+       return  newState;
 
     case actType.getListShirtSuccess:
         newState.listShirt = action.listShirt;
@@ -25,6 +25,7 @@ export default function PatternList(state = defaultState, action) {
 
     case actType.removeShirtSuccess:
         newState.listShirt = [];
+        // alert("Remove " + shirt._id + " successful!!! ");
         for  (var shirt in state.listShirt){
           if (shirt._id !== action.shirtId)
             newState.listShirt.push(shirt);
