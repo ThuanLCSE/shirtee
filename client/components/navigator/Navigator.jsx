@@ -20,9 +20,7 @@ const flexContainer = {
       padding: 0,
     };
 const stylePaper = {
-    overflow: 'auto',
-    paddingBottom: 10,
-    marginBottom: 10
+    overflow: 'auto'
 }
 
 class Profile extends React.Component {
@@ -127,13 +125,13 @@ class Navigator extends React.Component {
 //{this.props.categoryData.list.map()...}
     render() {
         return (
-            <z>
+            <z id="Navbar">
             <div className="col-sm-2" style={{padding:0, width:'12%'}}>
                 <div id="logo-inside" onClick={() => this.props.changeView('home')}>
                     <img src="static/AoDs.png"/>
                 </div>
             </div>
-            <div className="col-sm-10" style={{padding:0, width:'88%'}}>
+            <div id="NavbarRight" className="col-sm-10" style={{padding:0, width:'88%'}}>
                 <Paper style={stylePaper} zDepth={1}>
                     <div className="col-sm-9">
                         <List style={flexContainer}>

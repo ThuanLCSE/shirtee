@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import Homepage from './home/Homepage';
 import PatternView from './home/PatternView';
 import Navigator from './navigator/Navigator';
+
 import Information from './user/Information';
 import UserAccount from './user/UserAccount';
 import NewPattern from './pattern/NewPattern';
@@ -28,6 +29,10 @@ class Home extends React.Component{
         this.changeStateView = this.changeStateView.bind(this);
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        document.getElementById('contentInside').style.paddingTop = document.getElementById('NavbarRight').offsetHeight + 'px';
+    }
+    
     bestSell() {
         return (
             <PatternView patternList={this.props.PatternList.listPatternBestSell}
@@ -108,8 +113,7 @@ class Home extends React.Component{
 //                             getPattern={this.props.PatternAct.GetListSell}/>
   render(){
     return(
-      <div>
-        
+      <z>
         <Navigator changeView = {this.changeStateView}
                    signInFunc={this.props.UserAct.SignIn}
                     userData={this.props.UserTodo}
@@ -119,6 +123,8 @@ class Home extends React.Component{
                     signOutFunc={this.props.UserAct.UserSignOut}
                     categoryList={this.props.CategoryList}
                     getCategory={this.props.CategoryAct.GetList}/>
+
+        <div id="contentInside">
         {this.state.view === 'home'?this.homeView():null}
         {this.state.view === 'info'?this.infoView():null}
         {this.state.view === 'accUpdate'?this.accUpdateView():null}
@@ -126,7 +132,8 @@ class Home extends React.Component{
         {this.state.view === 'bestSell'?this.bestSell():null}
         {this.state.view === 'newest'?this.newest():null}
         {this.state.view === 'promotion'?this.promotion():null}
-      </div>
+        </div>
+      </z>
     );
   }
 }
