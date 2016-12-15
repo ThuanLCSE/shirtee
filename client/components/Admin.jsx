@@ -33,6 +33,7 @@ class Admin extends React.Component{
       this.adminHome = this.adminHome.bind(this);
       this.signInAdmin = this.signInAdmin.bind(this);
       this.uploadShirt = this.uploadShirt.bind(this);
+      this.createSale = this.createSale.bind(this);
 
   }
 

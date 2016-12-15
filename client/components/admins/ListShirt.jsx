@@ -26,12 +26,10 @@ class ListShirt extends React.Component{
            <tbody>
             {this.props.shirtData.listShirt.map(shirt =>
                  <ShirtItem
-
-                  removeShirt = {this.props.removeShirt}
+                 removeShirt = {this.props.removeShirt}
                   key = {shirt._id}
                   shirt = {shirt}
                   shirtData={this.props.shirtData}
-
                  />
               )
             }

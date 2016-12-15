@@ -12,6 +12,10 @@ export const getLevelSuccess = 'get level successful'
 export const getLevelFail = 'get level of designer fail' 
 export const removeMessagePattern = 'remove message error in shirt store' 
 export const validateBeforCreateFaile = 'validate failed' 
+export const removeSaleSuccess = 'remove sale succefful' 
+export const removeSaleFail = 'remove sale fail cmnr' 
+
+
 
 
 

@@ -1,6 +1,6 @@
 var defaultState = {
     sale: {},
-    listSale: {}
+    listSale: []
 }
 
 export default function SaleList(state = defaultState, action) {

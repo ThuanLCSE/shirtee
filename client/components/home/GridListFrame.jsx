@@ -1,15 +1,26 @@
 import React from 'react';
+
 import {GridList, GridTile} from 'material-ui/GridList';
+import {List, ListItem} from 'material-ui/List';
+import Popover from 'material-ui/Popover';
+
 import IconButton from 'material-ui/IconButton';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
+
 import ProductImg from './ProductImg.jsx';
-//import {zIndex} from 'material-ui/lib/styles/zIndex';
+
+const flexContainer = {
+      display: 'flex',
+      flexDirection: 'row',
+      padding: 0,
+    };
 
 const styles = {
   root: {
     display: 'flex',
     flexWrap: 'nowrap',
     justifyContent: 'space-around',
+    width: '100%'
   },
   gridList: {
     display: 'flex',
@@ -30,18 +41,19 @@ var patterns = [];
 class  GridListFrame extends React.Component{
   constructor(props){
     super(props);
+    this.state = {
+      openVote: false
+    };
+    this.handleClickVote = this.handleClickVote.bind(this);
+    this.handleRequestClose = this.handleRequestClose.bind(this);
   };
-    
-  componentWillMount() {
-      this.props.getPattern();
-  }
 
   handleRequestClose() {
     this.setState({
       openVote: false
     });
   };
-
+  
   handleClickVote(event) {
     // This prevents ghost click.
     event.preventDefault();
@@ -50,13 +62,14 @@ class  GridListFrame extends React.Component{
       anchorEl: event.currentTarget,
     });
   };
-
-
+    
   render(){
-    patterns = this.props.patternList.listPattern.slice(0, 4);
+    var start = this.props.index * 4;
+    var end = start + 4;
+    patterns = this.props.patternList.slice(start, end);
     return (
       <div style={styles.root}>
-        <GridList style={styles.gridList} cols={4} padding={10} cellHeight='auto'>
+        <GridList style={styles.gridList} cols={4} padding={30} cellHeight='auto'>
           {patterns.map( (row, index) => (
             <z key={index}>
                 <GridTile
@@ -65,11 +78,9 @@ class  GridListFrame extends React.Component{
                   titleStyle={styles.titleStyle}
                   titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
                 >
-                <ProductImg
-                    url={row.url}
-                    shirtData = {this.props.shirtData}
-                    listShirt = {this.props.listShirt}
-                />
+                <ProductImg url={row.url}
+                          shirtData = {this.props.shirtData}
+                          listShirt = {this.props.listShirt}/>
                 </GridTile>
                 <Popover
                   open={this.state.openVote}

@@ -1,5 +1,6 @@
 import * as api from './../constant/ApiUri';
 import restApi from "./../service/restAPI.js";
+import * as actType from '../constant/ActionTypes';
 
 export function CreateSale(sale) {
     var data = {
@@ -40,4 +41,21 @@ export function GetSale() {
                     });
 		});
 	};
+}
+
+export function RemoveSale() {
+    return function (dispatch) {
+        return restApi.get(api.adminRemoveSale).then((response) => {
+            console.log(response);
+           dispatch({ type: actType.removeSaleSuccess,
+                     listSale : response.listSale,
+                    message: response.message}
+                   );
+        }).catch((err) => {
+            console.log(err);
+            dispatch({ type: actType.removeSaleFail,
+                    text: err.responseText
+                    });
+        });
+    };
 }

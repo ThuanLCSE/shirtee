@@ -36,6 +36,7 @@ export function ApprovePattern(e, id) {
 	};
 }
 
+
 export function DeletePattern(e, id) {
     return function (dispatch) {
         var adminDeletePattern = apiUser.adminDeletePattern + id;
@@ -81,6 +82,56 @@ export function GetListSale() {
 	        dispatch({ type: 'GET_LIST_PATTERN_FAILED',
                     text: err.responseText
                     });
+		});
+	};
+}
+
+export function GetListBestSell() {
+    return function (dispatch) {
+	  	return restApi.get(apiUser.getListPatternBestSell).then((response) => {
+	    	console.log(response);
+	       dispatch({ type: 'GET_LIST_PATTERN_BESTSELL_SUCCESS',
+                     listPattern : response.listPattern}
+                   );
+	    }).catch((err) => {
+	    	console.log(err);
+	        dispatch({ type: 'GET_LIST_PATTERN_FAILED',
+                    text: err.responseText
+                    });
+		});
+	};
+}
+
+export function GetListNewest() {
+    return function (dispatch) {
+	  	return restApi.get(apiUser.getListPatternNewest).then((response) => {
+	    	console.log(response);
+	       dispatch({ type: 'GET_LIST_PATTERN_NEWEST_SUCCESS',
+                     listPattern : response.listPattern}
+                   );
+	    }).catch((err) => {
+	    	console.log(err);
+	        dispatch({ type: 'GET_LIST_PATTERN_FAILED',
+                    text: err.responseText
+                    });
+		});
+	};
+}
+
+export function VotePattern(vote, id) {
+    var data = {
+        vote: vote
+    };
+    return function (dispatch) {
+        var userVotePattern = apiUser.userVotePattern + id;
+	  	return restApi.post(userVotePattern, data).then((response) => {
+	    	console.log(response);
+	       dispatch({ type: 'VOTE_SUCCESSFULLY',
+                    pattern : response.pattern});
+	    }).catch((err) => {
+	    	console.log(err);
+	        dispatch({ type: 'VOTE_FAILED',
+                     text: err.responseText});
 		});
 	};
 }
