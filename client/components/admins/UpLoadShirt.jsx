@@ -26,7 +26,17 @@ class UpLoadShirt extends React.Component{
           {key: 16, value: '#EC407A', name: '#EC407A'},
           {key: 15, value: '#9C27B0', name: '#9C27B0'},
           {key: 13, value: '#212121', name: '#212121'},
-          {key: 12, value: '#FF5722', name: '#FF5722'}
+          {key: 232, value: '#FF5722', name: '#FF5722'},
+          {key: 56, value: '#2ecc71', name: '#2ecc71'},
+          {key: 12, value: '#e67e22', name: '#e67e22'},
+          {key: 23, value: '#e74c3c', name: '#e74c3c'},
+          {key: 34, value: '#c0392b', name: '#c0392b'},
+          {key: 45, value: '#E08283', name: '#E08283'},
+          {key: 343, value: '#9B59B6', name: '#9B59B6'},
+          {key: 167, value: '#4183D7', name: '#4183D7'},
+          {key: 78, value: '#87D37C', name: '#87D37C'},
+          {key: 89, value: '#36D7B7', name: '#36D7B7'},
+          {key: 90, value: '#26C281', name: '#26C281'}
        ]
     };
     this.getValueUploadShirt = this.getValueUploadShirt.bind(this);
@@ -127,24 +137,21 @@ class UpLoadShirt extends React.Component{
             {this.state.info.layoutUrl?<img style= {shirtPreview} src={this.state.info.layoutUrl}/>:null}
            
  
-              Detail: <br/>
-              <textarea rows="10" cols="30"  value ={this.state.info.detail}
-              onChange={(e) => this.handleChange('detail', e)}
-              >
-              </textarea>
+              Detail: 
+              <input type = "text"  name = "detail" value ={this.state.info.detail}
+              onChange={(e) => this.handleChange('detail', e)}  />
+            
               <br/>
               Price:
               <input type = "text" name = "price" value ={this.state.info.price}
-              onChange={(e) => this.handleChange('price', e)}
-              />
+              onChange={(e) => this.handleChange('price', e)} />
               <br/>
               Color: {this.colorCheckList()}
 
               <input type="radio" name="sex" value='Male'
               checked={this.state.info.gender === 'Male'}
               onChange={this.onGenderChanged} /> Male
-              <br/>
-
+            
               <input type="radio" name="sex" value='Female'
               checked={this.state.info.gender === 'Female'}
               onChange={this.onGenderChanged} /> Female

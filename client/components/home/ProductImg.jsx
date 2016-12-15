@@ -10,7 +10,10 @@ const customContentStyle = {
   maxWidth: 'none',
 };
 
+
 class ProductImg extends React.Component{
+
+
   constructor(props){
     super(props);
     this.state = {
@@ -20,6 +23,9 @@ class ProductImg extends React.Component{
     this.handleClose = this.handleClose.bind(this);
   }
 
+
+
+
   handleOpen() {
     this.setState({open: true});
   }
@@ -27,7 +33,10 @@ class ProductImg extends React.Component{
     this.setState({open: false});
   }
 
+
+
   render(){
+
       return (
         <div className="imageoutside" onClick={this.handleOpen}>
           <Dialog
@@ -36,13 +45,16 @@ class ProductImg extends React.Component{
             onRequestClose={this.handleClose}
             contentStyle={customContentStyle}
           >
-              <CarouselLogo />
-          </Dialog>
+          <CarouselLogo />
+        </Dialog>
             <div className="img-square">
               <img className="img-pattern img-responsive" src={this.props.url} />
               <img className="img-shirt img-responsive" src="https://image.freepik.com/free-vector/amazing-full-color-background-with-wavy-shapes_1126-105.jpg" />
             </div>
+
         </div>
+
+
       );
   }
 };

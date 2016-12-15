@@ -6,7 +6,7 @@ var defaultState = {
     currentColor: ''
 }
 
-export default function PatternList(state = defaultState, action) {
+export default function ShirtList(state = defaultState, action) {
   var newState = Object.assign({}, state);
   switch (action.type) {
 
@@ -28,12 +28,12 @@ export default function PatternList(state = defaultState, action) {
         return newState;
 
     case actType.removeShirtSuccess:
-        newState.listShirt = [];
-        // alert("Remove " + shirt._id + " successful!!! ");
-        for  (var shirt in state.listShirt){
-          if (shirt._id !== action.shirtId)
-            newState.listShirt.push(shirt);
+        newState.listShirt = []; 
+        for  (var i in state.listShirt){
+          if (state.listShirt[i]._id !== action.shirtId)
+            newState.listShirt.push(state.listShirt[i]);
         }
+        console.log(newState.listShirt.length+' '+state.listShirt.length);
         newState.message = action.message;
         return newState;
     case actType.removeShirtFail:

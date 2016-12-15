@@ -48,6 +48,7 @@ class Admin extends React.Component{
   listPattern(){
     return(
       <ListPattern
+
               getListPattern = {this.props.PatternAct.GetListByAdmin}
               AdminStore={this.props.AdminTodo}
               PatternList={this.props.PatternList}

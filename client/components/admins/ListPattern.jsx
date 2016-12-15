@@ -34,8 +34,7 @@ class ViewAdminPattern extends React.Component{
                pattern = {pattern}
                funcOnControl={this.props.approvePattern}
                funcOnControl2={this.props.deletePattern}
-               control={"buttonApprove"}
-               />
+               control={"buttonApprove"}/>
             )
           }
 

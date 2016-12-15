@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-import Homepage from './home/Homepage';
-import PatternView from './home/PatternView';
+import GridListFrame from './home/GridListFrame';
+import GridListFour from './home/GridListFour';
 import Navigator from './navigator/Navigator';
+
+//import CarouselLogo from './CarouselLogo';
+import CarouselModal from './home/CarouselModal';
 
 import Information from './user/Information';
 import UserAccount from './user/UserAccount';
@@ -19,6 +21,12 @@ import * as CategoryAct from './../actions/CategoryAction.jsx';
 import * as ShirtAct from './../actions/ShirtAction.jsx';
 import * as PatternAct from './../actions/PatternAction.jsx';
 import * as DesignerAct from './../actions/DesignerAction.jsx';
+
+const divStyle = {
+  color: 'blue'
+};
+
+
 
 class Home extends React.Component{
     constructor(props) {
@@ -93,7 +101,7 @@ class Home extends React.Component{
     }
 
     changeStateView(page){
-        console.log('view changed');
+        console.log('view thay doi');
         this.setState({
             view : page
         });
@@ -101,16 +109,28 @@ class Home extends React.Component{
 
     homeView(){
         return (
-            <Homepage   patternList={this.props.PatternList}
-                        getPattern={this.props.PatternAct}
-                        votePattern={this.props.PatternAct.VotePattern}/>
+            <z>
+              <a href="admins">Go to Admin </a>
+                <div className="container">
+                  <GridListFrame patternList={this.props.PatternList}
+                              
+                                 getPattern={this.props.PatternAct.GetList}/>
+                  <h3 style={divStyle}>Best Sell </h3>
+                  <a href="#">View All</a>
+                  <GridListFour />
+                  <h3 style={divStyle}>Newest </h3>
+                  <a href='#'>View All</a>
+                  <GridListFour />
+                  <h3 style={divStyle}>Promotion </h3>
+                  <a href='#'>View All</a>
+                  <GridListFrame patternList={this.props.PatternList}
+                                
+                                 getPattern={this.props.PatternAct.GetListSale}/>
+                </div>
+            </z>
         );
     }
-//<Divider/>
-//              <h4 style={divStyle}>Promotion </h4>
-//              <a style={divStyle} href='#'>View All</a>
-//              <GridListFrame patternList={this.props.PatternList}
-//                             getPattern={this.props.PatternAct.GetListSell}/>
+
   render(){
     return(
       <z>

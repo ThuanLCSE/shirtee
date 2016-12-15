@@ -29,9 +29,9 @@ class PatternItem extends React.Component{
           <td>{this.props.pattern.voteQuantity}</td>
           <td>{this.props.pattern.name}</td>
           <td>{this.props.pattern.available ? "true" : "false"}</td>
-              <td>{this.props.control === "buttonApprove" ? <z><button onClick={this.controlFunc}>Approve</button>
-                                                               <button onClick={this.controlFunc2}>Delete</button></z> :
-              this.props.control === "checkboxSale" ?
+              <td>{this.props.control === "buttonApprove" ? <z><button onClick={this.controlFunc2}>Delete</button></z> :null}
+                {this.props.pattern.status !== "approve"?<button onClick={this.controlFunc}>Approve</button>:null}
+              {this.props.control === "checkboxSale" ?
                   <z><input onChange={this.controlFunc} type="checkbox"/>Choose this</z> : null}</td>
         </tr>
       );
