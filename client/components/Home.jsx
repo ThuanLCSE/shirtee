@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import GridListFrame from './home/GridListFrame';
-import GridListFour from './home/GridListFour';
+
+
+import Homepage from './home/Homepage';
+import PatternView from './home/PatternView';
 import Navigator from './navigator/Navigator';
 
-//import CarouselLogo from './CarouselLogo';
-import CarouselModal from './home/CarouselModal';
 
 import Information from './user/Information';
 import UserAccount from './user/UserAccount';
@@ -22,11 +22,6 @@ import * as ShirtAct from './../actions/ShirtAction.jsx';
 import * as PatternAct from './../actions/PatternAction.jsx';
 import * as DesignerAct from './../actions/DesignerAction.jsx';
 
-const divStyle = {
-  color: 'blue'
-};
-
-
 
 class Home extends React.Component{
     constructor(props) {
@@ -40,7 +35,7 @@ class Home extends React.Component{
     componentDidUpdate(prevProps, prevState) {
         document.getElementById('contentInside').style.paddingTop = document.getElementById('NavbarRight').offsetHeight + 'px';
     }
-    
+
     bestSell() {
         return (
             <PatternView patternList={this.props.PatternList.listPatternBestSell}
@@ -48,7 +43,7 @@ class Home extends React.Component{
                          votePattern={this.props.PatternAct.VotePattern}/>
         );
     }
-    
+
     newest() {
         return (
             <PatternView patternList={this.props.PatternList.listPatternNewest}
@@ -56,7 +51,7 @@ class Home extends React.Component{
                          votePattern={this.props.PatternAct.VotePattern}/>
         );
     }
-    
+
     promotion() {
         return (
             <PatternView patternList={this.props.PatternList.listPatternSale}
@@ -64,7 +59,7 @@ class Home extends React.Component{
                          votePattern={this.props.PatternAct.VotePattern}/>
         );
     }
-    
+
     infoView() {
         return (
            <Information userData = {this.props.UserTodo}
@@ -88,7 +83,7 @@ class Home extends React.Component{
         return (
            <NewPattern categoryList={this.props.CategoryList}
                       getCategory={this.props.CategoryAct.GetList}
-                      userData={this.props.UserTodo} 
+                      userData={this.props.UserTodo}
                       getListShirt ={this.props.ShirtAct.GetList}
                       changeShirt = {this.props.ShirtAct.selectCurrentShirt}
                       changeColor = {this.props.ShirtAct.selectCurrentColor}
@@ -101,7 +96,6 @@ class Home extends React.Component{
     }
 
     changeStateView(page){
-        console.log('view thay doi');
         this.setState({
             view : page
         });
@@ -109,30 +103,21 @@ class Home extends React.Component{
 
     homeView(){
         return (
-            <z>
-              <a href="admins">Go to Admin </a>
-                <div className="container">
-                  <GridListFrame patternList={this.props.PatternList}
-                              
-                                 getPattern={this.props.PatternAct.GetList}/>
-                  <h3 style={divStyle}>Best Sell </h3>
-                  <a href="#">View All</a>
-                  <GridListFour />
-                  <h3 style={divStyle}>Newest </h3>
-                  <a href='#'>View All</a>
-                  <GridListFour />
-                  <h3 style={divStyle}>Promotion </h3>
-                  <a href='#'>View All</a>
-                  <GridListFrame patternList={this.props.PatternList}
-                                
-                                 getPattern={this.props.PatternAct.GetListSale}/>
-                </div>
-            </z>
+
+            <Homepage   patternList={this.props.PatternList}
+                        getPattern={this.props.PatternAct}
+                        votePattern={this.props.PatternAct.VotePattern}
+
+                        shirtData = {this.props.ShirtList}
+                        listShirt = {this.props.ShirtAct}
+
+                        />
         );
     }
 
   render(){
     return(
+
       <z>
         <Navigator changeView = {this.changeStateView}
                    signInFunc={this.props.UserAct.SignIn}
@@ -143,6 +128,7 @@ class Home extends React.Component{
                     signOutFunc={this.props.UserAct.UserSignOut}
                     categoryList={this.props.CategoryList}
                     getCategory={this.props.CategoryAct.GetList}/>
+
 
         <div id="contentInside">
         {this.state.view === 'home'?this.homeView():null}
@@ -163,7 +149,7 @@ const mapStateToProps = state => ({
   DesignerList : state.DesignerList,
   CategoryList: state.CategoryList,
   PatternList: state.PatternList,
-   ShirtList: state.ShirtList
+  ShirtList: state.ShirtList
 });
 
 const mapDispatchToProps = dispatch => ({

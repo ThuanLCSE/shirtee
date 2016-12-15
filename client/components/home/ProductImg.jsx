@@ -34,7 +34,6 @@ class ProductImg extends React.Component{
   }
 
 
-
   render(){
 
       return (
@@ -45,7 +44,10 @@ class ProductImg extends React.Component{
             onRequestClose={this.handleClose}
             contentStyle={customContentStyle}
           >
-          <CarouselLogo />
+          <CarouselLogo
+            shirtData = {this.props.shirtData}
+            getListShirt = {this.props.getListShirt}
+          />
         </Dialog>
             <div className="img-square">
               <img className="img-pattern img-responsive" src={this.props.url} />

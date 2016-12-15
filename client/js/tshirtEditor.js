@@ -44,9 +44,11 @@ var applyCanvasAndShirt = function() {
 
 	 		canvas = new fabric.Canvas('shirtCanvas', {
 			  hoverCursor: 'pointer',
-			  selection: false,
+			
+			  selection: true,
 			  selectionBorderColor:'blue'
 			});
+			
 				canvas.on({
 				 'object:moving': function(e) {
 				    e.target.opacity = 0.5;

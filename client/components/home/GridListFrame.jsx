@@ -36,21 +36,56 @@ class  GridListFrame extends React.Component{
       this.props.getPattern();
   }
 
+  handleRequestClose() {
+    this.setState({
+      openVote: false
+    });
+  };
+
+  handleClickVote(event) {
+    // This prevents ghost click.
+    event.preventDefault();
+    this.setState({
+      openVote: true,
+      anchorEl: event.currentTarget,
+    });
+  };
+
+
   render(){
     patterns = this.props.patternList.listPattern.slice(0, 4);
     return (
       <div style={styles.root}>
         <GridList style={styles.gridList} cols={4} padding={10} cellHeight='auto'>
           {patterns.map( (row, index) => (
-            <GridTile
-              key={index}
-              title={row.name}
-              actionIcon={<IconButton><StarBorder color="yellow" /></IconButton>}
-              titleStyle={styles.titleStyle}
-              titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
-            >
-            <ProductImg url={row.url}/>
-            </GridTile>
+            <z key={index}>
+                <GridTile
+                  title={<b>{'$' + row.price}</b>}
+                  actionIcon={<IconButton onClick={this.handleClickVote}><StarBorder color="yellow" /></IconButton>}
+                  titleStyle={styles.titleStyle}
+                  titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
+                >
+                <ProductImg
+                    url={row.url}
+                    shirtData = {this.props.shirtData}
+                    listShirt = {this.props.listShirt}
+                />
+                </GridTile>
+                <Popover
+                  open={this.state.openVote}
+                  anchorEl={this.state.anchorEl}
+                  anchorOrigin={{horizontal: 'middle', vertical: 'bottom'}}
+                  targetOrigin={{horizontal: 'middle', vertical: 'top'}}
+                  onRequestClose={this.handleRequestClose}>
+                  <List style={flexContainer}>
+                    <ListItem children={<StarBorder/>} onClick={() => this.props.votePattern(1, row._id)}/>
+                    <ListItem children={<StarBorder/>} onClick={() => this.props.votePattern(2, row._id)}/>
+                    <ListItem children={<StarBorder/>} onClick={() => this.props.votePattern(3, row._id)}/>
+                    <ListItem children={<StarBorder/>} onClick={() => this.props.votePattern(4, row._id)}/>
+                    <ListItem children={<StarBorder/>} onClick={() => this.props.votePattern(5, row._id)}/>
+                  </List>
+                </Popover>
+            </z>
           ))}
         </GridList>
       </div>

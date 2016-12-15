@@ -7,10 +7,6 @@ import {GridList, GridTile} from 'material-ui/GridList';
 
 
 const style = {
-
-  height: 200,
-  width: 150,
-  margin: 20,
   textAlign: 'center',
 };
 
@@ -45,34 +41,59 @@ const gridStyles = {
 //       </Carousel.Item>
 // </Carousel>
 
+
+// <Paper style={style} zDepth={3}>
+// </Paper>
+//
+// <Paper style={style} zDepth={3}>
+// </Paper>
+//
+// <Paper style={style} zDepth={3}>
+// </Paper>
+//
+// <Paper style={style} zDepth={3}>
+// </Paper>
+//
+// <Paper style={style} zDepth={3}>
+// </Paper>
+
+// onClick={() => this.changeShirtType(index)}
+
+
 class CarouselLogo extends React.Component{
+
+  shirtItem(shirt, index){
+
+      return (
+          <div className = "col-sm-3">
+
+
+             <img className = "img-responsive" src={shirt.url}   key= {shirt._id} />
+             {shirt.detail}
+          </div>
+        )
+  }
+
+  
+  getListShirt() {
+    return (
+
+
+      <div className = "row">
+          {this.props.shirtData.listShirt.map(this.shirtItem)}
+      </div>
+
+
+    );
+  }
 
   render() {
     return (
       <div className ="container">
-        <div className="row">
 
-          <GridList style={gridStyles.gridList} cellHeight={'auto'}
+              {this.props.shirtData.listShirt?
+              this.getListShirt(): 'no shirt in server'}
 
-          >
-            <Paper style={style} zDepth={3}>
-            </Paper>
-
-            <Paper style={style} zDepth={3}>
-            </Paper>
-
-            <Paper style={style} zDepth={3}>
-            </Paper>
-
-            <Paper style={style} zDepth={3}>
-            </Paper>
-
-            <Paper style={style} zDepth={3}>
-            </Paper>
-
-          </GridList>
-
-        </div>
       </div>
     );
   }
