@@ -27,21 +27,9 @@ class upPatternModal extends React.Component {
 
     render() {
        
-        const actions = [
-            <FlatButton
-              label="Cancel"
-              primary={true}
-              onTouchTap={this.handleClose}  />,
-            <FlatButton
-              label="Submit"
-              primary={true}
-              keyboardFocused={true}
-              onTouchTap={this.handleClose}   />,
-          ];
         return (
            <Dialog
-              title="Create new design"
-              actions={actions}
+              title="Create new design" 
               modal={false}
               open={this.state.open}
               onRequestClose={this.handleClose} >

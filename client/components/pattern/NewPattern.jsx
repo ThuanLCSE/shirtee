@@ -77,8 +77,14 @@ class NewShirt extends React.Component {
     }
     componentDidUpdate(prevProps, prevState){
       if (prevState.url !== this.state.url){
-        this.callAddPatternToShirt(this.state.recommend.x,this.state.recommend.y,this.state.recommend.scale);
-      }  
+          if (prevState.url === ''){
+            this.callAddPatternToShirt(this.state.recommend.x,this.state.recommend.y,this.state.recommend.scale);
+          } else {
+            document.getElementById(this.state.imgPaternTagId).click();
+          }
+          
+      }
+       
       if (this.props.shirtData.listShirt.length > 0){
         this.callApplyShirtCanvas();
       } 
