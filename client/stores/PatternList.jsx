@@ -1,6 +1,8 @@
 var defaultState = {
     listPatternAdmin: [],
     listPattern: [],
+    listPatternBestSale: [],
+    listPatternNewest: [],
     pattern: {}
 }
 
@@ -14,6 +16,12 @@ export default function PatternList(state = defaultState, action) {
            return newState;
     case 'GET_LIST_PATTERN_SUCCESS':
           newState.listPattern = action.listPattern;
+          return newState;
+    case 'GET_LIST_PATTERN_BESTSELL_SUCCESS':
+          newState.listPatternBestSale = action.listPattern;
+          return newState;
+    case 'GET_LIST_PATTERN_NEWEST_SUCCESS':
+          newState.listPatternNewest = action.listPattern;
           return newState;
     case 'GET_LIST_PATTERN_FAILED':
            return newState;

@@ -128,12 +128,12 @@ class Navigator extends React.Component {
     render() {
         return (
             <z>
-            <div className="col-sm-2" style={{padding:0, width:'13%'}}>
-                <div id="logo-inside">
+            <div className="col-sm-2" style={{padding:0, width:'12%'}}>
+                <div id="logo-inside" onClick={() => this.props.changeView('home')}>
                     <img src="static/AoDs.png"/>
                 </div>
             </div>
-            <div className="col-sm-10" style={{padding:0, width:'87%'}}>
+            <div className="col-sm-10" style={{padding:0, width:'88%'}}>
                 <Paper style={stylePaper} zDepth={1}>
                     <div className="col-sm-9">
                         <List style={flexContainer}>

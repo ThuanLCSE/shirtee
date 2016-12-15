@@ -12,19 +12,25 @@
     position: relative;
     width: 100%;
     padding-top: 100%;
+    background-color: #FFF;
 }
 .img-square {
+    padding: 5px;
+    border: 1px solid #9E9E9E;
     position:  absolute;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
+    box-sizing: border-box;
 }
 .img-shirt {
     display: none;
 }
 .img-pattern {
     display: block;
+/*    max-height: 100%;*/
+/*    margin: auto;*/
 }
 .imageoutside:hover .img-pattern {
     display: none;
@@ -37,22 +43,46 @@
     color: red;
 }
 #logo-inside {
-    width: 80%;
-    padding-top: 90%;
-    margin: auto;
-    margin-top: -10%;
+    width: 86%;
+    padding-top: 110%;
+    margin: 7%;
+    margin-top: -8%;
     background-color: #424242;
     transform: skewY(10deg);
-    position: relative;
+    position: absolute;
     z-index: 100;
 }
 #logo-inside img{
     width: 85%;
-    position:  absolute;
+    position: absolute;
     transform: skewY(-10deg);
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
     margin: auto;
+}
+.title-line {
+  display: block;
+  text-align: center;
+  margin-bottom: 0;
+  position: relative;
+}
+.title-line:before {
+  display: table;
+  content: "";
+  border-top: 1px solid #9E9E9E;
+  width: 100%;
+  position: absolute;
+  top: 15px;
+}
+.title-line h4 {
+  display: inline-block;
+  background: #FAFAFA;
+  padding: 0px 15px;
+  position: relative;
+  z-index: 1;
+  color: black;
+  font-size: 18px;
+  font-weight: bold;
 }

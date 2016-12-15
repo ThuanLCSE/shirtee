@@ -72,7 +72,7 @@ export function GetListSale() {
     return function (dispatch) {
 	  	return restApi.get(apiUser.getListPatternSale).then((response) => {
 	    	console.log(response);
-	       dispatch({ type: 'GET_LIST_PATTERN_SALE_SUCCESS',
+	       dispatch({ type: 'GET_LIST_PATTERN_SUCCESS',
                      listPattern : response.listPattern}
                    );
 	    }).catch((err) => {
@@ -83,4 +83,35 @@ export function GetListSale() {
 		});
 	};
 }
- 
+
+export function GetListBestSell() {
+    return function (dispatch) {
+	  	return restApi.get(apiUser.getListPatternBestSell).then((response) => {
+	    	console.log(response);
+	       dispatch({ type: 'GET_LIST_PATTERN_BESTSELL_SUCCESS',
+                     listPattern : response.listPattern}
+                   );
+	    }).catch((err) => {
+	    	console.log(err);
+	        dispatch({ type: 'GET_LIST_PATTERN_FAILED',
+                    text: err.responseText
+                    });
+		});
+	};
+}
+
+export function GetListNewest() {
+    return function (dispatch) {
+	  	return restApi.get(apiUser.getListPatternNewest).then((response) => {
+	    	console.log(response);
+	       dispatch({ type: 'GET_LIST_PATTERN_NEWEST_SUCCESS',
+                     listPattern : response.listPattern}
+                   );
+	    }).catch((err) => {
+	    	console.log(err);
+	        dispatch({ type: 'GET_LIST_PATTERN_FAILED',
+                    text: err.responseText
+                    });
+		});
+	};
+}
