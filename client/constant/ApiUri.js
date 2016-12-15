@@ -125,10 +125,10 @@ export const adminRemoveSale = '/api/sale/remove/'
 // 	saleId : id
 // }
 
-export const userVotePattern = '/api/pattern/voting/:patternId'//:patternId'
+export const userVotePattern = '/api/pattern/voting/'//:patternId'
 // http method post
 // data send = {
-// 	vote: number (1->5 )
+// 	vote: number (1->5)
 // }
 // success :{
 // 	message: 'update success',

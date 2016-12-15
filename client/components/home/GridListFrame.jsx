@@ -47,10 +47,6 @@ class  GridListFrame extends React.Component{
     this.handleClickVote = this.handleClickVote.bind(this);
     this.handleRequestClose = this.handleRequestClose.bind(this);
   };
-    
-  componentWillMount() {
-      this.props.getPattern();
-  }
 
   handleRequestClose() {
     this.setState({
@@ -75,9 +71,8 @@ class  GridListFrame extends React.Component{
       <div style={styles.root}>
         <GridList style={styles.gridList} cols={4} padding={30} cellHeight='auto'>
           {patterns.map( (row, index) => (
-            <z>
+            <z key={index}>
                 <GridTile
-                  key={index}
                   title={<b>{'$' + row.price}</b>}
                   actionIcon={<IconButton onClick={this.handleClickVote}><StarBorder color="yellow" /></IconButton>}
                   titleStyle={styles.titleStyle}
@@ -92,11 +87,11 @@ class  GridListFrame extends React.Component{
                   targetOrigin={{horizontal: 'middle', vertical: 'top'}}
                   onRequestClose={this.handleRequestClose}>
                   <List style={flexContainer}>
-                    <ListItem children={<StarBorder/>}/>
-                    <ListItem children={<StarBorder/>}/>
-                    <ListItem children={<StarBorder/>}/>
-                    <ListItem children={<StarBorder/>}/>
-                    <ListItem children={<StarBorder/>}/>
+                    <ListItem children={<StarBorder/>} onClick={() => this.props.votePattern(1, row._id)}/>
+                    <ListItem children={<StarBorder/>} onClick={() => this.props.votePattern(2, row._id)}/>
+                    <ListItem children={<StarBorder/>} onClick={() => this.props.votePattern(3, row._id)}/>
+                    <ListItem children={<StarBorder/>} onClick={() => this.props.votePattern(4, row._id)}/>
+                    <ListItem children={<StarBorder/>} onClick={() => this.props.votePattern(5, row._id)}/>
                   </List>
                 </Popover>
             </z>

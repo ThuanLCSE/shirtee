@@ -1,15 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import GridListFrame from './home/GridListFrame';
-import GridListFour from './home/GridListFour';
+import Homepage from './home/Homepage';
+import PatternView from './home/PatternView';
 import Navigator from './navigator/Navigator';
-import CarouselModal from './home/CarouselModal';
 import Information from './user/Information';
 import UserAccount from './user/UserAccount';
 import NewPattern from './pattern/NewPattern';
-
-import Divider from 'material-ui/Divider';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -31,6 +28,30 @@ class Home extends React.Component{
         this.changeStateView = this.changeStateView.bind(this);
     }
 
+    bestSell() {
+        return (
+            <PatternView patternList={this.props.PatternList.listPatternBestSell}
+                         getPattern={this.props.PatternAct.GetListBestSell}
+                         votePattern={this.props.PatternAct.VotePattern}/>
+        );
+    }
+    
+    newest() {
+        return (
+            <PatternView patternList={this.props.PatternList.listPatternNewest}
+                         getPattern={this.props.PatternAct.GetListNewest}
+                         votePattern={this.props.PatternAct.VotePattern}/>
+        );
+    }
+    
+    promotion() {
+        return (
+            <PatternView patternList={this.props.PatternList.listPatternSale}
+                         getPattern={this.props.PatternAct.GetListSale}
+                         votePattern={this.props.PatternAct.VotePattern}/>
+        );
+    }
+    
     infoView() {
         return (
            <Information userData = {this.props.UserTodo}
@@ -63,7 +84,7 @@ class Home extends React.Component{
     }
 
     changeStateView(page){
-        console.log('view thay doi');
+        console.log('view changed');
         this.setState({
             view : page
         });
@@ -71,42 +92,16 @@ class Home extends React.Component{
 
     homeView(){
         return (
-            <div className="container">
-              <GridListFrame patternList={this.props.PatternList.listPattern}
-                             getPattern={this.props.PatternAct.GetList}
-                             index={0}/>
-              <br/>
-              <div className="title-line">
-                <h4>Best Sell</h4>
-              </div>
-              <br/>
-              <GridListFrame patternList={this.props.PatternList.listPatternBestSale}
-                             getPattern={this.props.PatternAct.GetListBestSell}
-                             index={0}/>
-              <br/><br/>
-              <GridListFrame patternList={this.props.PatternList.listPatternBestSale}
-                             getPattern={this.props.PatternAct.GetListBestSell}
-                             index={1}/>
-              <br/>
-              <div className="title-line">
-                <h4>Newest</h4>
-              </div>
-              <br/>
-              <GridListFrame patternList={this.props.PatternList.listPatternNewest}
-                             getPattern={this.props.PatternAct.GetListNewest}
-                             index={0}/>
-              <br/><br/>
-              <GridListFrame patternList={this.props.PatternList.listPatternNewest}
-                             getPattern={this.props.PatternAct.GetListNewest}
-                             index={1}/>
-            </div>
+            <Homepage   patternList={this.props.PatternList}
+                        getPattern={this.props.PatternAct}
+                        votePattern={this.props.PatternAct.VotePattern}/>
         );
     }
 //<Divider/>
 //              <h4 style={divStyle}>Promotion </h4>
 //              <a style={divStyle} href='#'>View All</a>
 //              <GridListFrame patternList={this.props.PatternList}
-//                             getPattern={this.props.PatternAct.GetListSale}/>
+//                             getPattern={this.props.PatternAct.GetListSell}/>
   render(){
     return(
       <div>
@@ -120,11 +115,13 @@ class Home extends React.Component{
                     signOutFunc={this.props.UserAct.UserSignOut}
                     categoryList={this.props.CategoryList}
                     getCategory={this.props.CategoryAct.GetList}/>
-          {this.state.view === 'home'?this.homeView():null}
-           {this.state.view === 'info'?this.infoView():null}
-           {this.state.view === 'accUpdate'?this.accUpdateView():null}
-           {this.state.view === 'NewPattern'?this.CreatePattern():null}
-
+        {this.state.view === 'home'?this.homeView():null}
+        {this.state.view === 'info'?this.infoView():null}
+        {this.state.view === 'accUpdate'?this.accUpdateView():null}
+        {this.state.view === 'NewPattern'?this.CreatePattern():null}
+        {this.state.view === 'bestSell'?this.bestSell():null}
+        {this.state.view === 'newest'?this.newest():null}
+        {this.state.view === 'promotion'?this.promotion():null}
       </div>
     );
   }

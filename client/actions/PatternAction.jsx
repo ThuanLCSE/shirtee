@@ -115,3 +115,21 @@ export function GetListNewest() {
 		});
 	};
 }
+
+export function VotePattern(vote, id) {
+    var data = {
+        vote: vote
+    };
+    return function (dispatch) {
+        var userVotePattern = apiUser.userVotePattern + id;
+	  	return restApi.post(userVotePattern, data).then((response) => {
+	    	console.log(response);
+	       dispatch({ type: 'VOTE_SUCCESSFULLY',
+                    pattern : response.pattern});
+	    }).catch((err) => {
+	    	console.log(err);
+	        dispatch({ type: 'VOTE_FAILED',
+                     text: err.responseText});
+		});
+	};
+}

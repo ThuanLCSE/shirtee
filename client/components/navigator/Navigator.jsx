@@ -137,9 +137,15 @@ class Navigator extends React.Component {
                 <Paper style={stylePaper} zDepth={1}>
                     <div className="col-sm-9">
                         <List style={flexContainer}>
-                          <ListItem primaryText={(<b>Best Sell</b>)} leftIcon={<ActionFavorite />} />
-                          <ListItem primaryText={(<b>Newest</b>)} leftIcon={<AvFiberNew />} />
-                          <ListItem primaryText={(<b>Promotion</b>)} leftIcon={<ActionCardGiftcard />} />
+                          <ListItem primaryText={(<b>Best Sell</b>)}
+                                    leftIcon={<ActionFavorite />}
+                                    onClick={() => this.props.changeView('bestSell')}/>
+                          <ListItem primaryText={(<b>Newest</b>)}
+                                    leftIcon={<AvFiberNew />}
+                                    onClick={() => this.props.changeView('newest')}/>
+                          <ListItem primaryText={(<b>Promotion</b>)}
+                                    leftIcon={<ActionCardGiftcard />}
+                                    onClick={() => this.props.changeView('promotion')}/>
                           <ListItem primaryText={(<b>Category</b>)} onClick={this.handleClickCategory} leftIcon={<ActionList />} />
                           <Popover
                               open={this.state.openCategory}
