@@ -55,6 +55,13 @@ exports.delete = function(req,res){
  	});
 };
  
+exports.updateVoting = function(req,res,next){
+	var newVoteQuantity = req.pattern.voteQuantity + 1;
+	req.pattern.vote = (req.body.vote + (req.pattern.vote * req.pattern.voteQuantity))/newVoteQuantity;
+	req.pattern.voteQuantity = newVoteQuantity;
+	next();
+};
+
 
 exports.increaseSale = function(req,res,next){
 	req.pattern.saleTime += 1;
@@ -78,7 +85,7 @@ exports.updatePattern = function(req,res){
 	  	res.status(400).send(err);
 	  }  else { 
 	  	res.status(200).send({
-	  		message: 'update status success',
+	  		message: 'update success',
 	  		pattern: updatedPattern,
 	  	}); 
 	  }
@@ -151,7 +158,7 @@ exports.getAllAvailable = function(req,res){
 };
 
 exports.getAllNewest= function(req,res){ 
-  	Pattern.find({status: 'approve'}).sort({createdDay:-1}).exec(function (err, patterns) {
+  	Pattern.find({status: 'approve', available: true}).sort({createdDay:-1}).exec(function (err, patterns) {
 	  if (err) {
 	  	res.status(400).send(err);
 	  }  else { 
@@ -165,7 +172,7 @@ exports.getAllNewest= function(req,res){
 
 
 exports.getAllBestSell = function(req,res){ 
-  	Pattern.find({status: 'approve'}).sort({saleTime:-1}).exec(function (err, patterns) {
+  	Pattern.find({status: 'approve', available: true}).sort({saleTime:-1}).exec(function (err, patterns) {
 	  if (err) {
 	  	res.status(400).send(err);
 	  }  else { 

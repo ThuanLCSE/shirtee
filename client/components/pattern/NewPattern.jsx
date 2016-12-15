@@ -34,8 +34,10 @@ class NewShirt extends React.Component {
         this.listTypeShirt = this.listTypeShirt.bind(this);
         this.shirtItem = this.shirtItem.bind(this);
 
+ 
          this.customBar = this.customBar.bind(this);
          this.changeShirtType = this.changeShirtType.bind(this);
+ 
          this.callAddPatternToShirt = this.callAddPatternToShirt.bind(this);
          this.handleChangePosition = this.handleChangePosition.bind(this);
 
@@ -121,10 +123,10 @@ class NewShirt extends React.Component {
      editor(){
 
         let drawingAreae = {
-          position: 'absolute',
+          position: 'absolute', 
           top: 0,
           left: 0,
-          zIndex: 100,
+          zIndex: 100, 
           width: '100%',
           height: '100%'
         }
@@ -135,7 +137,7 @@ class NewShirt extends React.Component {
             width: '100%',
             position: 'relative'
         }
-        let shirtFacing = {
+        let shirtFacing = { 
             width: '100%',
             height: '100%'
         }
@@ -144,6 +146,7 @@ class NewShirt extends React.Component {
               <div id="shirtDiv" className="page" style={shirtDiv}>
                 <img id="tshirtFacing" src="static/TeeShirt1.png" style={shirtFacing}></img>
                 <div id="drawingArea" style={drawingAreae}>
+      
                   <canvas id="shirtCanvas"className="hover" style={webKitUser}>
                   </canvas>
                 </div>
@@ -178,6 +181,7 @@ class NewShirt extends React.Component {
       });
     }
     shirtItem(shirt, index){
+      
         let shirtItem = {
           height:  '100%',
           width: '100%'
@@ -187,6 +191,7 @@ class NewShirt extends React.Component {
         }
 
         return (
+         
              <div key= {shirt._id} className="col-sm-5" style = {shirtFrame}
              onClick={() => this.changeShirtType(index)} >
                <img className="shirtTypes" style={shirtItem} src={shirt.url}/>
@@ -200,6 +205,8 @@ class NewShirt extends React.Component {
           padding: 0
         }
         return (
+        
+            
           <div className="row"  style = {listShirt}>
                   {this.props.shirtData.listShirt.map(this.shirtItem)}
           </div>
@@ -224,12 +231,14 @@ class NewShirt extends React.Component {
 
             <div className="well">
                 {listColor.length > 0 ?
+             
                  listColor.map(this.colorItem): 'no shirt in server'}
             </div>
 
                 {this.props.shirtData.listShirt?
                 this.listTypeShirt(): 'no shirt in server'}
 
+              
 
 
               <RaisedButton  label="Create Pattern" primary={true} style={{marginTop: '5vh' }}/>
@@ -256,13 +265,15 @@ class NewShirt extends React.Component {
                                   url={this.state.url}
                                   submit={this.handleSubmit}/>
                 </div>
+ 
                 <Paper className="col-sm-5" style={{height:'80vh'}}>
-
+ 
                           {this.editor()}
                           {this.imageEditor()}
 
                 </Paper>
                 <div className="col-sm-3">
+         
                     <Paper style={{height:'80vh'}}>
                          {this.customBar()}
                     </Paper>
@@ -276,6 +287,7 @@ class NewShirt extends React.Component {
                   onClick = {(e) => this.handleChangePosition('scale', e)} />
                   <input type="hidden" id="patternAngle"
                   onClick = {(e) => this.handleChangePosition('rotate', e)} />
+                  
             </div>
         );
     }

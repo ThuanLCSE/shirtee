@@ -12,6 +12,9 @@ module.exports = function(app){
 	.get(patternCtrller.getByID,
 		adminCtrller.checkAdminRole, patternCtrller.delete);
 	
+	app.route('/api/pattern/voting/:patternId')
+	.post(patternCtrller.getByID,patternCtrller.updateVoting, patternCtrller.updatePattern);
+
 	app.route('/api/pattern/approve/:patternId')
 	.get(patternCtrller.getByID,patternCtrller.setAcceptStatus,
 		adminCtrller.checkAdminRole, patternCtrller.updatePattern);

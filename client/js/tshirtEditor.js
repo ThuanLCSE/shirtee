@@ -77,7 +77,8 @@ var applyCanvasAndShirt = function() {
 
 
 		$(".shirtTypes").click(function(e){
-			// $("#shirtDiv").css('height','vh');
+			 
+			 
   			$("#tshirtFacing")[0].src = e.currentTarget.src;
 		});
 		  document.getElementById('remove-selected').onclick = function() {
@@ -95,28 +96,9 @@ var applyCanvasAndShirt = function() {
 		    }
 	  };
 
-	   $(".clearfix button,a").tooltip();
-	  //  line1 = new fabric.Line([0,0,200,0], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
-	  //  line2 = new fabric.Line([199,0,200,399], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
-	  //  line3 = new fabric.Line([0,0,0,400], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
-	  //  line4 = new fabric.Line([0,400,200,399], {"stroke":"#000000", "strokeWidth":1,hasBorders:false,hasControls:false,hasRotatingPoint:false,selectable:false});
-		  // $("#drawingArea").hover(
-			//         function() {
-			//         	//  canvas.add(line1);
-			// 	        //  canvas.add(line2);
-			// 	        //  canvas.add(line3);
-			// 	        //  canvas.add(line4);
-			// 	        //  canvas.renderAll();
-			//         },
-			//         function() {
-			//         	//  canvas.remove(line1);
-			// 	        //  canvas.remove(line2);
-			// 	        //  canvas.remove(line3);
-			// 	        //  canvas.remove(line4);
-			// 	        //  canvas.renderAll();
-			//         }
-			//     );
 
+	   $(".clearfix button,a").tooltip();
+	   
  	// 	canvas.on('object:over', function(e) {
 		// });
 
@@ -216,3 +198,23 @@ var applyCanvasAndShirt = function() {
   applyColorChange.click = function(){
 	  	applyColor();
  	}
+  
+  //html2canvas 
+   $( "#screenShot" ).click(function() {
+	  	html2canvas(document.getElementById('shirtDiv')).then(function(shotPicture) {
+		    var dataURL = shotPicture.toDataURL("image/jpeg", 0.5);
+		    $.ajax({
+		        url: '/api/upload64',
+		        type: 'post',
+		        headers: { 
+		        },
+		        data: {
+		            image: dataURL
+		        },
+		        dataType: 'json',
+		        success: function(response) { 
+		               console.log(response); 
+		        }
+		});
+ 		});
+	}); 

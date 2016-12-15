@@ -65,7 +65,7 @@ export const adminSignIn = '/api/admin/signIn'
 export const adminApprovePattern = '/api/pattern/approve/'//:patternId'
 // http method get
 // success :{
-// 	message: 'update status success',
+// 	message: 'update success',
 // 	pattern: object
 // }
 export const adminDeletePattern = '/api/pattern/remove/'//:patternId'
@@ -123,4 +123,14 @@ export const adminRemoveSale = '/api/sale/remove/'
 //http method: post
 // {
 // 	saleId : id
+// }
+
+export const userVotePattern = '/api/pattern/voting/:patternId'//:patternId'
+// http method post
+// data send = {
+// 	vote: number (1->5 )
+// }
+// success :{
+// 	message: 'update success',
+// 	pattern: object
 // }
