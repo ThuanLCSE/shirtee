@@ -53,7 +53,7 @@ class  GridListFrame extends React.Component{
       openVote: false
     });
   };
-  
+
   handleClickVote(event) {
     // This prevents ghost click.
     event.preventDefault();
@@ -62,7 +62,7 @@ class  GridListFrame extends React.Component{
       anchorEl: event.currentTarget,
     });
   };
-    
+
   render(){
     var start = this.props.index * 4;
     var end = start + 4;
@@ -79,8 +79,11 @@ class  GridListFrame extends React.Component{
                   titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
                 >
                 <ProductImg url={row.url}
+                          openModal = {this.props.openModal}
                           shirtData = {this.props.shirtData}
-                          listShirt = {this.props.listShirt}/>
+                          listShirt = {this.props.listShirt}
+                 />
+
                 </GridTile>
                 <Popover
                   open={this.state.openVote}
