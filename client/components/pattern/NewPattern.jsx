@@ -34,9 +34,9 @@ class NewShirt extends React.Component {
         this.listTypeShirt = this.listTypeShirt.bind(this);
         this.shirtItem = this.shirtItem.bind(this);
 
-        this.customBar = this.customBar.bind(this);
+         this.customBar = this.customBar.bind(this);
          this.changeShirtType = this.changeShirtType.bind(this);
-        this.callAddPatternToShirt = this.callAddPatternToShirt.bind(this);
+         this.callAddPatternToShirt = this.callAddPatternToShirt.bind(this);
          this.handleChangePosition = this.handleChangePosition.bind(this);
 
 
@@ -122,11 +122,11 @@ class NewShirt extends React.Component {
 
         let drawingAreae = {
           position: 'absolute',
-          top: '100px',
-          left: '160px',
+          top: 0,
+          left: 0,
           zIndex: 100,
-          width: '200px',
-          height: '400px'
+          width: '100%',
+          height: '100%'
         }
         let webKitUser = {
           WebkitUserSelect : 'none'
@@ -136,15 +136,15 @@ class NewShirt extends React.Component {
             position: 'relative'
         }
         let shirtFacing = {
-             width: '100%'
+            width: '100%',
+            height: '100%'
         }
 
         return(
               <div id="shirtDiv" className="page" style={shirtDiv}>
                 <img id="tshirtFacing" src="static/TeeShirt1.png" style={shirtFacing}></img>
                 <div id="drawingArea" style={drawingAreae}>
-                  <canvas id="shirtCanvas" width="200px" height="400px" className="hover" style={webKitUser}>
-
+                  <canvas id="shirtCanvas"className="hover" style={webKitUser}>
                   </canvas>
                 </div>
               </div>
@@ -168,8 +168,6 @@ class NewShirt extends React.Component {
               <div className="pull-right"  id="imageeditor">
                 <RaisedButton  id="remove-selected" label="delete" primary={true}/>
 
-
-
               </div>
           )
       }
@@ -180,26 +178,30 @@ class NewShirt extends React.Component {
       });
     }
     shirtItem(shirt, index){
-        let shirtIcon = {
-          height:  80,
-          width: 80
+        let shirtItem = {
+          height:  '100%',
+          width: '100%'
         }
+        let shirtFrame  = {
+          marginTop : '20%'
+        }
+
         return (
-             <div key= {shirt._id}
-             onClick={() => this.changeShirtType(index)} style={shirtIcon}>
-               <img className="img-responsive shirtTypes" src={shirt.url}/>
+             <div key= {shirt._id} className="col-sm-5" style = {shirtFrame}
+             onClick={() => this.changeShirtType(index)} >
+               <img className="shirtTypes" style={shirtItem} src={shirt.url}/>
               {shirt.detail}
              </div>
           )
     }
     listTypeShirt(){
+        let listShirt = {
+          margin: 0,
+          padding: 0
+        }
         return (
-          <div className="form-group form-inline">
-
-
-               <div className="row">
-                      {this.props.shirtData.listShirt.map(this.shirtItem)}
-               </div>
+          <div className="row"  style = {listShirt}>
+                  {this.props.shirtData.listShirt.map(this.shirtItem)}
           </div>
         )
     }
@@ -219,13 +221,20 @@ class NewShirt extends React.Component {
       }
         return (
           <div className="form well">
+
+            <div className="well">
                 {listColor.length > 0 ?
-                listColor.map(this.colorItem): 'no shirt in server'}
+                 listColor.map(this.colorItem): 'no shirt in server'}
+            </div>
 
                 {this.props.shirtData.listShirt?
                 this.listTypeShirt(): 'no shirt in server'}
 
-               <button className="btn btn-success">Create Pattern</button>
+
+
+              <RaisedButton  label="Create Pattern" primary={true} style={{marginTop: '5vh' }}/>
+
+
         </div>
         )
     }
@@ -247,14 +256,14 @@ class NewShirt extends React.Component {
                                   url={this.state.url}
                                   submit={this.handleSubmit}/>
                 </div>
-                <Paper className="col-sm-5" style={{height:'100vh'}}>
+                <Paper className="col-sm-5" style={{height:'80vh'}}>
 
-                           {this.editor()}
+                          {this.editor()}
                           {this.imageEditor()}
 
                 </Paper>
                 <div className="col-sm-3">
-                    <Paper style={{height:'100vh'}}>
+                    <Paper style={{height:'80vh'}}>
                          {this.customBar()}
                     </Paper>
                 </div>
