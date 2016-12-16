@@ -136,11 +136,16 @@ var applyCanvasAndShirt = function() {
   });
 
 
-  var applyShirtCanvas = document.getElementById('applyShirtCanvas');
-  applyShirtCanvas.dispatchEvent(applyEvent);
-  applyShirtCanvas.click = function(){
-	  	applyCanvasAndShirt();
- 	}
+  // var applyShirtCanvas = document.getElementById('applyShirtCanvas');
+  // applyShirtCanvas.dispatchEvent(applyEvent);
+  // applyShirtCanvas.click = function(){
+	//   	applyCanvasAndShirt();
+ // 	}
+	   $( "#applyShirtCanvas" ).click(function() {
+			 console.log('click')
+			 	applyCanvasAndShirt();
+		 });
+
   var addPatternEvent = new MouseEvent('click', {
     'view': window,
     'bubbles': true,
@@ -177,29 +182,52 @@ var applyCanvasAndShirt = function() {
 			  img.cornervisibility = false;
 			  canvas.remove(img.oCoords)
 			//  img.oCoords.setControlsVisibility(HideControls);
+			html2canvas(document.getElementById('shirtDiv'), {
+			  onrendered: function(shotPicture) {
 
+								var dataURL = shotPicture.toDataURL("image/jpeg", 0.5);
+									$.ajax({
+											url: 'http://192.168.2.193:3013/api/upload64',
+											type: 'post',
+											headers: {
+											},
+											data: {
+													image: dataURL
+											},
+											dataType: 'json',
+											xhrFields: {
+														withCredentials: true
+												},
+												crossDomain: true,
+											success: function(response) {
 
-
-	  	html2canvas(document.getElementById('shirtDiv')).then(function(shotPicture) {
-		    var dataURL = shotPicture.toDataURL("image/jpeg", 0.5);
-		    $.ajax({
-		        url: '/api/upload64',
-		        type: 'post',
-		        headers: {
-		        },
-		        data: {
-		            image: dataURL
-		        },
-		        dataType: 'json',
-                xhrFields: {
-	                withCredentials: true
-	            },
-	            crossDomain: true,
-		        success: function(response) {
-
-		        	$('#screenShotUrl')[0].value = response.pictureUrl;
-				    $('#screenShotUrl').trigger("click");
-		        }
-		});
- 		});
-	});
+												$('#screenShotUrl')[0].value = response.pictureUrl;
+											$('#screenShotUrl').trigger("click");
+											}
+							});
+			  },
+				useCORS: true
+			});
+});
+		// 	.then(function(shotPicture) {
+		//     var dataURL = shotPicture.toDataURL("image/jpeg", 0.5);
+		//     $.ajax({
+		//         url: 'http://192.168.2.193/api/upload64',
+		//         type: 'post',
+		//         headers: {
+		//         },
+		//         data: {
+		//             image: dataURL
+		//         },
+		//         dataType: 'json',
+    //             xhrFields: {
+	  //               withCredentials: true
+	  //           },
+	  //           crossDomain: true,
+		//         success: function(response) {
+		//
+		//         	$('#screenShotUrl')[0].value = response.pictureUrl;
+		// 		    $('#screenShotUrl').trigger("click");
+		//         }
+		// });
+ 	// 	});
