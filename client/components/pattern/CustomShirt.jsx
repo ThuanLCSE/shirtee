@@ -3,6 +3,7 @@ import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
 import CircularProgress from 'material-ui/CircularProgress';
+import hostServer from './../../constant/ApiUri';
 
 import DialogMessage from './../utils/DialogMessage.jsx'; 
 
@@ -176,7 +177,7 @@ class CustomShirt extends React.Component {
          
              <div key= {index} className="col-sm-5" style = {shirtFrame}
              onClick={() => this.changeShirtType(index)} >
-               <img className="shirtTypes" style={shirtItem} src={shirt.url}/>
+               <img className="shirtTypes" style={shirtItem} src={hostServer +'/'+ shirt.url}/>
               {shirt.detail}
              </div>
           )

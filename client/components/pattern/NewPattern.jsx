@@ -3,6 +3,7 @@ import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
 import CircularProgress from 'material-ui/CircularProgress';
+import hostServer from './../../constant/ApiUri';
 
 import UpPatternModal from './upPatternModal.jsx';
 import DialogMessage from './../utils/DialogMessage.jsx';
@@ -14,38 +15,38 @@ class NewShirt extends React.Component {
         this.state = {
             imgPaternTagId : 'patternTagId',
             category: [],
-
+        
             detail: {
                 name: '',
                 price: 0
             },
-            url: '',
-            recommend: {
+            url: '',  
+            recommend: { 
               x:200,
               scale: 0.2,
               rotate: 0,
               y:150
             },
-
+           
             canvas: {
               height: 100,
               width: 100
-            }
+            } 
         };
-        this.handleChange = this.handleChange.bind(this);
+        this.handleChange = this.handleChange.bind(this); 
         this.handleCategory = this.handleCategory.bind(this);
         this.handleChangeUrl = this.handleChangeUrl.bind(this);
         this.submitAfterHavePreview = this.submitAfterHavePreview.bind(this);
-
+        
         this.listTypeShirt = this.listTypeShirt.bind(this);
         this.shirtItem = this.shirtItem.bind(this);
            this.colorItem = this.colorItem.bind(this);
 
-
+ 
          this.customBar = this.customBar.bind(this);
          this.changeShirtType = this.changeShirtType.bind(this);
          this.changeColorCode = this.changeColorCode.bind(this);
-
+        
          this.callAddPatternToShirt = this.callAddPatternToShirt.bind(this);
          this.handleChangeRecommend = this.handleChangeRecommend.bind(this);
          this.loadCanvasInit = this.loadCanvasInit.bind(this);
@@ -57,8 +58,8 @@ class NewShirt extends React.Component {
       this.props.getLevelInfo(this.props.userData.designer._id);
       this.props.getListShirt();
     }
-     componentDidMount() {
-      var mountedCanvas = this.state.canvas;
+     componentDidMount() { 
+      var mountedCanvas = this.state.canvas; 
       mountedCanvas.width = document.getElementById('tshirtFacing').clientWidth;
       mountedCanvas.height = mountedCanvas.width *63/53;
       this.setState({ canvas: mountedCanvas });
@@ -66,14 +67,14 @@ class NewShirt extends React.Component {
 
     callAddPatternToShirt(top, left, scale){
       var patternId = this.state.imgPaternTagId;
-      var addPatternToShirt = document.getElementById('addPatternToShirt').click(patternId, top, left, scale);
+      var addPatternToShirt = document.getElementById('addPatternToShirt').click(patternId, top, left, scale); 
     }
 
-    callApplyShirtCanvas(){
-      document.getElementById('applyShirtCanvas').click();
+    callApplyShirtCanvas(){ 
+      document.getElementById('applyShirtCanvas').click(); 
     }
-    callApplyColorChange(){
-     document.getElementById('applyColorChange').click();
+    callApplyColorChange(){ 
+     document.getElementById('applyColorChange').click(); 
     }
     componentDidUpdate(prevProps, prevState){
       if (prevState.url !== this.state.url){
@@ -82,17 +83,17 @@ class NewShirt extends React.Component {
           } else {
             document.getElementById(this.state.imgPaternTagId).click();
           }
-
+          
       }
-
+       
       if (this.props.shirtData.listShirt.length > 0){
         this.callApplyShirtCanvas();
-      }
+      } 
       if (prevProps.shirtData.currentSelect !== this.props.shirtData.currentSelect){
         this.callApplyColorChange();
       }
     }
-    loadCanvasInit() {
+    loadCanvasInit() {  
       return (
         <UpPatternModal patternUrlChange={this.handleChangeUrl} />
       )
@@ -110,18 +111,18 @@ class NewShirt extends React.Component {
         this.setState({url: url});
     }
     takePreviewBeforSubmit() {
-      document.getElementById('screenShot').click();
+      document.getElementById('screenShot').click(); 
     }
     submitAfterHavePreview(e) {
-
+         
         var newShirt = this.props.shirtData.listShirt[this.props.shirtData.currentSelect];
         var newPattern = Object.assign({},this.state);
         newPattern.recommendShirtUrl = newShirt.url;
         newPattern.recommendShirtId = newShirt._id;
-        newPattern.previewUrl = e.target.value;
+        newPattern.previewUrl = e.target.value; 
         newPattern.colorCode = this.props.shirtData.currentColor;
         newPattern.designerId = this.props.userData.designer._id;
-        this.props.uploadPattern(newPattern);
+        this.props.uploadPattern(newPattern); 
     }
 
     handleCategory(e, id) {
@@ -138,14 +139,14 @@ class NewShirt extends React.Component {
         this.setState({detail: newDetail});
     }
 
-
+  
      editor(){
 
         let drawingAreae = {
-          position: 'absolute',
+          position: 'absolute', 
           top: 0,
           left: 0,
-          zIndex: 100,
+          zIndex: 100, 
           width: '100%',
           height: '100%'
         }
@@ -158,25 +159,16 @@ class NewShirt extends React.Component {
             width: '100%',
             position: 'relative'
         }
-        let shirtFacing = {
+        let shirtFacing = { 
             width: '100%',
             height: '100%'
-        }
-        let platform = {
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          zIndex: -2
-          ,
-          width: '100%',
-          height: '100%'
         }
 
         return(
               <div id="shirtDiv" className="page" style={shirtDiv}>
                 <img id="tshirtFacing" src="static/TeeShirt1.png" style={shirtFacing}></img>
                 <div id="drawingArea" style={drawingAreae}>
-                  <img src="static/platform.png" style={platform}/>
+      
                   <canvas id="shirtCanvas" height={this.state.canvas.height}
                   width={this.state.canvas.width}
                    className="hover" style={webKitUser}>
@@ -207,13 +199,13 @@ class NewShirt extends React.Component {
           )
       }
     changeShirtType(index){
-      this.props.changeShirt(index);
+      this.props.changeShirt(index);  
     }
-    changeColorCode(colorCode){
-      this.props.changeColor(colorCode);
+    changeColorCode(colorCode){ 
+      this.props.changeColor(colorCode); 
     }
     shirtItem(shirt, index){
-
+      
         let shirtItem = {
           height:  '100%',
           width: '100%'
@@ -223,10 +215,10 @@ class NewShirt extends React.Component {
         }
 
         return (
-
+         
              <div key= {index} className="col-sm-5" style = {shirtFrame}
              onClick={() => this.changeShirtType(index)} >
-               <img className="shirtTypes" style={shirtItem} src={shirt.url}/>
+               <img className="shirtTypes" style={shirtItem} src={ hostServer +'/'+ shirt.url}/>
               {shirt.detail}
              </div>
           )
@@ -237,8 +229,8 @@ class NewShirt extends React.Component {
           padding: 0
         }
         return (
-
-
+        
+            
           <div className="row"  style = {listShirt}>
                   {this.props.shirtData.listShirt.map(this.shirtItem)}
           </div>
@@ -264,7 +256,7 @@ class NewShirt extends React.Component {
 
             <div className="well">
                 {listColor.length > 0 ?
-
+             
                  listColor.map(this.colorItem): 'no shirt in server'}
             </div>
 
@@ -276,57 +268,56 @@ class NewShirt extends React.Component {
     waitingProgress(){
       return(
             <Dialog
-              title="waiting"
+              title="waiting" 
               modal={false}
               open={this.props.shirtData.listShirt.length <= 0 }
-              >
+              > 
               <CircularProgress size={80} thickness={5} />
               <CircularProgress size={80} thickness={5} />
-            </Dialog>
+            </Dialog>  
         )
-    }
-    noticeDialog(message){
+    } 
+    noticeDialog(message){ 
       return(
-        <DialogMessage message={message}
-            closeMessage ={this.props.closeMessage}
-            pattern = {this.props.designerData.pattern}
-        />
+        <DialogMessage message={message} 
+            closeMessage ={this.props.closeMessage}  
+            pattern = {this.props.designerData.pattern}/>
       )
     }
-
+       
 
     render() {
         return (
             <div className="container">
-
+            
                 <div className="col-sm-3">
                  <PatternInfor
                                   categoryList={this.props.categoryList}
                                   getCategory={this.props.getCategory}
                                   handleCategory={this.handleCategory}
                                   handleChange={this.handleChange}
-                                  detail = {this.state.detail}
+                                  detail = {this.state.detail} 
                                   stateList={this.state}
                                   expireTime = {this.props.designerData.level.expireTime}
                                   changeUrl={this.handleChangeUrl}
                                   imgTagId = {this.state.imgPaternTagId}
                                   url={this.state.url}
                                   submit={this.takePreviewBeforSubmit}/>
-
+            
                 </div>
-
-                <Paper className="col-sm-5" style={{height:'80vh'}}>
+ 
+                <Paper className="col-sm-5" style={{height:'80vh'}}> 
                           {this.editor()}
                           {this.imageEditor()}
 
                 </Paper>
                 <div className="col-sm-3">
-
+         
                     <Paper style={{height:'80vh'}}>
                          {this.customBar()}
                     </Paper>
                 </div>
-                {this.props.shirtData.listShirt.length <= 0 ?this.waitingProgress():this.loadCanvasInit()}
+                {this.props.shirtData.listShirt.length <= 0 ?this.waitingProgress():this.loadCanvasInit()} 
                 {this.props.designerData.message !== '' ?this.noticeDialog(this.props.designerData.message):null}
                   <input type="hidden" id="patternTop"
                   onClick = {(e) => this.handleChangeRecommend('x', e)} />
@@ -338,7 +329,7 @@ class NewShirt extends React.Component {
                   onClick = {(e) => this.handleChangeRecommend('rotate', e)} />
                   <input type="hidden" id="screenShotUrl"
                   onClick = {(e) => this.submitAfterHavePreview(e)} />
-
+                  
             </div>
         );
     }

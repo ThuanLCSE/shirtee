@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {hostServer} from './../../constant/ApiUri';
 
 
 
@@ -23,7 +24,7 @@ class PatternItem extends React.Component{
       return (
         <tr>
           <td>{this.props.pattern.status}</td>
-          <td>{this.props.pattern.url}</td>
+          <td><img src={hostServer +'/'+this.props.pattern.url}/></td>
           <td>{this.props.pattern.designer}</td>
           <td>{this.props.pattern.vote}</td>
           <td>{this.props.pattern.voteQuantity}</td>

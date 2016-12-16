@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {hostServer} from './../../constant/ApiUri';
 
 
 
@@ -16,15 +17,15 @@ class ProductImg extends React.Component{
 
   } 
 
-  render(){
+  render(){ 
 
       return (
         <div className="imageoutside" onClick={() => this.props.openModal(this.props.pattern)}>
 
 
         <div className="img-square">
-              <img className="img-pattern img-responsive" src={this.props.pattern.url} />
-              <img className="img-shirt img-responsive" src={this.props.pattern.recommendPreviewUrl} />
+              <img className="img-pattern img-responsive" src={hostServer+'/' + this.props.pattern.url} />
+              <img className="img-shirt img-responsive" src={hostServer +'/'+ this.props.pattern.recommendPreviewUrl} />
         </div>
 
 

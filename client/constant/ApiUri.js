@@ -1,4 +1,4 @@
-const hostServer = 'http://192.168.2.193:3013'
+export const hostServer = 'http://192.168.2.193:3013'
 export const UserSignIn = hostServer + '/api/user/signIn'
 export const UserSignUp = hostServer + '/api/user/signUp'
 export const DesignerRegister = hostServer + '/api/designer/register'

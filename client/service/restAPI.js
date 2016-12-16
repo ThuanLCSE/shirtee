@@ -6,6 +6,10 @@ module.exports = {
 			$.ajax({
 				url:url,
 				dataType:"json",
+				xhrFields: {
+	                withCredentials: true
+	            },
+	            crossDomain: true,
 				success,
 				error
 			});
@@ -16,6 +20,10 @@ module.exports = {
 			$.ajax({
 				url:url,
 				type:'DELETE',
+				xhrFields: {
+	                withCredentials: true
+	            },
+	            crossDomain: true,
 				success,
 				error
 			})
@@ -26,6 +34,10 @@ module.exports = {
 			$.ajax({
 				url,
 				type:'POST',
+				xhrFields: {
+	                withCredentials: true
+	            },
+	            crossDomain: true,
 				data,
 				success,
 				error
@@ -37,6 +49,10 @@ module.exports = {
 			$.ajax({
 				url,
 				type:'PUT',
+				xhrFields: {
+	                withCredentials: true
+	            },
+	            crossDomain: true,
 				data,
 				success,
 				error

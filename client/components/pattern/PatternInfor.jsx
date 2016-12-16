@@ -4,6 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Checkbox from 'material-ui/Checkbox'; 
 import Upload from 'rc-upload';
+import {hostServer} from './../../constant/ApiUri';
 import {uploadFileUrl} from './../../constant/ApiUri';
 
 class PatternInfor extends React.Component {
@@ -37,7 +38,7 @@ class PatternInfor extends React.Component {
         return(
             <div>
               {this.props.url ? <img id={this.props.imgTagId} className="img-polaroid img-responsive"
-               style={{marginBottom:20}} src={this.props.url}/> : null}
+               style={{marginBottom:20}} src={hostServer +'/'+ this.props.url}/> : null}
 
               <Upload name="picture" onReady={this.onReadyUpload}
               action = {uploadFileUrl}

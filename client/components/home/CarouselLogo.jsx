@@ -70,12 +70,14 @@ class CarouselLogo extends React.Component{
           {this.props.shirtData.listShirt.map(this.shirtItem)}
       </div>
 
+
     );
   }
 
   render() {
     return (
       <div className ="container">
+
               {this.props.shirtData.listShirt?
               this.getListShirt(): 'no shirt in server'}
 

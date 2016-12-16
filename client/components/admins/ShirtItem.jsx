@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {hostServer} from './../../constant/ApiUri';
 
 
 class ShirtItem extends React.Component{
@@ -30,10 +31,10 @@ class ShirtItem extends React.Component{
         <tr>
           <td className="col-sm-3">{this.props.shirt.gender}</td>
           <td className="col-sm-3">
-            <img className="img-responsive" src={this.props.shirt.url} />
+            <img className="img-responsive" src={hostServer +'/'+this.props.shirt.url} />
           </td>
           <td className="col-sm-3">
-            <img className="img-responsive" src={this.props.shirt.layoutUrl}/>
+            <img className="img-responsive" src={hostServer +'/'+this.props.shirt.layoutUrl}/>
           </td>
           <td className="col-sm-3">{this.props.shirt.detail}</td>
           <td className="col-sm-3">{this.props.shirt.price}</td>
