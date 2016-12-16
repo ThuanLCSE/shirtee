@@ -1,6 +1,7 @@
 var configDetail = require('./config'),
 	http = require('http'),
 	expressWebAppFramwrk = require('express'),
+	cors = require('cors'),
 	morgan = require('morgan'),
 	bodyParser = require('body-parser'),
 	methodOverride = require('method-override'),
@@ -30,7 +31,7 @@ module.exports = function(database) {
 	app.use('/static', expressWebAppFramwrk.static(path.join(__dirname, './../static')));
 	app.use('/upload', expressWebAppFramwrk.static(path.join(__dirname, './../upload')));
 
-
+	app.use(cors({origin: 'http://localhost:3013'}));
 	require('../server/router/react.component.js')(app);
 	require('../server/router/category.js')(app);  
 	require('../server/router/shirt.js')(app);  
