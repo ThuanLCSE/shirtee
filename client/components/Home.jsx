@@ -110,6 +110,9 @@ class Home extends React.Component{
     }
 
     changeStateView(page){
+        if (page === 'NewPattern' || page === 'CustomShirt'){
+          document.getElementById("resetCanvas").click();
+        }
         this.setState({
             view : page
         });

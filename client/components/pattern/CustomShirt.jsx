@@ -4,6 +4,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
 import CircularProgress from 'material-ui/CircularProgress';
 import {hostServer} from './../../constant/ApiUri';
+import CanvasEditor from './../utils/CanvasEditor.jsx';
+import cookie from 'react-cookie';
 
 import DialogMessage from './../utils/DialogMessage.jsx'; 
 
@@ -30,7 +32,7 @@ class CustomShirt extends React.Component {
         this.resetMessage = this.resetMessage.bind(this); 
         this.listTypeShirt = this.listTypeShirt.bind(this);
         this.shirtItem = this.shirtItem.bind(this);
-           this.colorItem = this.colorItem.bind(this);
+        this.colorItem = this.colorItem.bind(this);
 
  
          this.customBar = this.customBar.bind(this);
@@ -39,18 +41,15 @@ class CustomShirt extends React.Component {
         
          this.callAddPatternToShirt = this.callAddPatternToShirt.bind(this);
          this.handleChangeRecommend = this.handleChangeRecommend.bind(this);
+         this.callApplyShirtCanvas = this.callApplyShirtCanvas.bind(this);
      
     }
-
+    addToCart(e){
+      cookie.save('userId', e.target.value, { path: '/' });
+    } 
     componentWillMount(){ 
       this.props.getListShirt();
-    }
-     componentDidMount() { 
-      var mountedCanvas = this.state.canvas; 
-      mountedCanvas.width = document.getElementById('tshirtFacing').clientWidth;
-      mountedCanvas.height = mountedCanvas.width *63/53;
-      this.setState({ canvas: mountedCanvas });
-    }
+    } 
 
     callAddPatternToShirt(top, left, scale){
       var patternId = this.state.imgPaternTagId;
@@ -58,7 +57,7 @@ class CustomShirt extends React.Component {
     }
 
     callApplyShirtCanvas(){ 
-      document.getElementById('applyShirtCanvas').click(); 
+      document.getElementById('applyShirtCanvas').click(this.props.shirtData.currentSelect); 
     }
     callApplyColorChange(){ 
      document.getElementById('applyColorChange').click(); 
@@ -66,13 +65,16 @@ class CustomShirt extends React.Component {
     componentDidUpdate(prevProps, prevState){
    		if (!this.state.initiated && this.props.shirtData.listShirt.length > 0){
    			this.callApplyShirtCanvas();
-   			this.callAddPatternToShirt(this.state.recommend.x,this.state.recommend.y,this.state.recommend.scale); 
+   			this.callAddPatternToShirt(this.state.recommend.x,this.state.recommend.y,this.state.recommend.scale);  
    			this.setState({ initiated: true }); 
    		}
          
      	 if (prevProps.shirtData.currentSelect !== this.props.shirtData.currentSelect){
        	 this.callApplyColorChange();
-      	}
+         this.changeColorCode(this.props.pattern.recommendShirt.colorCode);
+         var recommendColor =  document.getElementById(this.props.pattern.recommendShirt.colorCode);
+         if (recommendColor) recommendColor.click(); 
+    	}
     } 
 
     handleChangeRecommend(att, e) {
@@ -99,68 +101,11 @@ class CustomShirt extends React.Component {
     }
   
   
-     editor(){
-
-        let drawingAreae = {
-          position: 'absolute', 
-          top: 0,
-          left: 0,
-          zIndex: 100, 
-          width: '100%',
-          height: '100%'
-        }
-        let webKitUser = {
-          width: '100%',
-          height: '100%',
-          WebkitUserSelect : 'none'
-        }
-        let shirtDiv = {
-            width: '100%',
-            position: 'relative'
-        }
-        let shirtFacing = { 
-            width: '100%',
-            height: '100%'
-        }
-
-        return(
-              <div id="shirtDiv" className="page" style={shirtDiv}>
-                <img id="tshirtFacing" src="static/TeeShirt1.png" style={shirtFacing}></img>
-                <div id="drawingArea" style={drawingAreae}>
-      
-                  <canvas id="shirtCanvas" height={this.state.canvas.height}
-                  width={this.state.canvas.width}
-                   className="hover" style={webKitUser}>
-                  </canvas>
-                </div>
-              </div>
-          )
-      }
-
-    imageEditor(){
-        let styleAlignCenter = {
-          minHeight : 32,
-          align: 'center'
-        }
-        let displayBlock = {
-          display : 'block'
-        }
-        let height19 = {
-          height : 19
-        }
-
-        return(
-
-              <div className="pull-right"  id="imageeditor">
-                <RaisedButton  id="remove-selected" label="delete" primary={true}/>
-
-              </div>
-          )
-      }
     changeShirtType(index){
       this.props.changeShirt(index);  
     }
     changeColorCode(colorCode){ 
+
       this.props.changeColor(colorCode); 
     }
     shirtItem(shirt, index){
@@ -175,7 +120,7 @@ class CustomShirt extends React.Component {
 
         return (
          
-             <div key= {index} className="col-sm-5" style = {shirtFrame}
+             <div key= {index} id={index === this.props.shirtData.currentSelect?"recommendShirt":""} className="col-sm-5" style = {shirtFrame}
              onClick={() => this.changeShirtType(index)} >
                <img className="shirtTypes" style={shirtItem} src={hostServer +'/'+ shirt.url}/>
               {shirt.detail}
@@ -200,7 +145,7 @@ class CustomShirt extends React.Component {
               backgroundColor: color
           }
          return (
-             <li key={color}  onClick={() => this.changeColorCode(color)}
+             <li key={color} id={color}  onClick={() => this.changeColorCode(color)}
              className="color-preview" title="sample" style={background}></li>
           )
       }
@@ -219,7 +164,7 @@ class CustomShirt extends React.Component {
                  listColor.map(this.colorItem): 'no shirt in server'}
             </div>
 
-                {this.props.shirtData.listShirt?
+                {this.props.shirtData.listShirt.length > 0?
                 this.listTypeShirt(): 'no shirt in server'} 
 
         </div>
@@ -262,16 +207,17 @@ class CustomShirt extends React.Component {
                 </div>
  
                 <Paper className="col-sm-5" style={{height:'80vh'}}> 
-                          {this.editor()}
-                          {this.imageEditor()}
-
+                          <CanvasEditor />  
                 </Paper>
                 <div className="col-sm-3">
          
                     <Paper style={{height:'80vh'}}>
-                         {this.customBar()}
+                          {this.customBar()}
+                         <RaisedButton onClick={this.takePreviewBeforSubmit} label="Add to cart" primary={true}/>
                     </Paper>
                 </div>
+                        
+                
                 {this.props.shirtData.listShirt.length <= 0 ?this.waitingProgress():null} 
                 {this.state.message !== '' ?this.noticeDialog(this.state.message):null}
                   <input type="hidden" id="patternTop"
@@ -283,7 +229,7 @@ class CustomShirt extends React.Component {
                   <input type="hidden" id="patternAngle"
                   onClick = {(e) => this.handleChangeRecommend('rotate', e)} />
                   <input type="hidden" id="screenShotUrl"
-                  onClick = {(e) => this.submitAfterHavePreview(e)} />
+                  onClick = {(e) => this.addToCart} />
                   
             </div>
         );

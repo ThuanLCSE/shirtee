@@ -45,7 +45,7 @@ var setPatternIntoCanvas = function(patternId,left, top, scale){
   	});
   	$('#'+ patternId).click();
 }
-var applyCanvasAndShirt = function() {
+var applyCanvasAndShirt = function(shirtIndex) {
 		//setup front side canvas
 	 	if (!canvas){
 	 		console.log($('canvas'));
@@ -88,7 +88,7 @@ var applyCanvasAndShirt = function() {
 			$(".shirtTypes").click(function(e){
 	  			$("#tshirtFacing")[0].src = e.currentTarget.src;
 			});
-			document.getElementsByClassName('shirtTypes')[0].click();
+			document.getElementsByClassName('shirtTypes')[shirtIndex].click();
 			applyColor();
 
 			document.getElementById('remove-selected').onclick = function() {
@@ -127,24 +127,21 @@ var applyCanvasAndShirt = function() {
 
 		// console.log('clearrrrrrrr');
 	 }
-
-
- var applyEvent = new MouseEvent('click', {
+  var applyShirtCanvasEvent = new MouseEvent('click', {
     'view': window,
     'bubbles': true,
     'cancelable': true
   });
 
 
-  // var applyShirtCanvas = document.getElementById('applyShirtCanvas');
-  // applyShirtCanvas.dispatchEvent(applyEvent);
-  // applyShirtCanvas.click = function(){
-	//   	applyCanvasAndShirt();
- // 	}
-	   $( "#applyShirtCanvas" ).click(function() {
-			 console.log('click')
-			 	applyCanvasAndShirt();
-		 });
+  var applyShirtCanvas = document.getElementById('applyShirtCanvas');
+  applyShirtCanvas.dispatchEvent(applyShirtCanvasEvent);
+  applyShirtCanvas.click = function(shirtIndex){
+	  	applyCanvasAndShirt(shirtIndex);
+ 	} 
+    $( "#resetCanvas" ).click(function() { 
+		 	canvas = null;
+	 });
 
   var addPatternEvent = new MouseEvent('click', {
     'view': window,
@@ -172,9 +169,7 @@ var applyCanvasAndShirt = function() {
  	}
 
   //html2canvas
-   $( "#screenShot" ).click(function() {
-		 // xóa mấy nút resize ở cái góc cái hình
-		//  console.log(canvas._objects[0]);
+   $( "#screenShot" ).click(function() { 
 
 			var img = canvas._objects[0];
 
@@ -187,7 +182,7 @@ var applyCanvasAndShirt = function() {
 
 								var dataURL = shotPicture.toDataURL("image/jpeg", 0.5);
 									$.ajax({
-											url: 'http://192.168.2.193:3013/api/upload64',
+											url: 'http://localhost:3013/api/upload64',
 											type: 'post',
 											headers: {
 											},

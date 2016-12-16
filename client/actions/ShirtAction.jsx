@@ -71,7 +71,7 @@ export function removeShirt(shirt) {
 
 
 export function selectCurrentShirt(index) { 
-      
+      console.log(index);
        return  {  type: actType.selectCurrentShirt,
                   index: index,
                } 

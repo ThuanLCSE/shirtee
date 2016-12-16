@@ -5,7 +5,9 @@ import Dialog from 'material-ui/Dialog';
 import CircularProgress from 'material-ui/CircularProgress';
 import {hostServer} from './../../constant/ApiUri';
 
+
 import UpPatternModal from './upPatternModal.jsx';
+import CanvasEditor from './../utils/CanvasEditor.jsx';
 import DialogMessage from './../utils/DialogMessage.jsx';
 import PatternInfor from './PatternInfor';
 
@@ -26,12 +28,7 @@ class NewShirt extends React.Component {
               scale: 0.2,
               rotate: 0,
               y:150
-            },
-           
-            canvas: {
-              height: 100,
-              width: 100
-            } 
+            }
         };
         this.handleChange = this.handleChange.bind(this); 
         this.handleCategory = this.handleCategory.bind(this);
@@ -58,12 +55,7 @@ class NewShirt extends React.Component {
       this.props.getLevelInfo(this.props.userData.designer._id);
       this.props.getListShirt();
     }
-     componentDidMount() { 
-      var mountedCanvas = this.state.canvas; 
-      mountedCanvas.width = document.getElementById('tshirtFacing').clientWidth;
-      mountedCanvas.height = mountedCanvas.width *63/53;
-      this.setState({ canvas: mountedCanvas });
-    }
+    
 
     callAddPatternToShirt(top, left, scale){
       var patternId = this.state.imgPaternTagId;
@@ -71,7 +63,7 @@ class NewShirt extends React.Component {
     }
 
     callApplyShirtCanvas(){ 
-      document.getElementById('applyShirtCanvas').click(); 
+      document.getElementById('applyShirtCanvas').click(this.props.shirtData.currentSelect); 
     }
     callApplyColorChange(){ 
      document.getElementById('applyColorChange').click(); 
@@ -137,77 +129,7 @@ class NewShirt extends React.Component {
         var newDetail = this.state.detail;
         newDetail[att] = e.target.value;
         this.setState({detail: newDetail});
-    }
-
-  
-     editor(){
-
-        let drawingAreae = {
-          position: 'absolute', 
-          top: 0,
-          left: 0,
-          zIndex: 100, 
-          width: '100%',
-          height: '100%'
-        }
-        let webKitUser = {
-          width: '100%',
-          height: '100%',
-          WebkitUserSelect : 'none'
-        }
-        let shirtDiv = {
-            width: '100%',
-
-            position: 'relative'
-        }
-        let shirtFacing = { 
-            width: '100%',
-            height: '100%'
-        }
-        let platform = {
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          zIndex: 100,
-          width: '100%',
-          height: '100%',
-
-        }
-
-        return(
-              <div id="shirtDiv" className="page" style={shirtDiv}>
-                <img src={hostServer + '/' + "static/platform.png"} style={shirtFacing}></img>
-                <div id="drawingArea" style={drawingAreae}>
-                  <img id="tshirtFacing" className = "shirtLayout" style={platform}/>
-                  <canvas id="shirtCanvas" height={this.state.canvas.height}
-                  width={this.state.canvas.width}
-                   className="hover" style={webKitUser}>
-                  </canvas>
-                </div>
-              </div>
-          )
-      }
-
-    imageEditor(){
-        let styleAlignCenter = {
-          minHeight : 32,
-          align: 'center'
-        }
-        let displayBlock = {
-          display : 'block'
-        }
-        let height19 = {
-          height : 19
-        }
-
-        return(
-
-              <div className="pull-right"  id="imageeditor">
-                <RaisedButton  id="remove-selected" label="delete" primary={true}/>
-
-              </div>
-          )
-      }
+    } 
     changeShirtType(index){
       this.props.changeShirt(index);  
     }
@@ -317,9 +239,7 @@ class NewShirt extends React.Component {
                 </div>
  
                 <Paper className="col-sm-5" style={{height:'80vh'}}> 
-                          {this.editor()}
-                          {this.imageEditor()}
-
+                          <CanvasEditor />  
                 </Paper>
                 <div className="col-sm-3">
          

@@ -19,7 +19,9 @@ export default function ShirtList(state = defaultState, action) {
 
     case actType.getListShirtSuccess:
         newState.listShirt = action.listShirt;
-        newState.currentSelect = 0;
+        if (newState.currentSelect === -1 || newState.currentSelect >= newState.listShirt.length){
+          newState.currentSelect = 0;
+        } 
         newState.currentColor = action.listShirt[0].colorCode[0];
         newState.message = action.message;
         return newState;
