@@ -2,7 +2,7 @@
 import React from 'react';
 import UploadImg from './UploadImg';
 
-import Checkbox from 'material-ui/Checkbox'; 
+import Checkbox from 'material-ui/Checkbox';
 
 
 
@@ -15,12 +15,12 @@ class UpLoadShirt extends React.Component{
          gender : '',
          url: '',
          detail: '',
-         layoutUrl: '',
+         layoutUrl: 'ahihi',
          price: '',
          colorCode: []
        },
        listColorDefault : [
-        
+
           {key: 1, value: '#ffffff', name: '#ffffff'},
           {key: 19, value: '#0277BD', name: '#0277BD'},
           {key: 16, value: '#EC407A', name: '#EC407A'},
@@ -47,13 +47,13 @@ class UpLoadShirt extends React.Component{
 
     this.handleCheckColorBox = this.handleCheckColorBox.bind(this);
     this.colorItem = this.colorItem.bind(this);
-   
+
     this.colorCheckList = this.colorCheckList.bind(this);
   }
   getValueUploadShirt() {
       var shirtInfo = this.state.info;
 
-      this.props.uploadShirt(shirtInfo); 
+      this.props.uploadShirt(shirtInfo);
 
   }
 
@@ -61,7 +61,7 @@ class UpLoadShirt extends React.Component{
       var newInfo = this.state.info;
       newInfo[att] = e.target.value;
       this.setState({info: newInfo});
-   
+
   }
   onGenderChanged(e) {
     var newInfo = this.state.info;
@@ -84,10 +84,10 @@ class UpLoadShirt extends React.Component{
     this.setState({
       info: newInfo
     });
-  
+
   }
   handleCheckColorBox(e,isChecked, code){
-     
+
     var newInfo = this.state.info;
     if (isChecked && (newInfo.colorCode.indexOf(code) === -1)){
       newInfo.colorCode.push(code);
@@ -100,7 +100,7 @@ class UpLoadShirt extends React.Component{
 
   }
   colorItem(color){
-   
+
 
     let checkboxStyle = {
       backgroundColor: color.value,
@@ -109,10 +109,10 @@ class UpLoadShirt extends React.Component{
       marginRight: '10px'
     }
 
-   
+
      return (
                   <Checkbox key = {color.key}
-                           
+
                             style = {checkboxStyle}
                             onCheck={(e,isChecked, code) => this.handleCheckColorBox(e, isChecked,color.value)}/>
       )
@@ -129,18 +129,19 @@ class UpLoadShirt extends React.Component{
       width : 200,
       height: 200
     }
+
+    // <UploadImg buttonName="shirt layout url" getUrl = {this.onLayoutUrlChange}/>
+    // {this.state.info.layoutUrl?<img style= {shirtPreview} src={this.state.info.layoutUrl}/>:null}
+
       return (
         <div>
             <UploadImg buttonName="shirt Url" getUrl = {this.onUrlChange}/>
             {this.state.info.url?<img style= {shirtPreview} src={this.state.info.url}/>:null}
-            <UploadImg buttonName="shirt layout url" getUrl = {this.onLayoutUrlChange}/>
-            {this.state.info.layoutUrl?<img style= {shirtPreview} src={this.state.info.layoutUrl}/>:null}
-           
- 
-              Detail: 
+
+              Detail:
               <input type = "text"  name = "detail" value ={this.state.info.detail}
               onChange={(e) => this.handleChange('detail', e)}  />
-            
+
               <br/>
               Price:
               <input type = "text" name = "price" value ={this.state.info.price}
@@ -151,7 +152,7 @@ class UpLoadShirt extends React.Component{
               <input type="radio" name="sex" value='Male'
               checked={this.state.info.gender === 'Male'}
               onChange={this.onGenderChanged} /> Male
-            
+
               <input type="radio" name="sex" value='Female'
               checked={this.state.info.gender === 'Female'}
               onChange={this.onGenderChanged} /> Female
@@ -160,13 +161,13 @@ class UpLoadShirt extends React.Component{
               <button onClick={this.getValueUploadShirt}>
               Create
 
-              </button> 
+              </button>
               <p>{this.props.uploadMessage}</p>
           </div>
       );
     }
 };
- 
+
 
 
 export default UpLoadShirt;

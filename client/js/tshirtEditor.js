@@ -40,7 +40,6 @@ var setPatternIntoCanvas = function(patternId,left, top, scale){
 	      	  		hasRotatingPoint:true
 		          });
 		          image.scale(scale).setCoords();
-
 		          canvas.add(image);
 		        });
   	});
