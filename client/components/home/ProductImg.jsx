@@ -12,26 +12,19 @@ class ProductImg extends React.Component{
 
   constructor(props){
     super(props);
-    this.state = {
+    
 
-    };
-
-  }
-
-
-
-
-
+  } 
 
   render(){
 
       return (
-        <div className="imageoutside" onClick={this.props.openModal}>
+        <div className="imageoutside" onClick={() => this.props.openModal(this.props.pattern)}>
 
 
         <div className="img-square">
-              <img className="img-pattern img-responsive" src={this.props.url} />
-              <img className="img-shirt img-responsive" src={this.props.previewUrl} />
+              <img className="img-pattern img-responsive" src={this.props.pattern.url} />
+              <img className="img-shirt img-responsive" src={this.props.pattern.recommendPreviewUrl} />
         </div>
 
 

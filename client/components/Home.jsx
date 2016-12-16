@@ -11,6 +11,9 @@ import Information from './user/Information';
 import UserAccount from './user/UserAccount';
 import NewPattern from './pattern/NewPattern';
 
+import CustomShirt from './pattern/CustomShirt';
+
+
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Provider } from 'react-redux';
@@ -94,6 +97,17 @@ class Home extends React.Component{
                     uploadPattern={this.props.DesignerAct.UploadPattern}/>
         );
     }
+    CreateCustomShirt() {
+        return (
+           <CustomShirt  
+                      userData={this.props.UserTodo}
+                      getListShirt ={this.props.ShirtAct.GetList}
+                      changeShirt = {this.props.ShirtAct.selectCurrentShirt}
+                      changeColor = {this.props.ShirtAct.selectCurrentColor}
+                      shirtData = {this.props.ShirtList} 
+                      pattern = {this.props.PatternList.pattern}/>
+        );
+    }
 
     changeStateView(page){
         this.setState({
@@ -107,9 +121,10 @@ class Home extends React.Component{
             <Homepage   patternList={this.props.PatternList}
                         getPattern={this.props.PatternAct}
                         votePattern={this.props.PatternAct.VotePattern}
-
+                        choosePattern = {this.props.PatternAct.ChoosePattern}
                         shirtData = {this.props.ShirtList}
-                        listShirt = {this.props.ShirtAct}/>
+                        changeView = {this.changeStateView}
+                        shirtAct = {this.props.ShirtAct}/>
         );
     }
 
@@ -133,6 +148,7 @@ class Home extends React.Component{
         {this.state.view === 'info'?this.infoView():null}
         {this.state.view === 'accUpdate'?this.accUpdateView():null}
         {this.state.view === 'NewPattern'?this.CreatePattern():null}
+        {this.state.view === 'CustomShirt'?this.CreateCustomShirt():null}
         {this.state.view === 'bestSell'?this.bestSell():null}
         {this.state.view === 'newest'?this.newest():null}
         {this.state.view === 'promotion'?this.promotion():null}

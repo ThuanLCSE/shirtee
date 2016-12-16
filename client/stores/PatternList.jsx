@@ -1,10 +1,13 @@
+
+import * as actType from '../constant/ActionTypes';
 var defaultState = {
     listPatternAdmin: [],
     listPattern: [],
     listPatternBestSell: [],
     listPatternNewest: [],
     listPatternSale: [],
-    pattern: {}
+    pattern: {},
+    message: ''
 }
 export default function PatternList(state = defaultState, action) {
   var newState = Object.assign({}, state);
@@ -42,6 +45,11 @@ export default function PatternList(state = defaultState, action) {
           return newState;
     case 'APPROVE_PATTERN_FAILED':
           return newState;
+
+    case actType.choosePattern:
+          newState.pattern = action.pattern;
+          return newState;
+
     default:
       return state;
   }

@@ -14,6 +14,8 @@ export const removeMessagePattern = 'remove message error in shirt store'
 export const validateBeforCreateFaile = 'validate failed' 
 export const removeSaleSuccess = 'remove sale succefful' 
 export const removeSaleFail = 'remove sale fail cmnr' 
+export const choosePattern = 'click choose pattern to buy' 
+
 
 
 

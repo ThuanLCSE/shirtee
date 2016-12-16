@@ -1,5 +1,4 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'; 
 import GridListFrame from './GridListFrame';
 import ProductImg from './ProductImg';
 import CarouselLogo from './../home/CarouselLogo';
@@ -24,7 +23,8 @@ class Homepage extends React.Component{
 
 
   }
-  handleOpen() {
+  handleOpen(pattern) {
+    this.props.choosePattern(pattern);
     this.setState({open: true});
   }
   handleClose() {
@@ -35,7 +35,7 @@ class Homepage extends React.Component{
       this.props.getPattern.GetList();
       this.props.getPattern.GetListBestSell();
       this.props.getPattern.GetListNewest();
-      this.props.listShirt.GetList();
+      this.props.shirtAct.GetList();
 
   }
 
@@ -48,10 +48,10 @@ class Homepage extends React.Component{
         onRequestClose={this.handleClose}
         contentStyle={customContentStyle}
       >
-      <CarouselLogo
-        shirtData = {this.props.shirtData}
-        listShirt = {this.props.listShirt}
-      />
+      <CarouselLogo  
+        changeView = {this.props.changeView}
+        chooseShirt = {this.props.shirtAct.selectCurrentShirt}
+        shirtData = {this.props.shirtData}/>
       </Dialog>
     )
   }

@@ -78,12 +78,10 @@ class  GridListFrame extends React.Component{
                   titleStyle={styles.titleStyle}
                   titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
                 >
-                <ProductImg url={row.url}
-                          previewUrl = {row.recommendPreviewUrl}
+                <ProductImg pattern={row}
                           openModal = {this.props.openModal}
                           shirtData = {this.props.shirtData}
-                          listShirt = {this.props.listShirt}
-                 />
+                          listShirt = {this.props.listShirt}/>
 
                 </GridTile>
                 <Popover

@@ -1,5 +1,6 @@
 import * as apiUser from './../constant/ApiUri';
 import restApi from "./../service/restAPI.js";
+import * as actType from '../constant/ActionTypes';
 
 export function GetListByAdmin() {
     return function (dispatch) {
@@ -134,4 +135,11 @@ export function VotePattern(vote, id) {
                      text: err.responseText});
 		});
 	};
+}
+export function ChoosePattern(pattern) {
+  
+    return { 
+    		type: actType.choosePattern,
+                    pattern : pattern
+	    } 
 }

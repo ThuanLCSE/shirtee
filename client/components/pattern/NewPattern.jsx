@@ -145,7 +145,7 @@ class NewShirt extends React.Component {
           position: 'absolute',
           top: 0,
           left: 0,
-          zIndex: 1,
+          zIndex: 100,
           width: '100%',
           height: '100%'
         }
@@ -269,14 +269,7 @@ class NewShirt extends React.Component {
             </div>
 
                 {this.props.shirtData.listShirt?
-                this.listTypeShirt(): 'no shirt in server'}
-
-
-
-
-              <RaisedButton  label="Create Pattern" primary={true} style={{marginTop: '5vh' }}/>
-
-
+                this.listTypeShirt(): 'no shirt in server'} 
         </div>
         )
     }

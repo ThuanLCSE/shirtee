@@ -32,12 +32,30 @@ const gridStyles = {
 
 
 class CarouselLogo extends React.Component{
-
+  constructor(props){
+    super(props);
+    this.state = {
+       
+    } 
+   this.shirtChoose = this.shirtChoose.bind(this);
+   this.shirtItem = this.shirtItem.bind(this);
+  
+  }
+  shirtChoose(index){
+    this.props.changeView('CustomShirt');
+    this.props.chooseShirt(index);
+  }
   shirtItem(shirt, index){
-
+      let backgroundStyle = {
+          backgroundImage : `url('${shirt.url.replace("\\", "/")}')`,
+          width: '100%',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          height: '200px'
+      };
       return (
-          <div className = "col-sm-3">
-             <img className = "img-responsive" src={shirt.url}   key= {shirt._id} />
+          <div key={shirt._id} className = "col-sm-3" onClick={() => this.shirtChoose(index)}>
+             <div className = "img-responsive" src={shirt.url} style={backgroundStyle} ></div>
              {shirt.detail}
           </div>
         )
