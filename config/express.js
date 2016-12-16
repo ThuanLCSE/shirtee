@@ -31,7 +31,10 @@ module.exports = function(database) {
 	app.use('/static', expressWebAppFramwrk.static(path.join(__dirname, './../static')));
 	app.use('/upload', expressWebAppFramwrk.static(path.join(__dirname, './../upload')));
 
-	app.use(cors({origin: 'http://localhost:3013'}));
+	app.use(cors({
+        origin: 'http://localhost:3013',
+        credentials: true
+                 }));
 	require('../server/router/react.component.js')(app);
 	require('../server/router/category.js')(app);  
 	require('../server/router/shirt.js')(app);  

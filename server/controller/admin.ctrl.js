@@ -17,6 +17,7 @@ exports.signIn = function(req,res){
 			email: admin.email
 		};
 		req.session.admin = authenticateduser;
+           console.log(req.session);
 	  		res.status(200).send({
 			  		admin:admin,
 			  		message: "sign in as admin success",
@@ -26,6 +27,7 @@ exports.signIn = function(req,res){
   });
 }; 
 exports.checkAdminRole = function(req,res,next){
+    console.log(req.session);
 	if (!req.session.admin){
 		res.status(200).send({
 	  		message: 'not authorized' 
