@@ -1,6 +1,7 @@
 
 import React from 'react';
 import UploadImg from './UploadImg';
+import {hostServer} from './../../constant/ApiUri';
 
 import Checkbox from 'material-ui/Checkbox';
 
@@ -136,9 +137,8 @@ class UpLoadShirt extends React.Component{
       return (
         <div>
             <UploadImg buttonName="shirt Url" getUrl = {this.onUrlChange}/>
-            {this.state.info.url?<img style= {shirtPreview} src={this.state.info.url}/>:null}
-
-              Detail:
+            {this.state.info.url?<img style= {shirtPreview} src={hostServer +'/' +this.state.info.url}/>:null}
+              Detail: 
               <input type = "text"  name = "detail" value ={this.state.info.detail}
               onChange={(e) => this.handleChange('detail', e)}  />
 

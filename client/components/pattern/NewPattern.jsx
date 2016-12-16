@@ -3,7 +3,7 @@ import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
 import CircularProgress from 'material-ui/CircularProgress';
-import hostServer from './../../constant/ApiUri';
+import {hostServer} from './../../constant/ApiUri';
 
 import UpPatternModal from './upPatternModal.jsx';
 import DialogMessage from './../utils/DialogMessage.jsx';
@@ -157,6 +157,7 @@ class NewShirt extends React.Component {
         }
         let shirtDiv = {
             width: '100%',
+
             position: 'relative'
         }
         let shirtFacing = { 
@@ -175,7 +176,7 @@ class NewShirt extends React.Component {
 
         return(
               <div id="shirtDiv" className="page" style={shirtDiv}>
-                <img src="static/platform.png" style={shirtFacing}></img>
+                <img id="tshirtFacing" style={shirtFacing}></img>
                 <div id="drawingArea" style={drawingAreae}>
                   <img id="tshirtFacing" className = "shirtLayout" src="static/TeeShirt1.png" style={platform}/>
                   <canvas id="shirtCanvas" height={this.state.canvas.height}

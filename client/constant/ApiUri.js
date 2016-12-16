@@ -44,7 +44,7 @@ export const uploadShirt = hostServer + '/api/shirt/create'
 export const viewUserInfo = hostServer + 'api/user/info'
 // http method : get
 
-export const checkUserSignIn = hostServer + 'api/user/checkSignin'
+export const checkUserSignIn = hostServer + '/api/user/checkSignin'
 //http method: get
 // success: {
 // 			user: object,

@@ -3,7 +3,7 @@ import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
 import CircularProgress from 'material-ui/CircularProgress';
-import hostServer from './../../constant/ApiUri';
+import {hostServer} from './../../constant/ApiUri';
 
 import DialogMessage from './../utils/DialogMessage.jsx'; 
 
@@ -258,7 +258,7 @@ class CustomShirt extends React.Component {
                 <div className="col-sm-3">
                   Logo 
                   <img id={this.state.imgPaternTagId} className="img-polaroid img-responsive"
-               		style={{marginBottom:20}}  src={this.props.pattern.url} />
+               		style={{marginBottom:20}}  src={hostServer + '/' + this.props.pattern.url} />
                 </div>
  
                 <Paper className="col-sm-5" style={{height:'80vh'}}> 
