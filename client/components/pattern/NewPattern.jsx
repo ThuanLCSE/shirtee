@@ -176,9 +176,9 @@ class NewShirt extends React.Component {
 
         return(
               <div id="shirtDiv" className="page" style={shirtDiv}>
-                <img id="tshirtFacing" style={shirtFacing}></img>
+                <img src={hostServer + '/' + "static/platform.png"} style={shirtFacing}></img>
                 <div id="drawingArea" style={drawingAreae}>
-                  <img id="tshirtFacing" className = "shirtLayout" src="static/TeeShirt1.png" style={platform}/>
+                  <img id="tshirtFacing" className = "shirtLayout" style={platform}/>
                   <canvas id="shirtCanvas" height={this.state.canvas.height}
                   width={this.state.canvas.width}
                    className="hover" style={webKitUser}>
