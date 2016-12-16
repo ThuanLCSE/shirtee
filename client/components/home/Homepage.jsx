@@ -59,7 +59,7 @@ class Homepage extends React.Component{
   render(){
     return (
         <div className="container">
-          <img src='static/banner.jpg' style={{width:'100%', marginBottom:25}}/>
+          <img src='static/banner.png' style={{width:'100%', marginBottom:25}}/>
           <GridListFrame patternList={this.props.patternList.listPattern}
                          votePattern={this.props.votePattern}
                          openModal = {this.handleOpen}

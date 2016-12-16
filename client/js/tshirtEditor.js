@@ -191,6 +191,10 @@ var applyCanvasAndShirt = function() {
 		            image: dataURL
 		        },
 		        dataType: 'json',
+                xhrFields: {
+	                withCredentials: true
+	            },
+	            crossDomain: true,
 		        success: function(response) {
 
 		        	$('#screenShotUrl')[0].value = response.pictureUrl;

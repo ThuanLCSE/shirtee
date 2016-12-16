@@ -4,7 +4,7 @@ import {Carousel} from 'react-bootstrap';
 //import ImagePaper from './ImagePaper';
 import Paper from 'material-ui/Paper';
 import {GridList, GridTile} from 'material-ui/GridList';
-
+import {hostServer} from './../../constant/ApiUri';
 
 
 const style = {
@@ -29,8 +29,6 @@ const gridStyles = {
 };
 
 
-
-
 class CarouselLogo extends React.Component{
   constructor(props){
     super(props);
@@ -47,7 +45,7 @@ class CarouselLogo extends React.Component{
   }
   shirtItem(shirt, index){
       let backgroundStyle = {
-          backgroundImage : `url('${shirt.url.replace("\\", "/")}')`,
+          backgroundImage : `url('${hostServer + '/' + shirt.url.replace("\\", "/")}')`,
           width: '100%',
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',

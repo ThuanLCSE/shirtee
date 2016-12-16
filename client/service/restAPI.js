@@ -6,6 +6,10 @@ module.exports = {
 			$.ajax({
 				url:url,
 				dataType:"json",
+
+
+
+
 				xhrFields: {
 	                withCredentials: true
 	            },
